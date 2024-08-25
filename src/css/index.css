@@ -1,0 +1,39 @@
+body {
+    font-family: "Nunito Sans", sans-serif;
+    background-image: var(--theme-section-bg-lightgrad);
+    color: black
+}
+.navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    height: 10%;
+    background-color: ye;
+}
+
+.navbar > ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 10px;
+}
+
+h2 {
+    text-align: center;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: #0000;
+    font-style: normal !important;
+    font-weight: bold !important;
+    background-image: var(--theme-em-gradient-pink);
+}
+
+input[type=text], input[type=password], input[type=date] {
+    padding: 5px;
+    border-radius: 5px;
+    border: none
+}

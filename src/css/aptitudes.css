@@ -1,0 +1,27 @@
+.aptitudes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items:center;
+    justify-content: space-between;
+    border-radius: 5px;
+    gap: 7px;
+}
+.imgtext {
+    display: flex;
+    color: black;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 2px 2px 5px black;
+    border-radius: 5px;
+    background-image: var(--theme-section-bg-lightgrad);
+    padding: 7px;
+    width: 100px;
+    height: 100px;
+    
+}
+.imgtext > img {
+    filter: drop-shadow(3px 3px 4px black);
+    width: 75px;
+}
