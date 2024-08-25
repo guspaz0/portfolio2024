@@ -1,3 +1,17 @@
+.about {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.about img {
+    max-width: 300px;
+    mask-image: linear-gradient(black 80%, transparent)
+}
+
 .overview {
     display: flex;
     flex-direction: column;
@@ -6,12 +20,6 @@
     gap: 5px;
     font-size: 30px;
 
-}
-
-body {
-    --theme-section-bg-lightgrad: linear-gradient(103deg,#f5f6ff 10%,#dff4fb);
-    --theme-em-gradient: linear-gradient(90deg,#7209d4,#2832d4 33%,#00a5b2);
-    --theme-em-gradient-pink: linear-gradient(90deg,#ed7077,#9a34e7 66%);
 }
 
 .overview em {
@@ -29,3 +37,4 @@ body {
     color: black;
     border-radius: 5px;
 }
+

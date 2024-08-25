@@ -1,6 +1,7 @@
 
 export default {
-    template: `<h2>{{Titulo}}</h2>
+    template: `
+    <link rel="stylesheet" href="./src/css/about.css"/>
     <section className="about">
         <div v-bind:className="style">
             <span>
@@ -9,6 +10,9 @@ export default {
             </span>
             <p>{{mensaje}}</p>
             <a v-bind:href="resumeDrive">CV - Curriculum Vitae - Resume</a>
+        </div>
+        <div className="perfil">
+            <img src="./src/assets/perfil_cv.png" alt="perfil"/> 
         </div>
     </section>`,
     data(){

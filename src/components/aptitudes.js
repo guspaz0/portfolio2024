@@ -1,14 +1,14 @@
 export default {
-    template: `<div>
-        <link href="./src/css/aptitudes.css" rel="stylesheet"/>
-        <h2>Habilidades tecnicas:</h2>
-        <div className="aptitudes">
-            <span v-for="skill in aptitudes" className="imgtext">
-                <small>{{skill.nombre}}</small>
-                <img v-bind:src="cloudurl+skill.path" v-bind:alt="skill.nombre" loading="lazy"/>
-            </span>
-        </div>
-    </div>`,
+    template: `<link href="./src/css/aptitudes.css" rel="stylesheet"/>
+        <section>
+            <h2>Habilidades tecnicas:</h2>
+            <div className="aptitudes">
+                <span v-for="skill in aptitudes" className="imgtext">
+                    <small>{{skill.nombre}}</small>
+                    <img v-bind:src="cloudurl+skill.path" v-bind:alt="skill.nombre" loading="lazy"/>
+                </span>
+            </div>
+        </section>`,
     data: ()=> {
         return {
             cloudurl: 'https://res.cloudinary.com/dbowsjk6p/image/upload/v1724456108/aptitudes/',

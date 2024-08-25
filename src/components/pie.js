@@ -1,15 +1,14 @@
 export default {
     template: `<hr></hr>
     <footer class="mainfooter">
-        <span>{{author}}</span>
-        <span>{{descripcion}}</span>
-        <span> Contacto:{{redes}}</span>
+        <span>Portfolio 2024 - Desarrollador Web Full Stack </span>
+        <router-link to="/contacto"><b>Contacto</b></router-link>
+        <span><b>Author: </b>{{author}}</span>
     </footer>`,
     data(){
         return {
-            author: "Gustavo Paz",
+            author: "Gustavo R. Paz",
             descripcion: "Full Stack Developer",
-            redes: "aqui van mis redes"
         }
     }
 }

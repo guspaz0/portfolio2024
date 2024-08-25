@@ -2,19 +2,22 @@
 export default {
     template: `
     <link href="./src/css/proyectos.css" rel="stylesheet"/>
-    <h2>{{Titulo}}</h2>
-    <section v-bind:className="style">
-        <article v-for="pr in Proyectos">
-            <h2>{{pr.nombre}}</h2>
-            <div>{{pr.descripcion}}</div>
-            <div className="proyectos">
-                <span v-for="tec in pr.tecnologias" className="skills">
-                    <small>{{tec.nombre}}</small>
-                    <img  v-bind:src="cloudurl+tec.path" v-bind:alt="tec.nombre" loading="lazy"/>
-                </span>
-            </div>
-        </article>
-    </section>`,
+    <section>
+        <h2>{{Titulo}}</h2>
+        <div v-bind:className="style">
+            <article v-for="pr in Proyectos">
+                <h2>{{pr.nombre}}</h2>
+                <p>{{pr.descripcion}}</p>
+                <div className="proyectos">
+                    <span v-for="tec in pr.tecnologias" className="skills">
+                        <small>{{tec.nombre}}</small>
+                        <img  v-bind:src="cloudurl+tec.path" v-bind:alt="tec.nombre" loading="lazy"/>
+                    </span>
+                </div>
+            </article>
+        </div>
+    </section>
+    `,
     data(){
         return {
             Titulo: "Proyectos",
@@ -33,7 +36,7 @@ export default {
                 },
                 {
                     nombre: 'La Tienda de Maria', 
-                    descripcion: 'Proyecto tipo E-commerce sobre articulos religiosos / artesanias con dashboard. CRUD completo, filtrado y busqueda de articulos. carrito de compras y favoritos. CRUD de Usuarios. Servicio smtp para enviar correo.',
+                    descripcion: 'Proyecto tipo E-commerce sobre articulos religiosos / artesanias y dashboard con KPIs. CRUD completo, filtrado y busqueda de articulos. carrito de compras y favoritos. CRUD de Usuarios. Servicio smtp para enviar correo.',
                     tecnologias: [
                         {nombre: 'JWT', path: `jwt_logo_lxcuhq.png`},
                         {nombre: 'Node', path: `node_logo_dh5is6.png`},

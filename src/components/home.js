@@ -2,15 +2,16 @@ import aptitudes from './aptitudes.js'
 import proyectos from './proyectos.js'
 import about from './about.js'
 import contacto from './contacto.js'
+import eventos from './eventos.js'
 
 export default {
     template: `
-    <link href="./src/css/home.css" rel="stylesheet"/>
     <section className="home container">
         <about></about>
-        <contacto></contacto>
         <aptitudes></aptitudes>
         <proyectos></proyectos>
+        <eventos></eventos>
+        <contacto></contacto>
     </section>`,
     data(){
 
@@ -22,6 +23,7 @@ export default {
         'aptitudes': aptitudes,
         'proyectos': proyectos,
         'about': about,
-        'contacto': contacto
+        'contacto': contacto,
+        'eventos': eventos
     }
 }
