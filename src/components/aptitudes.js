@@ -1,17 +1,19 @@
 export default {
-    template: `<link href="./src/css/aptitudes.css" rel="stylesheet"/>
-        <section>
-            <h2>Habilidades tecnicas:</h2>
-            <div className="aptitudes">
-                <span v-for="skill in aptitudes" className="imgtext">
-                    <small>{{skill.nombre}}</small>
-                    <img v-bind:src="cloudurl+skill.path" v-bind:alt="skill.nombre" loading="lazy"/>
-                </span>
-            </div>
-        </section>`,
+    template: `
+    <link v-bind:href="css" rel="stylesheet"/>
+    <section>
+        <h2>Habilidades tecnicas:</h2>
+        <div className="aptitudes">
+            <span v-for="skill in aptitudes" className="imgtext">
+                <small>{{skill.nombre}}</small>
+                <img v-bind:src="cloudurl+skill.path" v-bind:alt="skill.nombre" loading="lazy"/>
+            </span>
+        </div>
+    </section>`,
+    props: ['cloudurl'],
     data: ()=> {
         return {
-            cloudurl: 'https://res.cloudinary.com/dbowsjk6p/image/upload/v1724456108/aptitudes/',
+            css: './src/css/aptitudes.css',
             aptitudes: [
                 {nombre: 'React', path: `react_logo_vzqkhb.png`},
                 {nombre: 'Vite', path: `vite_logo_r8rm42.png`},

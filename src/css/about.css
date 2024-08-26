@@ -9,7 +9,7 @@
 
 .about img {
     max-width: 300px;
-    mask-image: linear-gradient(black 80%, transparent)
+    mask-image: linear-gradient(black 70%, transparent)
 }
 
 .overview {
@@ -38,3 +38,17 @@
     border-radius: 5px;
 }
 
+div.perfil {
+    max-width: 300px;
+}
+
+img#flag {
+    position: relative;
+    z-index: 10;
+    width: 60px;
+    left: calc((50% - 30px));
+    bottom: 30px;
+    place-items: center;
+    border: solid 1px black;
+    mask-image: none
+}

@@ -7,17 +7,16 @@ import eventos from './eventos.js'
 export default {
     template: `
     <section className="home container">
-        <about></about>
-        <aptitudes></aptitudes>
-        <proyectos></proyectos>
-        <eventos></eventos>
-        <contacto></contacto>
+        <about :cloudurl="cloudurl"></about>
+        <aptitudes :cloudurl="cloudurl"></aptitudes>
+        <proyectos :cloudurl="cloudurl"></proyectos>
+        <eventos :cloudurl="cloudurl"></eventos>
+        <contacto :cloudurl="cloudurl"></contacto>
     </section>`,
     data(){
-
-    },
-    async mounted () {
-
+        return {
+            cloudurl: 'https://res.cloudinary.com/dbowsjk6p/image/upload/v1724456108/aptitudes/'
+        }
     },
     components: {
         'aptitudes': aptitudes,

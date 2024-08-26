@@ -1,7 +1,6 @@
-
 export default {
     template: `
-    <link href="./src/css/proyectos.css" rel="stylesheet"/>
+    <link v-bind:href="css" rel="stylesheet"/>
     <section>
         <h2>{{Titulo}}</h2>
         <div v-bind:className="style">
@@ -18,11 +17,12 @@ export default {
         </div>
     </section>
     `,
+    props: ['cloudurl'],
     data(){
         return {
+            css: './src/css/proyectos.css',
             Titulo: "Proyectos",
             style: 'proyectos',
-            cloudurl: 'https://res.cloudinary.com/dbowsjk6p/image/upload/v1724456108/aptitudes/',
             Proyectos: [
                 {
                     nombre: 'API fichadas', 
