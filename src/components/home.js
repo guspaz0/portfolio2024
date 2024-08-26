@@ -2,26 +2,27 @@ import aptitudes from './aptitudes.js'
 import proyectos from './proyectos.js'
 import about from './about.js'
 import contacto from './contacto.js'
+import eventos from './eventos.js'
 
 export default {
     template: `
-    <link href="./src/css/home.css" rel="stylesheet"/>
     <section className="home container">
-        <about></about>
-        <contacto></contacto>
-        <aptitudes></aptitudes>
-        <proyectos></proyectos>
+        <about :cloudurl="cloudurl"></about>
+        <aptitudes :cloudurl="cloudurl"></aptitudes>
+        <proyectos :cloudurl="cloudurl"></proyectos>
+        <eventos :cloudurl="cloudurl"></eventos>
+        <contacto :cloudurl="cloudurl"></contacto>
     </section>`,
     data(){
-
-    },
-    async mounted () {
-
+        return {
+            cloudurl: 'https://res.cloudinary.com/dbowsjk6p/image/upload/v1724456108/aptitudes/'
+        }
     },
     components: {
         'aptitudes': aptitudes,
         'proyectos': proyectos,
         'about': about,
-        'contacto': contacto
+        'contacto': contacto,
+        'eventos': eventos
     }
 }

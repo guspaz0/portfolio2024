@@ -1,5 +1,9 @@
 body {
     font-family: "Nunito Sans", sans-serif;
+    --theme-section-bg-lightgrad: linear-gradient(103deg,#f5f6ff 10%,#dff4fb);
+    --theme-em-gradient: linear-gradient(90deg,#7209d4,#2832d4 33%,#00a5b2);
+    --theme-em-gradient-pink: linear-gradient(90deg,#ed7077,#9a34e7 66%);
+    --theme-button-gradient-gray: linear-gradient(135deg, lightgray 5%, white);
     background-image: var(--theme-section-bg-lightgrad);
     color: black
 }
@@ -10,7 +14,6 @@ body {
     justify-content: space-between;
     gap: 5px;
     height: 10%;
-    background-color: ye;
 }
 
 .navbar > ul {
@@ -32,8 +35,39 @@ h2 {
     background-image: var(--theme-em-gradient-pink);
 }
 
-input[type=text], input[type=password], input[type=date] {
+input[type=text], input[type=password], input[type=date], textarea {
     padding: 5px;
     border-radius: 5px;
     border: none
+}
+
+.mainfooter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+p {
+    text-indent: 30px;
+}
+
+section {
+    view-timeline-name: --reveal;
+
+    animation-name: show;
+    animation-fill-mode: both;
+
+    animation-timeline: --reveal;
+    animation-range: entry 25% cover 30%;
+}
+
+@keyframes show {
+    from {
+        opacity: 0; scale: 10%
+    }
+
+    to {
+        opacity: 1; scale: 100%
+    }
 }

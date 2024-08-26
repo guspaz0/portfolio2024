@@ -1,6 +1,6 @@
 export default {
     template: `<nav className="navbar">
-        <h1>{{Titulo}} 🌎</h1>
+        <h2>{{Titulo}} </h2>
         <ul>
             <li v-for="list in listasNav">
                 <router-link v-bind:to="list.href">{{list.nombre}}</router-link>
