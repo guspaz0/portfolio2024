@@ -21,6 +21,6 @@ export default {
         }
     },
     created(){
-        this.$router.push({name: 'home', path: '/'})
+        this.$router.push({name: 'home', path: '/' })
     }
 }

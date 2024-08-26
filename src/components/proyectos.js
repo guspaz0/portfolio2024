@@ -1,6 +1,7 @@
+import vars from '../utils/var.js'
+
 export default {
     template: `
-    <link v-bind:href="css" rel="stylesheet"/>
     <section>
         <h2>{{Titulo}}</h2>
         <div v-bind:className="style">
@@ -17,10 +18,9 @@ export default {
         </div>
     </section>
     `,
-    props: ['cloudurl'],
     data(){
         return {
-            css: 'src/css/proyectos.css',
+            cloudurl: vars.cloudurl,
             Titulo: "Proyectos",
             style: 'proyectos',
             Proyectos: [

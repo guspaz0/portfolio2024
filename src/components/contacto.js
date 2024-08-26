@@ -1,6 +1,7 @@
+import vars from '../utils/var.js'
+
 export default {
     template: `
-    <link v-bind:href="css" rel="stylesheet"/>
     <section className="contacto">
         <h2>{{Titulo}}</h2>
         <div className="redes">
@@ -22,10 +23,9 @@ export default {
             </fieldset>
         </form>
     </section>`,
-    props: ['cloudurl'],
     data(){
         return {
-            css: 'src/css/contacto.css',
+            cloudurl: vars.cloudurl,
             Titulo: "Contacto",
             redes: [
                 {

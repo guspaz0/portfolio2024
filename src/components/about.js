@@ -1,6 +1,7 @@
+import vars from '../utils/var.js'
+
 export default {
     template: `
-    <link v-bind:href="css" rel="stylesheet"/>
     <section className="about">
         <div v-bind:className="style">
             <span>
@@ -12,10 +13,9 @@ export default {
         </div>
         <div className="perfil">
             <img v-bind:src="cloudurl+'perfil_cv_l8xbne.png'" alt="perfil" loading="lazy"/>
-            <img id="flag" src="https://flagcdn.com/ar.svg" alt="country flag" loading="lazy"/>
+            <img id="flag" src="https://codingweek.org/wp-content/uploads/2023/09/chris-ried-ieic5Tq8YMk-unsplash-2048x1367.jpg" alt="country flag" loading="lazy"/>
         </div>
     </section>`,
-    props: ['cloudurl'],
     data(){
         return {
             resumeDrive: 'https://drive.google.com/file/d/1otmq9F_jcLdmL0niyZgp1wg_EQj3YyIJ/view?usp=sharing',
@@ -23,7 +23,7 @@ export default {
             tituloGradient:  'Soy Desarrollador Full Stack',
             mensaje: "Ofrezco Servicios de programacion para paginas web modernas, tanto Frontend y Backend",
             style: 'overview',
-            css: 'src/css/about.css',
+            cloudurl: vars.cloudurl
         }
     },
     async mounted () {
