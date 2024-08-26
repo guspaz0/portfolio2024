@@ -25,7 +25,7 @@ export default {
     props: ['cloudurl'],
     data(){
         return {
-            css: './src/css/contacto.css',
+            css: 'src/css/contacto.css',
             Titulo: "Contacto",
             redes: [
                 {

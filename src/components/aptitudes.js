@@ -13,7 +13,7 @@ export default {
     props: ['cloudurl'],
     data: ()=> {
         return {
-            css: './src/css/aptitudes.css',
+            css: 'src/css/aptitudes.css',
             aptitudes: [
                 {nombre: 'React', path: `react_logo_vzqkhb.png`},
                 {nombre: 'Vite', path: `vite_logo_r8rm42.png`},

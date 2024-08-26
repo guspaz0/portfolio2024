@@ -20,7 +20,7 @@ export default {
     props: ['cloudurl'],
     data(){
         return {
-            css: './src/css/proyectos.css',
+            css: 'src/css/proyectos.css',
             Titulo: "Proyectos",
             style: 'proyectos',
             Proyectos: [
