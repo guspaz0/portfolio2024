@@ -1,6 +1,7 @@
+import vars from '../utils/var.js'
+
 export default {
     template: `
-    <link v-bind:href="css" rel="stylesheet"/>
     <section>
         <h2>Habilidades tecnicas:</h2>
         <div className="aptitudes">
@@ -10,10 +11,9 @@ export default {
             </span>
         </div>
     </section>`,
-    props: ['cloudurl'],
     data: ()=> {
         return {
-            css: 'src/css/aptitudes.css',
+            cloudurl: vars.cloudurl,
             aptitudes: [
                 {nombre: 'React', path: `react_logo_vzqkhb.png`},
                 {nombre: 'Vite', path: `vite_logo_r8rm42.png`},
