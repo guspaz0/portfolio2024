@@ -23,7 +23,7 @@ export default {
             tituloGradient:  'Soy Desarrollador Full Stack',
             mensaje: "Ofrezco Servicios de programacion para paginas web modernas, tanto Frontend y Backend",
             style: 'overview',
-            css: './src/css/about.css',
+            css: 'src/css/about.css',
         }
     },
     async mounted () {
