@@ -8,8 +8,8 @@ export default {
     template: `
     <section className="home container">
         <about></about>
-        <aptitudes></aptitudes>
         <proyectos></proyectos>
+        <aptitudes></aptitudes>
         <eventos></eventos>
         <contacto></contacto>
     </section>`,

@@ -6,8 +6,7 @@ export default {
                 <router-link v-bind:to="list.href">{{list.nombre}}</router-link>
             </li>
         </ul>
-    </nav>
-    <hr></hr>`,
+    </nav>`,
     data(){
         return {
             Titulo: "Portfolio",
