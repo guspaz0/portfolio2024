@@ -1,7 +1,8 @@
 export default {
     template: `
-    <section>
+    <section className="eventos">
         <h2>{{Titulo}}</h2>
+        En construccion...
     </section>
     `,
     data(){

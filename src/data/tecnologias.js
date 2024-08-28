@@ -1,3 +1,5 @@
+import vars from '../utils/var.js'
+
 export default {
     data: [
         {id: 1,nombre: 'React', path: `react_logo_vzqkhb.png`},
@@ -17,11 +19,20 @@ export default {
         {id: 15,nombre: 'Tomcat', path: `tomcat_logo_cob4ax.png`},
         {id: 16,nombre: 'Java', path: `java_logo_dxiy5o.png`},
         {id: 17,nombre: 'Github', path: `github_logo_xodefl.png`},
-        {id: 18,nombre: 'Docker', path: `docker_logo_w8pb4p.png`}
+        {id: 18,nombre: 'Docker', path: `docker_logo_w8pb4p.png`},
+        {id: 19, nombre: 'Next', path: ''}
     ],
+    findAll(){
+        return this.data.map(x => {
+            return {...x, path: vars.cloudurl+x.path}
+        })
+    },
     findOne: function (id) {
         const tecnologia = this.data.find(tec => tec.id == id)
-        if (tecnologia) return tecnologia
+        if (tecnologia) return {
+            ...tecnologia, 
+            path: vars.cloudurl+tecnologia.path
+        }
         else throw new Error("No se encuentra la Tecnologia");
         
     }

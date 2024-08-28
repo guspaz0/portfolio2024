@@ -1,5 +1,4 @@
 import data from '../data/index.js'
-import vars from '../utils/var.js'
 
 export default {
     template: `
@@ -15,9 +14,9 @@ export default {
                         <small>{{tec.nombre}}</small>
                     </span>
                 </div>
-                <span>
-                    <a v-bind:href="pr.repositorio" rel="noreferrer noopener">Repositorio</a>
-                    <a v-bind:href="pr.deploy" rel="noreferrer noopener">Link Deploy</a>
+                <span className="links">
+                    <a v-if="pr.repositorio" v-bind:href="pr.repositorio" rel="noreferrer noopener" id="repo">Repositorio</a>
+                    <a v-if="pr.deploy" v-bind:href="pr.deploy" rel="noreferrer noopener" id="deploy">Link Deploy</a>
                 </span>
             </article>
         </div>
@@ -25,7 +24,6 @@ export default {
     `,
     data(){
         return {
-            cloudurl: vars.cloudurl,
             Titulo: "Proyectos",
             style: 'proyectos',
             Proyectos: data.Proyectos.findAll()
