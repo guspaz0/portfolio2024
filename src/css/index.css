@@ -107,16 +107,12 @@ div.perfil {
     max-height: 350px;
 }
 
-/* img#flag {
-    position: relative;
-    z-index: 10;
-    width: 60px;
-    left: calc((50% - 30px));
-    bottom: 30px;
-    place-items: center;
-    border: solid 1px black;
-    mask-image: none
-} */
+span.links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
 
 img#flag {
     position: relative;
