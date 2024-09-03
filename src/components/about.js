@@ -12,8 +12,11 @@ export default {
             <a v-bind:href="resumeDrive">CV - Curriculum Vitae - Resume</a>
         </div>
         <div className="perfil">
-            <img v-bind:src="cloudurl+'perfil_cv_l8xbne.png'" alt="perfil" loading="lazy"/>
-            <img id="flag" src="https://codingweek.org/wp-content/uploads/2023/09/chris-ried-ieic5Tq8YMk-unsplash-2048x1367.jpg" alt="country flag" loading="lazy"/>
+            <img @contextmenu.prevent="" 
+                v-bind:src="cloudurl+'perfil_cv_l8xbne.png'" alt="perfil" loading="lazy"/>
+            <img @contextmenu.prevent="" 
+                id="flag" src="https://codingweek.org/wp-content/uploads/2023/09/chris-ried-ieic5Tq8YMk-unsplash-2048x1367.jpg" 
+                alt="country flag" loading="lazy"/>
         </div>
     </section>`,
     data(){

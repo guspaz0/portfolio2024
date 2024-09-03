@@ -5,7 +5,7 @@ export default {
     <section className="contacto">
         <h2>{{Titulo}}</h2>
         <div className="redes">
-            <span v-for="red in redes" className="card">
+            <span v-for="red in redes" className="card" @contextmenu.prevent="">
                 <b>{{red.nombre}}</b>
                 <a v-bind:href="red.href">
                     <img v-bind:src="cloudurl+red.logo" v-bind:alt="red.logo" loading="lazy"/>
@@ -19,7 +19,7 @@ export default {
                 <input v-model="subject" id="subject" type="text" name="subject"/>
                 <label for="body">Mensaje:</label> 
                 <textarea v-model="body" id="body" name="body" rows="10" cols="40"></textarea>
-                <span className="card" @click="handleSubmit"><input type="submit"/></span>
+                <span className="card" @click="handleSubmit" @contextmenu.prevent="">Enviar</span>
             </fieldset>
         </form>
     </section>`,

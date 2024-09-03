@@ -6,7 +6,7 @@ export default {
             id: 1,
             nombre: 'API fichadas',
             descripcion: 'Backend API Rest para obtener informacion de fichadas y setear parametros en relojes de asistencia biometricos Zkteco, de forma remota y centralizada. Tambien brinda informacion resumida de horas trabajadas para automatizar procesos internos',
-            tecnologias: [ 11, 12, 13, 14 ],
+            tecnologias: [ 11, 12, 13, 14, 18 ],
             repositorio: '',
             deploy: ''
         },
@@ -14,7 +14,7 @@ export default {
             id: 2,
             nombre: 'La Tienda de Maria',
             descripcion: 'Proyecto tipo E-commerce sobre articulos religiosos / artesanias y dashboard con KPIs. CRUD completo, filtrado y busqueda de articulos. carrito de compras y favoritos. CRUD de Usuarios. Servicio smtp para enviar correo.',
-            tecnologias: [ 11, 4, 5, 6, 8, 10, 1, 2 ],
+            tecnologias: [ 11, 4, 5, 6, 8, 10, 1, 2, 18 ],
             repositorio: 'https://github.com/guspaz0/grupo3_dashboard_DH.git',
             deploy: ''
         },
@@ -30,7 +30,7 @@ export default {
             id: 4,
             nombre: 'CAC Movies',
             descripcion: 'Proyecto Backend de API rest con Servlets Java. Desde el Front se puede buscar peliculas consumiendo la API de TMDB o de la API local. CRUD de peliculas y Usuarios, con encriptacion de contraseñas',
-            tecnologias: [ 6, 3, 2, 16, 15, 10],
+            tecnologias: [ 6, 3, 2, 16, 15, 10, 18],
             repositorio: 'https://github.com/guspaz0/Movies-FS-Java.git',
             deploy: ''
         },
@@ -41,6 +41,37 @@ export default {
             tecnologias: [ 6, 19, 2, 4,5,9,11,7,8],
             repositorio: 'https://github.com/guspaz0/GprojUnity.git',
             deploy: 'https://gproj-unity.vercel.app/'
+        },
+        {
+            id: 6,
+            nombre: 'PI Countries',
+            descripcion: 'Proyecto de entrenamiento de bootcamps',
+            tecnologias: [ 7, 4, 5, 6, 8, 9, 1, 2],
+            repositorio: '',
+            deploy: ''
+        },{
+            id: 7,
+            nombre: 'PI Foods',
+            descripcion: 'Proyecto de entrenamiento de bootcamps',
+            tecnologias: [ 7, 4, 5, 6, 8, 9, 1, 2],
+            repositorio: '',
+            deploy: ''
+        },
+        {
+            id: 8,
+            nombre: 'PI Video Games',
+            descripcion: 'Proyecto de entrenamiento de bootcamps',
+            tecnologias: [ 7, 4, 5, 6, 8, 9, 1, 2],
+            repositorio: '',
+            deploy: ''
+        },
+        {
+            id: 9,
+            nombre: 'Rick & Morty',
+            descripcion: 'Proyecto de entrenamiento de bootcamps',
+            tecnologias: [ 7, 4, 5, 6, 8, 9, 1, 2],
+            repositorio: '',
+            deploy: ''
         }
     ],
     findAll: function (){

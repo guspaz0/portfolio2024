@@ -3,6 +3,7 @@ import proyectos from './proyectos.js'
 import about from './about.js'
 import contacto from './contacto.js'
 import eventos from './eventos.js'
+import certificados from './certificados.js'
 
 export default {
     template: `
@@ -10,6 +11,7 @@ export default {
         <about></about>
         <proyectos></proyectos>
         <aptitudes></aptitudes>
+        <certificados></certificados>
         <eventos></eventos>
         <contacto></contacto>
     </section>`,
@@ -18,6 +20,7 @@ export default {
         'proyectos': proyectos,
         'about': about,
         'contacto': contacto,
-        'eventos': eventos
+        'eventos': eventos,
+        'certificados': certificados
     }
 }

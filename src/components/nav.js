@@ -14,8 +14,9 @@ export default {
                 {href: '/', nombre: 'Inicio'},
                 {href: '/about', nombre: 'Sobre mi'},
                 {href: '/aptitudes', nombre: 'Aptitudes'},
-                {href: '/contacto', nombre: 'Contacto'},
                 {href: '/proyectos', nombre: 'Proyectos'},
+                {href: '/certificados', nombre: 'Certificados'},
+                {href: '/contacto', nombre: 'Contacto'},
             ]
         }
     },

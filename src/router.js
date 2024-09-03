@@ -4,6 +4,7 @@ import about from './components/about.js'
 import contacto from './components/contacto.js'
 import aptitudes from './components/aptitudes.js'
 import eventos from './components/eventos.js'
+import certificados from './components/certificados.js'
 
 const { createRouter, createWebHistory} = VueRouter
 
@@ -16,7 +17,8 @@ const router = createRouter({
         {path: '/contacto', name: 'contacto', component: contacto},
         {path: '/aptitudes', name: 'aptitudes', component: aptitudes},
         {path: '/proyectos', name: 'proyectos', component: proyectos},
-        {path: '/eventos', name: 'eventos', component: eventos}
+        {path: '/eventos', name: 'eventos', component: eventos},
+        {path: '/certificados', name: 'certificados', component: certificados}
     ]
 })
 
