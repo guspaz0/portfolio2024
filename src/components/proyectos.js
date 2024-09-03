@@ -14,7 +14,7 @@ export default {
                         <small>{{tec.nombre}}</small>
                     </span>
                 </div>
-                <span className="links">
+                <span className="links" @contextmenu.prevent="">
                     <a v-if="pr.repositorio" v-bind:href="pr.repositorio" rel="noreferrer noopener" id="repo">Repositorio</a>
                     <a v-if="pr.deploy" v-bind:href="pr.deploy" rel="noreferrer noopener" id="deploy">Link Deploy</a>
                 </span>

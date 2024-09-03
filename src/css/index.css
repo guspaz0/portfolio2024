@@ -256,6 +256,23 @@ article .skills {
     gap: 5px;
     flex-wrap: wrap;
 }
+
+.certificados {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.certificados > article {
+    text-align: center;
+} 
+.certificados img {
+    width: 150px;
+
+}
+
 @keyframes show {
     from {
         opacity: 0; scale: 10%
