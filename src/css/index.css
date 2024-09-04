@@ -1,3 +1,6 @@
+html {
+    scroll-behavior: smooth;
+}
 body {
     font-family: "Nunito Sans", sans-serif;
     --theme-section-bg-lightgrad: linear-gradient(103deg,#f5f6ff 10%,#dff4fb);
@@ -8,22 +11,48 @@ body {
     color: black
 }
 .navbar {
+    position: fixed;
+    place-items: center;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    gap: 5px;
-    height: 10%;
+    justify-content: center;
+    flex-wrap: wrap;
+    z-index: 50;
+    gap: 10px;
+    height: 5%;
 }
 
+ul > h2 {
+    margin-top: 1px;
+    margin-bottom: 1px;
+    filter: drop-shadow(2px 2px 2px white);
+}
 .navbar > ul {
     list-style-type: none;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(0,0,0, 0.5);
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
     gap: 10px;
 }
+
+li > a {
+    text-decoration: none;
+    color: white;
+    transition: 250ms;
+}
+li > a:hover {
+    background-color: rgba(255,255,255,0.2);
+    padding: 5px;
+    border-radius: 5px;
+}
+
 
 h2 {
     text-align: center;
@@ -35,7 +64,7 @@ h2 {
     background-image: var(--theme-em-gradient-pink);
 }
 
-input[type=text], input[type=password], input[type=date], textarea {
+input[type=text], input[type=password], input[type=date], textarea, select {
     padding: 5px;
     border-radius: 5px;
     border: none
@@ -59,7 +88,7 @@ section {
     animation-fill-mode: both;
 
     animation-timeline: --reveal;
-    animation-range: entry 25% cover 30%;
+    animation-range: entry 25% cover 11.5%;
 }
 .about {
     display: flex;
@@ -191,7 +220,7 @@ input[type="submit"] {
     object-fit: cover;
 }
 
-.redes .card, form .card {
+.redes .card, .card {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -201,7 +230,7 @@ input[type="submit"] {
     box-shadow: 2px 2px 5px black;
     border-radius: 5px; 
     background-color: white;
-    width: 100px;
+
     transition: 250ms;
 }
 .card:hover {
@@ -214,7 +243,7 @@ input[type="submit"] {
     padding-right: 3px;
 }
 
-form fieldset {
+fieldset {
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -260,17 +289,41 @@ article .skills {
 .certificados {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: start;
     justify-content: space-around;
     flex-wrap: wrap;
     gap: 5px;
 }
+
 .certificados > article {
     text-align: center;
-} 
+}
 .certificados img {
     width: 150px;
+}
 
+.resume > a {
+    color: black;
+    text-decoration: none;
+}
+
+@media (min-width: 600px) {
+    section {
+        animation-range: entry 25% cover 13%;
+    }
+    #certificados form, #certificados fieldset, #proyectos form, #proyectos fieldset {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        flex-wrap: wrap;
+    }
+}
+@media (min-width: 900px) {
+    section {
+        animation-range: entry 25% cover 22%;
+    }
 }
 
 @keyframes show {
