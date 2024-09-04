@@ -8,17 +8,19 @@ import certificados from './components/certificados.js'
 
 const { createRouter, createWebHistory} = VueRouter
 
+const root = window.location.pathname
+
 const router = createRouter({
     history: createWebHistory(),
     mode: 'history',
     routes: [
-        {path: '/', name: 'home', component: home},
-        {path: '/about', name: 'about', component: about},
-        {path: '/contacto', name: 'contacto', component: contacto},
-        {path: '/aptitudes', name: 'aptitudes', component: aptitudes},
-        {path: '/proyectos', name: 'proyectos', component: proyectos},
-        {path: '/eventos', name: 'eventos', component: eventos},
-        {path: '/certificados', name: 'certificados', component: certificados}
+        {path: `${root}`, name: 'home', component: home},
+        {path: `${root}/about`, name: 'about', component: about},
+        {path: `${root}/contacto`, name: 'contacto', component: contacto},
+        {path: `${root}/aptitudes`, name: 'aptitudes', component: aptitudes},
+        {path: `${root}/proyectos`, name: 'proyectos', component: proyectos},
+        {path: `${root}/eventos`, name: 'eventos', component: eventos},
+        {path: `${root}/certificados`, name: 'certificados', component: certificados}
     ]
 })
 

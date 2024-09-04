@@ -2,14 +2,16 @@ import vars from '../utils/var.js'
 
 export default {
     template: `
-    <section className="about">
+    <section id="about" className="about">
         <div v-bind:className="style">
             <span>
                 <b>{{titulo}}</b> 
                 <em>{{tituloGradient}}</em>
             </span>
             <p>{{mensaje}}</p>
-            <a v-bind:href="resumeDrive">CV - Curriculum Vitae - Resume</a>
+            <span className="card resume">
+                <a v-bind:href="resumeDrive"> CV / Resume</a>
+            </span>
         </div>
         <div className="perfil">
             <img @contextmenu.prevent="" 

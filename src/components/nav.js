@@ -1,22 +1,23 @@
 export default {
     template: `<nav className="navbar">
-        <h2>{{Titulo}} </h2>
         <ul>
+            <h2>{{Titulo}} </h2>
             <li v-for="list in listasNav">
-                <router-link v-bind:to="list.href">{{list.nombre}}</router-link>
+                <a v-bind:href="list.href">{{list.nombre}}</a>
             </li>
         </ul>
     </nav>`,
     data(){
         return {
+            el: '#app',
             Titulo: "Portfolio",
             listasNav: [
-                {href: '/', nombre: 'Inicio'},
-                {href: '/about', nombre: 'Sobre mi'},
-                {href: '/aptitudes', nombre: 'Aptitudes'},
-                {href: '/proyectos', nombre: 'Proyectos'},
-                {href: '/certificados', nombre: 'Certificados'},
-                {href: '/contacto', nombre: 'Contacto'},
+                {href: '#', nombre: 'Inicio'},
+                {href: '#about', nombre: 'Sobre mi'},
+                {href: '#aptitudes', nombre: 'Aptitudes'},
+                {href: '#proyectos', nombre: 'Proyectos'},
+                {href: '#certificados', nombre: 'Certificados'},
+                {href: '#contacto', nombre: 'Contacto'},
             ]
         }
     },

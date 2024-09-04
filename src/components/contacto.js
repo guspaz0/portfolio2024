@@ -2,7 +2,7 @@ import vars from '../utils/var.js'
 
 export default {
     template: `
-    <section className="contacto">
+    <section id="contacto" className="contacto">
         <h2>{{Titulo}}</h2>
         <div className="redes">
             <span v-for="red in redes" className="card" @contextmenu.prevent="">

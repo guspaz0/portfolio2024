@@ -1,6 +1,6 @@
 export default {
     template: `
-    <section className="eventos">
+    <section id="eventos" className="eventos">
         <h2>{{Titulo}}</h2>
         En construccion...
     </section>

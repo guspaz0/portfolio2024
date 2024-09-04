@@ -2,8 +2,8 @@ import Tecnologias from '../data/tecnologias.js'
 
 export default {
     template: `
-    <section>
-        <h2>Habilidades tecnicas:</h2>
+    <section v-bind:id="el">
+        <h2>Tecnologias:</h2>
         <div className="aptitudes">
             <span v-for="skill in aptitudes" className="imgtext">
                 <small>{{skill.nombre}}</small>
@@ -20,6 +20,7 @@ export default {
     </section>`,
     data: ()=> {
         return {
+            el: 'aptitudes',
             aptitudes: Tecnologias.findAll()
         }
     }

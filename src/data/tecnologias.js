@@ -21,10 +21,12 @@ export default {
         {id: 17,nombre: 'Github', path: `github_logo_xodefl.png`},
         {id: 18,nombre: 'Docker', path: `docker_logo_w8pb4p.png`},
         {id: 19, nombre: 'Next', path: ''},
-        {id: 20, nombre: 'Serverless', path: 'serverless_logo_fa4qga.svg'},
+        {id: 20, nombre: 'Serverless', path: 'serverless_logo_cmfxpj.png'},
         {id: 21, nombre: 'AWS', path: 'aws_logo_vvu4gp.png'},
         {id: 22, nombre: 'Microsoft Excel', path: 'excel_logo_zp7tlj.png'},
-        {id: 23, nombre: 'Google Sheets', path: 'google_sheets_logol_t8vgn6.png'}
+        {id: 23, nombre: 'Google Sheets', path: 'google_sheets_logol_t8vgn6.png'},
+        {id: 24, nombre: 'HTML', path: 'HTML5_logo_v0liwi.png'},
+        {id: 25, nombre: 'CSS', path: 'CSS3_logo_udoavo.svg'}
     ],
     findAll(){
         return this.data.map(x => {

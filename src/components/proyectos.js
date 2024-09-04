@@ -2,9 +2,21 @@ import data from '../data/index.js'
 
 export default {
     template: `
-    <section>
+    <section v-bind:id="el">
         <h2>{{Titulo}}</h2>
-        <div v-bind:className="style">
+        <form>
+            <fieldset>
+                <legend>Filtros</legend>
+                <label for="filterTec">Tecnologia:</label>
+                <select id="filterTec" v-model="filterTecnologia">
+                    <option v-for="tec in Tecnologias" v-bind:value="tec.id">
+                    {{tec.nombre}}
+                    </option>
+                </select>
+            </fieldset>
+            <span className="card" @click.prevent="reset">Reset</span>
+        </form>
+        <div v-bind:className="el">
             <article v-for="pr in Proyectos">
                 <h2>{{pr.nombre}}</h2>
                 <p>{{pr.descripcion}}</p>
@@ -25,8 +37,24 @@ export default {
     data(){
         return {
             Titulo: "Proyectos",
-            style: 'proyectos',
-            Proyectos: data.Proyectos.findAll()
+            el: 'proyectos',
+            Proyectos: data.Proyectos.findAll(),
+            Tecnologias: data.Tecnologias.findAll(),
+            filterTecnologia: ''
+        }
+    },
+    methods: {
+        reset(){
+            this.filterTecnologia = ''
+            this.Proyectos = data.Proyectos.findAll()
+        }
+    },
+    watch: {
+        filterTecnologia(val){
+            if (val != ''){
+                this.filterTecnologia = ''
+                this.Proyectos = data.Proyectos.findAll().filter(pr => pr.tecnologias.some(tec => +tec.id == +val))
+            }
         }
     }
 }

@@ -10,8 +10,8 @@ export default {
     <section className="home container">
         <about></about>
         <proyectos></proyectos>
-        <aptitudes></aptitudes>
         <certificados></certificados>
+        <aptitudes></aptitudes>
         <eventos></eventos>
         <contacto></contacto>
     </section>`,
