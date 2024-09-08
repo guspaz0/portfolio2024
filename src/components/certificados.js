@@ -13,17 +13,17 @@ export default {
                     {{esc.nombre}}
                     </option>
                 </select>
-                <label for="filterTec">Tecnologia:</label>
+                <label for="filterTec">Aptitud:</label>
                 <select id="filterTec" v-model="filterTecnologia">
-                    <option v-for="tec in Tecnologias" v-bind:value="tec.id">
+                    <option v-for="tec in Aptitudes" v-bind:value="tec.id">
                     {{tec.nombre}}
                     </option>
                 </select>
             </fieldset>
             <span className="card" @click.prevent="reset">Reset</span>
         </form>
-
         <div className="certificados">
+            <p v-if="Certificados.length == 0">No hay certificados con la Escuela/Aptitud seleccionada</p>
             <article v-for="cert in Certificados">
                 <b>{{cert.nombre}}</b>
                 <span>
@@ -31,9 +31,19 @@ export default {
                 </span>
                 <b>Tecnologias:</b>
                 <div className="proyectos">
-                    <span v-for="tec in cert.tecnologias" className="skills">
+                    <span v-for="tec in cert.aptitudes.slice(0,2)" className="skills">
                         <small>{{tec.nombre}}</small>
+                        <img v-bind:src="tec.path" v-bind:alt="tec.nombre" loading="lazy"/>
                     </span>
+                    <span v-if="cert.aptitudes.length > 2" className="skills" @mouseenter.prevent="showAptitudes">
+                        <b>+{{cert.aptitudes.length-2}}</b>
+                    </span>
+                    <dialog v-if="cert.aptitudes.length > 3" @mouseleave.prevent="showAptitudes">
+                        <span v-for="tec in cert.aptitudes" className="skills">
+                            <small>{{tec.nombre}}</small>
+                            <img v-bind:src="tec.path" v-bind:alt="tec.nombre" loading="lazy"/>
+                        </span>
+                    </dialog>
                 </div>
                 <a v-bind:href="cert.path" rel="noreferrer noopener">Certificado</a>
             </article>
@@ -44,17 +54,29 @@ export default {
         return {
             Titulo: 'Certificados',
             Certificados: data.Certificados.findAll(),
-            Escuelas: data.Escuelas.findAll(),
-            Tecnologias: data.Tecnologias.findAll(),
+            Escuelas: [],
+            Aptitudes: [],
             filterEscuela: '',
             filterTecnologia: '',
         }
+    },
+    mounted(){
+        this.Aptitudes = data.Aptitudes.findAll().filter(apt => data.Certificados.data.some(cert => cert.aptitudes.includes(apt.id)))
+        this.Escuelas = data.Escuelas.findAll().filter(apt => data.Certificados.data.some(cert => cert.escuela == apt.id))
     },
     methods: {
         reset(){
             this.filterTecnologia = ''
             this.filterEscuela = ''
             this.Certificados = data.Certificados.findAll()
+        },
+        showAptitudes(e){
+            const skills = Array.from(e.target.parentNode.childNodes).filter(s => s.tagName == "DIALOG")
+            if (e.type == "mouseenter") {
+                skills[0].open = true
+            } else if (e.type == "mouseleave") {
+                skills[0].open = false
+            }
         }
     },
     watch: {
@@ -67,7 +89,7 @@ export default {
         filterTecnologia(val){
             if (val != ''){
                 this.filterEscuela = ''
-                this.Certificados = data.Certificados.findAll().filter(cert => cert.tecnologias.some(tec => tec.id == +val))
+                this.Certificados = data.Certificados.findAll().filter(cert => cert.aptitudes.some(tec => tec.id == +val))
             }
         }
     }

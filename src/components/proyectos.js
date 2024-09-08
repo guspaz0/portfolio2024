@@ -7,9 +7,9 @@ export default {
         <form>
             <fieldset>
                 <legend>Filtros</legend>
-                <label for="filterTec">Tecnologia:</label>
+                <label for="filterTec">Aptitud:</label>
                 <select id="filterTec" v-model="filterTecnologia">
-                    <option v-for="tec in Tecnologias" v-bind:value="tec.id">
+                    <option v-for="tec in Aptitudes" v-bind:value="tec.id">
                     {{tec.nombre}}
                     </option>
                 </select>
@@ -17,14 +17,27 @@ export default {
             <span className="card" @click.prevent="reset">Reset</span>
         </form>
         <div v-bind:className="el">
+            <p v-if="Proyectos.length == 0">No hay proyectos con la Aptitud seleccionada</p>
             <article v-for="pr in Proyectos">
+                <span className="img" v-bind:style="'background-image:linear-gradient(to bottom, rgba(109, 105, 105, 0.655), rgba(109, 105, 105, 0.1)), url('+pr.imagen+');'">
+                </span>
                 <h2>{{pr.nombre}}</h2>
                 <p>{{pr.descripcion}}</p>
                 <b>Tecnologias:</b>
                 <div className="proyectos">
-                    <span v-for="tec in pr.tecnologias" className="skills">
+                    <span v-for="tec in pr.aptitudes.slice(0,2)" className="skills">
                         <small>{{tec.nombre}}</small>
+                        <img v-bind:src="tec.path" v-bind:alt="tec.nombre" loading="lazy"/>
                     </span>
+                    <span v-if="pr.aptitudes.length > 2" className="expand" @mouseenter.prevent="showAptitudes">
+                        <b>+{{pr.aptitudes.length-2}}</b>
+                    </span>
+                    <dialog v-if="pr.aptitudes.length > 3" @mouseleave.prevent="showAptitudes">
+                        <span v-for="tec in pr.aptitudes" className="skills">
+                            <small>{{tec.nombre}}</small>
+                            <img v-bind:src="tec.path" v-bind:alt="tec.nombre" loading="lazy"/>
+                        </span>
+                    </dialog>
                 </div>
                 <span className="links" @contextmenu.prevent="">
                     <a v-if="pr.repositorio" v-bind:href="pr.repositorio" rel="noreferrer noopener" id="repo">Repositorio</a>
@@ -39,21 +52,32 @@ export default {
             Titulo: "Proyectos",
             el: 'proyectos',
             Proyectos: data.Proyectos.findAll(),
-            Tecnologias: data.Tecnologias.findAll(),
+            Aptitudes: [],
             filterTecnologia: ''
         }
+    },
+    mounted(){
+        this.Aptitudes = data.Aptitudes.findAll().filter(apt => data.Proyectos.data.some(pr => pr.aptitudes.includes(apt.id)))
     },
     methods: {
         reset(){
             this.filterTecnologia = ''
             this.Proyectos = data.Proyectos.findAll()
+        },
+        showAptitudes(e){
+            const skills = Array.from(e.target.parentNode.childNodes).filter(s => s.tagName == "DIALOG")
+            if (e.type == "mouseenter") {
+                skills[0].open = true
+            } else if (e.type == "mouseleave") {
+                skills[0].open = false
+            }
         }
     },
     watch: {
         filterTecnologia(val){
             if (val != ''){
                 this.filterTecnologia = ''
-                this.Proyectos = data.Proyectos.findAll().filter(pr => pr.tecnologias.some(tec => +tec.id == +val))
+                this.Proyectos = data.Proyectos.findAll().filter(pr => pr.aptitudes.some(tec => +tec.id == +val))
             }
         }
     }

@@ -1,4 +1,4 @@
-import Tecnologias from '../data/tecnologias.js'
+import Aptitudes from '../data/aptitudes.js'
 
 export default {
     template: `
@@ -21,7 +21,7 @@ export default {
     data: ()=> {
         return {
             el: 'aptitudes',
-            aptitudes: Tecnologias.findAll()
+            aptitudes: Aptitudes.findAll()
         }
     }
 }

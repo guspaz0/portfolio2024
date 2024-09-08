@@ -184,10 +184,58 @@ img#flag {
 
 .proyectos .skills {
     filter: none;
-    background-color: gray;
+    mask-image: none;
+    background-color: rgba(5,5,5, 0.1);
     padding: 5px;
+    min-width: 60px;
     border-radius: 5px;
-    color: white;
+}
+
+.proyectos > article {
+    position: relative;
+}
+
+.proyectos > article > span.img {
+    /* background-size: cover; */
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 200px;
+    position: relative;
+    background-position: center;
+    mask-image: linear-gradient(180deg, black 60%, transparent);
+}
+.proyectos > article h2 {
+    z-index: 50px;
+    position: absolute;
+    place-items: center;
+    top: 180px;
+}
+
+
+span.skills:hover {
+    background-color: rgba(5,5,5, 0.2);
+    color: black;
+}
+span.skills small:hover{
+    position: absolute;
+    z-index: 50;
+}
+
+section > h2::first-letter {
+    font-size: 26px;
+    font-weight: 900;
+}
+
+span.skills img {
+    display: none;
+    max-width: 50px;
+    max-height: 50px;
+    transition: 500ms;
+}
+span.skills:hover img {
+    display: block;
+    position: absolute;
+    z-index: 50;
 }
 
 .contacto {
@@ -261,6 +309,11 @@ fieldset {
     gap: 10px;
 }
 
+.proyectos div.proyectos {
+    position: relative;
+    justify-content: start;
+}
+
 article {
     display: flex;
     flex-direction: column;
@@ -296,7 +349,12 @@ article .skills {
 }
 
 .certificados > article {
+    position: relative;
+    display: flex;
+    flex-direction: column;
     text-align: center;
+    align-items: center;
+    justify-content: space-between;
 }
 .certificados img {
     width: 150px;
@@ -305,6 +363,49 @@ article .skills {
 .resume > a {
     color: black;
     text-decoration: none;
+}
+dialog {
+    transition: 500ms;
+}
+
+dialog:hover {
+    position: absolute;
+    
+}
+
+dialog[open] {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    bottom: -5px;
+    z-index: 15;
+    filter: drop-shadow(3px 3px 4px black);
+    border: none;
+    gap: 3px;
+    padding: 2px;
+    border-radius: 5px;
+}
+
+span.expand::after {
+    content: "";
+    text-align: center;
+    position: absolute;
+    font-size: 20px;
+    bottom: -20px;
+    right: 95px;
+    width: 35px;
+    height: 35px;
+    border-radius: 19px;
+    border: 2px solid transparent;
+    border-top: 2px solid #FF3CAC;
+    border-right: 2px solid #784BA0;
+    border-bottom: 2px solid #2B86C5;
+    box-sizing: border-box;
+    transform: translate(-50%,-50%);
+    animation: spin 2s linear infinite;
+    z-index: 2;
 }
 
 @media (min-width: 600px) {
@@ -333,5 +434,13 @@ article .skills {
 
     to {
         opacity: 1; scale: 100%
+    }
+}
+@keyframes spin {
+    0% {
+        transform: translate(-50%,-50%) rotate(0);
+    }
+    100% {
+        transform: translate(-50%,-50%) rotate(360deg);
     }
 }
