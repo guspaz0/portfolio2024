@@ -5,7 +5,7 @@ import vars from '../utils/var.js'
 export default {
     data: [
         { id: 1, nombre: 'Full Stack Developer', escuela: 1, path: '', fecha: new Date(), aptitudes: [1,2,4,5,6,7,8,9,17,11,24,25]},
-        { id: 2, nombre: 'Full Stack Developer', escuela: 2, path: '', fecha: new Date(), aptitudes: [1,2,4,5,6,8,10,17,24,25]},
+        { id: 2, nombre: 'Full Stack Developer', escuela: 2, path: '', fecha: new Date(), aptitudes: [1,2,4,5,6,8,10,17,24,25,26]},
         { id: 2, nombre: 'Full Stack Developer Java', escuela: 7, path: '', fecha: new Date(), aptitudes: [3,6,16,10,15,17,24,25]},
         { id: 3, nombre: 'Excel Completo de principiante a avanzado', escuela: 3, path: '', fecha: new Date(), aptitudes: [22]},
         { id: 4, nombre: 'Google Sheets y mas', escuela: 3, path: '', fecha: new Date(), aptitudes: [23]},

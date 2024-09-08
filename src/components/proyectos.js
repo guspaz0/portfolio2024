@@ -10,7 +10,7 @@ export default {
                 <label for="filterTec">Aptitud:</label>
                 <select id="filterTec" v-model="filterTecnologia">
                     <option v-for="tec in Aptitudes" v-bind:value="tec.id">
-                    {{tec.nombre}}
+                    {{tec.nombre}} ({{tec.countProyects}})
                     </option>
                 </select>
             </fieldset>
@@ -18,21 +18,21 @@ export default {
         </form>
         <div v-bind:className="el">
             <p v-if="Proyectos.length == 0">No hay proyectos con la Aptitud seleccionada</p>
-            <article v-for="pr in Proyectos">
+            <article v-for="pr in Proyectos" @contextmenu.prevent="" >
                 <span className="img" v-bind:style="'background-image:linear-gradient(to bottom, rgba(109, 105, 105, 0.655), rgba(109, 105, 105, 0.1)), url('+pr.imagen+');'">
                 </span>
                 <h2>{{pr.nombre}}</h2>
                 <p>{{pr.descripcion}}</p>
                 <b>Tecnologias:</b>
                 <div className="proyectos">
-                    <span v-for="tec in pr.aptitudes.slice(0,2)" className="skills">
+                    <span v-for="tec in pr.aptitudes.slice(0,2)" className="skills" @contextmenu.prevent="" >
                         <small>{{tec.nombre}}</small>
                         <img v-bind:src="tec.path" v-bind:alt="tec.nombre" loading="lazy"/>
                     </span>
-                    <span v-if="pr.aptitudes.length > 2" className="expand" @mouseenter.prevent="showAptitudes">
+                    <span v-if="pr.aptitudes.length > 2" className="expand" @mouseenter.prevent="showAptitudes" @contextmenu.prevent="" >
                         <b>+{{pr.aptitudes.length-2}}</b>
                     </span>
-                    <dialog v-if="pr.aptitudes.length > 3" @mouseleave.prevent="showAptitudes">
+                    <dialog v-if="pr.aptitudes.length > 3" @mouseleave.prevent="showAptitudes" @contextmenu.prevent="" >
                         <span v-for="tec in pr.aptitudes" className="skills">
                             <small>{{tec.nombre}}</small>
                             <img v-bind:src="tec.path" v-bind:alt="tec.nombre" loading="lazy"/>

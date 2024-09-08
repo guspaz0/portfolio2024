@@ -134,6 +134,7 @@ section {
 div.perfil {
     max-width: 350px;
     max-height: 350px;
+    filter: grayscale(100%);
 }
 
 span.links {
@@ -399,15 +400,23 @@ span.expand::after {
     height: 35px;
     border-radius: 19px;
     border: 2px solid transparent;
-    border-top: 2px solid #FF3CAC;
-    border-right: 2px solid #784BA0;
     border-bottom: 2px solid #2B86C5;
     box-sizing: border-box;
     transform: translate(-50%,-50%);
     animation: spin 2s linear infinite;
     z-index: 2;
 }
-
+.carousel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 60px;
+    white-space: nowrap;
+}
+.carousel img {
+    max-width: 50px;
+    max-height: 50px;
+}
 @media (min-width: 600px) {
     section {
         animation-range: entry 25% cover 13%;
@@ -421,6 +430,7 @@ span.expand::after {
         flex-wrap: wrap;
     }
 }
+
 @media (min-width: 900px) {
     section {
         animation-range: entry 25% cover 22%;

@@ -16,7 +16,7 @@ export default {
                 <label for="filterTec">Aptitud:</label>
                 <select id="filterTec" v-model="filterTecnologia">
                     <option v-for="tec in Aptitudes" v-bind:value="tec.id">
-                    {{tec.nombre}}
+                    {{tec.nombre}} ({{tec.countCertificados}})
                     </option>
                 </select>
             </fieldset>
@@ -24,21 +24,21 @@ export default {
         </form>
         <div className="certificados">
             <p v-if="Certificados.length == 0">No hay certificados con la Escuela/Aptitud seleccionada</p>
-            <article v-for="cert in Certificados">
+            <article v-for="cert in Certificados" @contextmenu.prevent="" >
                 <b>{{cert.nombre}}</b>
                 <span>
                     <img v-bind:src="cert.escuela.path" alt="cert.escuela.nombre" loading="lazy"/>
                 </span>
                 <b>Tecnologias:</b>
                 <div className="proyectos">
-                    <span v-for="tec in cert.aptitudes.slice(0,2)" className="skills">
+                    <span v-for="tec in cert.aptitudes.slice(0,2)" className="skills" @contextmenu.prevent="" >
                         <small>{{tec.nombre}}</small>
                         <img v-bind:src="tec.path" v-bind:alt="tec.nombre" loading="lazy"/>
                     </span>
-                    <span v-if="cert.aptitudes.length > 2" className="skills" @mouseenter.prevent="showAptitudes">
+                    <span v-if="cert.aptitudes.length > 2" className="skills" @mouseenter.prevent="showAptitudes" @contextmenu.prevent="" >
                         <b>+{{cert.aptitudes.length-2}}</b>
                     </span>
-                    <dialog v-if="cert.aptitudes.length > 3" @mouseleave.prevent="showAptitudes">
+                    <dialog v-if="cert.aptitudes.length > 3" @mouseleave.prevent="showAptitudes" @contextmenu.prevent="" >
                         <span v-for="tec in cert.aptitudes" className="skills">
                             <small>{{tec.nombre}}</small>
                             <img v-bind:src="tec.path" v-bind:alt="tec.nombre" loading="lazy"/>

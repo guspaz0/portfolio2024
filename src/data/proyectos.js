@@ -7,7 +7,7 @@ export default {
             id: 1,
             nombre: 'API fichadas',
             descripcion: 'Backend API Rest para obtener informacion de fichadas y setear parametros en relojes de asistencia biometricos Zkteco, de forma remota y centralizada. Tambien brinda informacion resumida de horas trabajadas para automatizar procesos internos',
-            aptitudes: [ 11, 12, 13, 14, 18,4,5,6,8,9,1 ],
+            aptitudes: [ 1, 12, 13, 14, 18,4,5,6,8,9,11 ],
             imagen: 'fichadas_beqpmi.png',
             repositorio: '',
             deploy: ''
@@ -16,7 +16,7 @@ export default {
             id: 2,
             nombre: 'La Tienda de Maria',
             descripcion: 'Proyecto tipo E-commerce sobre articulos religiosos / artesanias y dashboard con KPIs. CRUD completo, filtrado y busqueda de articulos. carrito de compras y favoritos. CRUD de Usuarios. Servicio smtp para enviar correo.',
-            aptitudes: [ 11, 4, 5, 6, 8, 10, 1, 2, 18,24,25 ],
+            aptitudes: [ 1, 4, 5, 6, 8, 10, 11, 2, 18,24,25,26 ],
             imagen: 'La_tienda_de_maria_ssxsn2.png',
             repositorio: 'https://github.com/guspaz0/grupo3_dashboard_DH.git',
             deploy: ''
@@ -34,7 +34,7 @@ export default {
             id: 4,
             nombre: 'CAC Movies',
             descripcion: 'Proyecto Backend de API rest con Servlets Java. Desde el Front se puede buscar peliculas consumiendo la API de TMDB o de la API local. CRUD de peliculas y Usuarios, con encriptacion de contraseñas',
-            aptitudes: [ 6, 3, 2, 16, 15, 10, 18,24,25],
+            aptitudes: [ 16, 3, 2, 6, 15, 10, 18,24,25],
             imagen: 'cac-Movies_zltzex.png',
             repositorio: 'https://github.com/guspaz0/Movies-FS-Java.git',
             deploy: ''
@@ -60,7 +60,7 @@ export default {
             id: 7,
             nombre: 'PI Foods',
             descripcion: 'Proyecto de entrenamiento de bootcamps',
-            aptitudes: [ 7, 4, 5, 6, 8, 9, 1, 2,24,25],
+            aptitudes: [ 1, 4, 5, 6, 8, 9, 7, 2,24,25],
             imagen: '',
             repositorio: '',
             deploy: ''
@@ -69,7 +69,7 @@ export default {
             id: 8,
             nombre: 'PI Video Games',
             descripcion: 'Proyecto de entrenamiento de bootcamps',
-            aptitudes: [ 7, 4, 5, 6, 8, 9, 1, 2,24,25],
+            aptitudes: [ 1, 4, 5, 6, 8, 9, 7, 2,24,25],
             imagen: '',
             repositorio: '',
             deploy: ''
@@ -78,7 +78,7 @@ export default {
             id: 9,
             nombre: 'Rick & Morty',
             descripcion: 'Proyecto de entrenamiento de bootcamps',
-            aptitudes: [ 7, 4, 5, 6, 8, 9, 1, 2,24,25],
+            aptitudes: [ 1, 4, 5, 6, 8, 9, 7, 2,24,25],
             imagen: '',
             repositorio: '',
             deploy: ''
