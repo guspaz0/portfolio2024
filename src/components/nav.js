@@ -12,7 +12,7 @@ export default {
             el: '#app',
             Titulo: "Portfolio",
             listasNav: [
-                {href: '#', nombre: 'Inicio'},
+                {href: `${window.location.pathname.split('/')[1]}`, nombre: 'Inicio'},
                 {href: '#about', nombre: 'Sobre mi'},
                 {href: '#aptitudes', nombre: 'Aptitudes'},
                 {href: '#proyectos', nombre: 'Proyectos'},
