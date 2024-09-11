@@ -14,7 +14,8 @@ export default {
                     </option>
                 </select>
             </fieldset>
-            <span className="card" @click.prevent="reset">Reset</span>
+            <small>Mostrando {{Proyectos.length}} de {{totalProyects}} Proyectos</small>
+            <span className="card" @click.prevent="reset">Ver Todos</span>
         </form>
         <div v-bind:className="el">
             <p v-if="Proyectos.length == 0">No hay proyectos con la Aptitud seleccionada</p>
@@ -51,13 +52,16 @@ export default {
         return {
             Titulo: "Proyectos",
             el: 'proyectos',
-            Proyectos: data.Proyectos.findAll(),
+            Proyectos: [],
             Aptitudes: [],
+            totalProyects: data.Proyectos.data.length,
             filterTecnologia: ''
         }
     },
     mounted(){
-        this.Aptitudes = data.Aptitudes.findAll().filter(apt => data.Proyectos.data.some(pr => pr.aptitudes.includes(apt.id)))
+        this.Aptitudes = data.Aptitudes.findAll()
+            .filter(apt => data.Proyectos.data.some(pr => pr.aptitudes.includes(apt.id)));
+        this.Proyectos = data.Proyectos.findAll().slice(0,3);
     },
     methods: {
         reset(){
