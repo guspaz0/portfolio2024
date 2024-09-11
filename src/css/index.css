@@ -344,9 +344,9 @@ article .skills {
     display: flex;
     flex-direction: row;
     align-items: start;
-    justify-content: space-around;
+    justify-content: center;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 10px;
 }
 
 .certificados > article {
@@ -355,6 +355,7 @@ article .skills {
     flex-direction: column;
     text-align: center;
     align-items: center;
+    min-height: 250px;
     justify-content: space-between;
 }
 .certificados img {
@@ -406,10 +407,20 @@ span.expand::after {
     animation: spin 2s linear infinite;
     z-index: 2;
 }
-.carousel {
+.carousel-container {
+    position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
+    padding: 20px;
+    width: 90%;
+
+    overflow: hidden;
+}
+
+.carousel {
+    display: flex;
+    flex-direction: row;
     gap: 60px;
     white-space: nowrap;
 }

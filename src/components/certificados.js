@@ -20,7 +20,8 @@ export default {
                     </option>
                 </select>
             </fieldset>
-            <span className="card" @click.prevent="reset">Reset</span>
+            <small>Mostrando {{Certificados.length}} de {{totalCertificados}} Certificados</small>
+            <span className="card" @click.prevent="reset">Ver Todos</span>
         </form>
         <div className="certificados">
             <p v-if="Certificados.length == 0">No hay certificados con la Escuela/Aptitud seleccionada</p>
@@ -53,7 +54,8 @@ export default {
     data(){
         return {
             Titulo: 'Certificados',
-            Certificados: data.Certificados.findAll(),
+            Certificados: [],
+            totalCertificados: data.Certificados.data.length,
             Escuelas: [],
             Aptitudes: [],
             filterEscuela: '',
@@ -61,6 +63,7 @@ export default {
         }
     },
     mounted(){
+        this.Certificados = data.Certificados.findAll().slice(0,3)
         this.Aptitudes = data.Aptitudes.findAll().filter(apt => data.Certificados.data.some(cert => cert.aptitudes.includes(apt.id)))
         this.Escuelas = data.Escuelas.findAll().filter(apt => data.Certificados.data.some(cert => cert.escuela == apt.id))
     },

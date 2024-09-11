@@ -4,7 +4,8 @@ export default {
     template: `
     <section v-bind:id="el">
         <h2>Tecnologias:</h2>
-        <div className="carousel" v-bind:style="style">
+        <div className="carousel-container"> 
+            <div className="carousel" v-bind:style="style">
             <span v-for="skill in aptitudes" >
                 <img @contextmenu.prevent="" 
                     v-if="skill.alt" v-bind:src="skill.alt" 
@@ -15,8 +16,8 @@ export default {
                     v-bind:alt="skill.nombre" 
                     loading="lazy"/>
             </span>
+            </div>
         </div>
-
     </section>`,
     data: ()=> {
         return {
@@ -36,7 +37,7 @@ export default {
                 }
                 let carousel = document.querySelector(".carousel")
                 carousel.style.transform = `translate3d(${counter}px, 0px, 0px)`
-            }, 10);
+            }, 5);
         }
     }, 
     mounted(){

@@ -23,6 +23,15 @@ export default {
         },
         {
             id: 3,
+            nombre: 'ProjUnity',
+            descripcion: 'Proyecto para compartir proyectos de software y/o adquirir por via onerosa. Incluye CRUD de entidad proyecto y usuarios, dashboard con KPIs, filtrado y ordenamiento de articulos, carrito de compras, pasarela de pagos, servicio SMTP para envio de emails.',
+            aptitudes: [ 6, 19, 2, 4,5,9,11,7,8,24,25],
+            imagen: 'projunity_oyh8x9.png',
+            repositorio: 'https://github.com/guspaz0/GprojUnity.git',
+            deploy: 'https://gproj-unity.vercel.app/'
+        },
+        {
+            id: 4,
             nombre: 'Pokedex',
             descripcion: 'Proyecto Frontend con framework Vue3 + VueRouter con scripts al estilo CDN, para crear SPA con Javascript Vanilla y ES6. Consumo de la PokeApi.',
             aptitudes: [ 3, 6,24,25],
@@ -31,7 +40,7 @@ export default {
             deploy: "https://guspaz0.github.io/CAC-VUE/"
         },
         {
-            id: 4,
+            id: 5,
             nombre: 'CAC Movies',
             descripcion: 'Proyecto Backend de API rest con Servlets Java. Desde el Front se puede buscar peliculas consumiendo la API de TMDB o de la API local. CRUD de peliculas y Usuarios, con encriptacion de contraseñas',
             aptitudes: [ 16, 3, 2, 6, 15, 10, 18,24,25],
@@ -40,20 +49,11 @@ export default {
             deploy: ''
         },
         {
-            id: 5,
-            nombre: 'ProjUnity',
-            descripcion: 'Proyecto para compartir proyectos de software y/o adquirir por via onerosa. Incluye CRUD de entidad proyecto y usuarios, dashboard con KPIs, filtrado y ordenamiento de articulos, carrito de compras, pasarela de pagos, servicio SMTP para envio de emails.',
-            aptitudes: [ 6, 19, 2, 4,5,9,11,7,8,24,25],
-            imagen: '',
-            repositorio: 'https://github.com/guspaz0/GprojUnity.git',
-            deploy: 'https://gproj-unity.vercel.app/'
-        },
-        {
             id: 6,
             nombre: 'PI Countries',
             descripcion: 'Proyecto de entrenamiento de bootcamps',
             aptitudes: [ 7, 4, 5, 6, 8, 9, 1, 2,24,25],
-            imagen: '',
+            imagen: 'countries_mnuxdc.jpg',
             repositorio: '',
             deploy: ''
         },{
@@ -61,7 +61,7 @@ export default {
             nombre: 'PI Foods',
             descripcion: 'Proyecto de entrenamiento de bootcamps',
             aptitudes: [ 1, 4, 5, 6, 8, 9, 7, 2,24,25],
-            imagen: '',
+            imagen: 'food_pi_oghuxf.jpg',
             repositorio: '',
             deploy: ''
         },
@@ -79,7 +79,7 @@ export default {
             nombre: 'Rick & Morty',
             descripcion: 'Proyecto de entrenamiento de bootcamps',
             aptitudes: [ 1, 4, 5, 6, 8, 9, 7, 2,24,25],
-            imagen: '',
+            imagen: 'rick_morty_om7ayj.jpg',
             repositorio: '',
             deploy: ''
         }
