@@ -2,17 +2,15 @@ import vars from '../utils/var.js'
 
 export default {
     template: `
+    <h2>Sobre mi</h2>
     <section id="about" className="about">
-        <div v-bind:className="style">
-            <span>
-                <b>{{titulo}}</b> 
-                <em>{{tituloGradient}}</em>
-            </span>
+        <span>
             <p>{{mensaje}}</p>
+            <p>{{parrafo2}}</p>
             <span className="card resume">
                 <a v-bind:href="resumeDrive"> CV / Resume</a>
             </span>
-        </div>
+        </span>
         <div className="perfil">
             <img @contextmenu.prevent="" 
                 v-bind:src="cloudurl+'perfil_cv_l8xbne.png'" alt="perfil" loading="lazy"/>
@@ -24,9 +22,8 @@ export default {
     data(){
         return {
             resumeDrive: 'https://drive.google.com/file/d/1otmq9F_jcLdmL0niyZgp1wg_EQj3YyIJ/view?usp=sharing',
-            titulo: 'Hola! ',
-            tituloGradient:  'Soy Desarrollador Full Stack',
-            mensaje: "Ofrezco Servicios de programacion para paginas web modernas, tanto Frontend y Backend",
+            mensaje: "Desde que era niño me gustó jugar y pasar el rato en las computadoras y me sumergi en este apasionante mundo de la computacion. Hoy en dia me considero un entusiasta de la informatica.",
+            parrafo2: 'Soy una persona proactiva, curiosa, flexible y perseverante. Nunca paro de aprender.',
             style: 'overview',
             cloudurl: vars.cloudurl
         }
