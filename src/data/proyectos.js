@@ -8,6 +8,7 @@ export default {
             nombre: 'API fichadas',
             descripcion: 'Backend API Rest para obtener informacion de fichadas y setear parametros en relojes de asistencia biometricos Zkteco, de forma remota y centralizada. Tambien brinda informacion resumida de horas trabajadas para automatizar procesos internos',
             aptitudes: [ 1, 12, 13, 14, 18,4,5,6,8,9,11 ],
+            fecha: new Date(),
             imagen: 'fichadas_beqpmi.png',
             repositorio: '',
             deploy: ''
@@ -16,7 +17,8 @@ export default {
             id: 2,
             nombre: 'La Tienda de Maria',
             descripcion: 'Proyecto tipo E-commerce sobre articulos religiosos / artesanias y dashboard con KPIs. CRUD completo, filtrado y busqueda de articulos. carrito de compras y favoritos. CRUD de Usuarios. Servicio smtp para enviar correo.',
-            aptitudes: [ 1, 4, 5, 6, 8, 10, 11, 2, 18,24,25,26 ],
+            aptitudes: [ 1, 4, 5, 6, 8, 10, 11, 2, 18, 24, 25, 26 ],
+            fecha: new Date(),
             imagen: 'La_tienda_de_maria_ssxsn2.png',
             repositorio: 'https://github.com/guspaz0/grupo3_dashboard_DH.git',
             deploy: ''
@@ -26,6 +28,7 @@ export default {
             nombre: 'ProjUnity',
             descripcion: 'Proyecto para compartir proyectos de software y/o adquirir por via onerosa. Incluye CRUD de entidad proyecto y usuarios, dashboard con KPIs, filtrado y ordenamiento de articulos, carrito de compras, pasarela de pagos, servicio SMTP para envio de emails.',
             aptitudes: [ 6, 19, 2, 4,5,9,11,7,8,24,25],
+            fecha: new Date(),
             imagen: 'projunity_oyh8x9.png',
             repositorio: 'https://github.com/guspaz0/GprojUnity.git',
             deploy: 'https://gproj-unity.vercel.app/'
@@ -35,6 +38,7 @@ export default {
             nombre: 'Pokedex',
             descripcion: 'Proyecto Frontend con framework Vue3 + VueRouter con scripts al estilo CDN, para crear SPA con Javascript Vanilla y ES6. Consumo de la PokeApi.',
             aptitudes: [ 3, 6,24,25],
+            fecha: new Date(),
             imagen: 'pokeapi_vue_prir8h.png',
             repositorio: 'https://github.com/guspaz0/CAC-VUE.git',
             deploy: "https://guspaz0.github.io/CAC-VUE/"
@@ -44,6 +48,7 @@ export default {
             nombre: 'CAC Movies',
             descripcion: 'Proyecto Backend de API rest con Servlets Java. Desde el Front se puede buscar peliculas consumiendo la API de TMDB o de la API local. CRUD de peliculas y Usuarios, con encriptacion de contraseñas',
             aptitudes: [ 16, 3, 2, 6, 15, 10, 18,24,25],
+            fecha: new Date(),
             imagen: 'cac-Movies_zltzex.png',
             repositorio: 'https://github.com/guspaz0/Movies-FS-Java.git',
             deploy: ''
@@ -53,6 +58,7 @@ export default {
             nombre: 'PI Countries',
             descripcion: 'Proyecto de entrenamiento de bootcamps',
             aptitudes: [ 7, 4, 5, 6, 8, 9, 1, 2,24,25],
+            fecha: new Date(),
             imagen: 'countries_mnuxdc.jpg',
             repositorio: '',
             deploy: ''
@@ -61,6 +67,7 @@ export default {
             nombre: 'PI Foods',
             descripcion: 'Proyecto de entrenamiento de bootcamps',
             aptitudes: [ 1, 4, 5, 6, 8, 9, 7, 2,24,25],
+            fecha: new Date(),
             imagen: 'food_pi_oghuxf.jpg',
             repositorio: '',
             deploy: ''
@@ -70,6 +77,7 @@ export default {
             nombre: 'PI Video Games',
             descripcion: 'Proyecto de entrenamiento de bootcamps',
             aptitudes: [ 1, 4, 5, 6, 8, 9, 7, 2,24,25],
+            fecha: new Date(),
             imagen: '',
             repositorio: '',
             deploy: ''
@@ -79,6 +87,7 @@ export default {
             nombre: 'Rick & Morty',
             descripcion: 'Proyecto de entrenamiento de bootcamps',
             aptitudes: [ 1, 4, 5, 6, 8, 9, 7, 2,24,25],
+            fecha: new Date(),
             imagen: 'rick_morty_om7ayj.jpg',
             repositorio: '',
             deploy: ''

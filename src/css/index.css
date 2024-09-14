@@ -99,6 +99,10 @@ section {
     gap: 5px;
 }
 
+.about > span > p {
+    max-width: 400px;
+}
+
 
 .overview {
     display: flex;
@@ -412,13 +416,13 @@ span.expand::after {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 20px;
+    padding: 30px;
     width: 90%;
-
     overflow: hidden;
 }
 
 .carousel {
+    position: absolute;
     display: flex;
     flex-direction: row;
     gap: 60px;
@@ -428,16 +432,44 @@ span.expand::after {
     max-width: 50px;
     max-height: 50px;
 }
+
+.timeline {
+    position: relative;
+    max-width: 600px;
+}
+
+ol.timeline {
+    border-left: solid 3px black;
+    list-style: none;
+    padding: 10px;
+}
+
+ol > li > div > div.dot {
+    position: absolute;
+    left: -7px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-image: var(--theme-em-gradient-pink);
+}
+.timeline-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
 @media (min-width: 600px) {
     section {
         animation-range: entry 25% cover 13%;
     }
-    #certificados form, #certificados fieldset, #proyectos form, #proyectos fieldset {
+    #certificados form, #certificados fieldset, #proyectos form, #proyectos fieldset, #timeline fieldset {
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        gap: 5px;
+        gap: 10px;
         flex-wrap: wrap;
     }
 }
