@@ -1,5 +1,5 @@
 export default {
-    template: `<hr></hr>
+    template: `
     <footer class="mainfooter">
         <span>Portfolio 2024 - Desarrollador Web Full Stack </span>
         <router-link v-bind:to="rootPath+'/contacto'"><b>Contacto</b></router-link>
