@@ -1,17 +1,78 @@
+:root,
+    :root.ligth {
+        font-size: 14px;
+        --bg-color: #fff;
+        --text-color: #123;
+        --theme-section-bg-lightgrad: linear-gradient(103deg,#f5f6ff 10%,#dff4fb);
+    }
+    :root.dark{
+        --bg-color: #123;
+        --text-color: #fff;
+        --theme-section-bg-lightgrad: linear-gradient(103deg,#212128 10%,#1a262c);
+    }
+
 html {
     scroll-behavior: smooth;
 }
+a{
+    text-decoration: none;
+    color: var(--text-color)
+}
+.toggle {
+    position : relative ;
+    display : inline-block;
+    width: 54px;
+    height: 30px;
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 30px;
+}
+
+.toggle:after {
+    content: '';
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background-color: rgba(0,0,255,0.3);
+    top: 2px; 
+    left: 2px;
+    background-image: url('https://res.cloudinary.com/dbowsjk6p/image/upload/v1726354393/sun_qemswh.svg');
+    background-position: center;
+    background-size: cover;
+    transition:  all 0.5s;
+}
+
+.toggle > p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+}
+
+.checkbox:checked + .toggle::after {
+    left : 26px; 
+    background-image: url('https://res.cloudinary.com/dbowsjk6p/image/upload/v1726354393/crescent-moon-moon_x8fbf8.svg');
+    background-position: center;
+    background-size: cover;
+}
+.checkbox:checked + .toggle {
+    background-color: rgba(9,162,182,0.5);
+}
+
+.checkbox { 
+    display : none;
+}
+
+
 body {
     font-family: "Nunito Sans", sans-serif;
-    --theme-section-bg-lightgrad: linear-gradient(103deg,#f5f6ff 10%,#dff4fb);
     --theme-em-gradient: linear-gradient(90deg,#7209d4,#2832d4 33%,#00a5b2);
     --theme-em-gradient-pink: linear-gradient(90deg,#ed7077,#9a34e7 66%);
     --theme-button-gradient-gray: linear-gradient(135deg, lightgray 5%, white);
     background-image: var(--theme-section-bg-lightgrad);
-    color: black
+    color: var(--text-color)
 }
+
 .navbar {
-    position: fixed;
+    position: relative;
     place-items: center;
     width: 100%;
     display: flex;
@@ -21,7 +82,6 @@ body {
     flex-wrap: wrap;
     z-index: 50;
     gap: 10px;
-    height: 5%;
 }
 
 ul > h2 {
@@ -126,7 +186,6 @@ section {
 
 .overview > span {
     padding: 5px;
-    color: black;
     border-radius: 5px;
 }
 
@@ -242,7 +301,9 @@ span.skills:hover img {
     position: absolute;
     z-index: 50;
 }
-
+.timeline span img {
+    max-height: 50px;
+}
 .contacto {
     display: flex;
     flex-direction: column;
@@ -281,9 +342,9 @@ input[type="submit"] {
     padding: 5px;
     border-radius: 5px;
     box-shadow: 2px 2px 5px black;
-    border-radius: 5px; 
+    border-radius: 5px;
+    color: black;
     background-color: white;
-
     transition: 250ms;
 }
 .card:hover {
@@ -433,15 +494,24 @@ span.expand::after {
     max-height: 50px;
 }
 
+.carousel > span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    min-height: 70px;
+    padding: 5px;
+}
+
 .timeline {
     position: relative;
     max-width: 600px;
 }
 
 ol.timeline {
-    border-left: solid 3px black;
+    border-left: solid 3px var(--text-color);
     list-style: none;
-    padding: 10px;
+    padding: 20px;
 }
 
 ol > li > div > div.dot {
@@ -461,9 +531,6 @@ ol > li > div > div.dot {
 }
 
 @media (min-width: 600px) {
-    section {
-        animation-range: entry 25% cover 13%;
-    }
     #certificados form, #certificados fieldset, #proyectos form, #proyectos fieldset, #timeline fieldset {
         display: flex;
         flex-direction: row;
@@ -475,9 +542,7 @@ ol > li > div > div.dot {
 }
 
 @media (min-width: 900px) {
-    section {
-        animation-range: entry 25% cover 22%;
-    }
+
 }
 
 @keyframes show {

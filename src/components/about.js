@@ -22,7 +22,7 @@ export default {
     data(){
         return {
             resumeDrive: 'https://drive.google.com/file/d/1otmq9F_jcLdmL0niyZgp1wg_EQj3YyIJ/view?usp=sharing',
-            mensaje: "Desde que era niño me gustó jugar y pasar el rato en las computadoras y me sumergi en este apasionante mundo de la computacion. Hoy en dia me considero un entusiasta de la informatica.",
+            mensaje: "Desde que era niño me gustó jugar en las computadoras y me sumergi en este apasionante mundo de la computacion. Hoy en dia me considero un entusiasta de la informatica.",
             parrafo2: 'Soy una persona proactiva, curiosa, flexible y perseverante. Nunca paro de aprender.',
             style: 'overview',
             cloudurl: vars.cloudurl

@@ -1,3 +1,4 @@
+import nabvar from './nav.js'
 import aptitudes from './aptitudes.js'
 import proyectos from './proyectos.js'
 import about from './about.js'
@@ -13,7 +14,7 @@ export default {
         <section id="inicio" className="about">
             <div v-bind:className="style">
                 <span>
-                    <b>{{titulo}}</b> 
+                    <p>{{titulo}}</p> 
                     <em>{{tituloGradient}}</em>
                 </span>
                 <p>{{mensaje}}</p>
@@ -29,9 +30,10 @@ export default {
     </section>`,
     data(){
         return {
+            darkmode: false,
             resumeDrive: 'https://drive.google.com/file/d/1otmq9F_jcLdmL0niyZgp1wg_EQj3YyIJ/view?usp=sharing',
-            titulo: 'Hola! ',
-            tituloGradient:  'Soy Desarrollador Full Stack',
+            titulo: 'Hola! Soy Gustavo Paz ',
+            tituloGradient:  'Desarrollador Full Stack',
             mensaje: "Ofrezco Servicios de programacion para paginas web modernas, tanto Frontend y Backend",
             style: 'overview',
             cloudurl: vars.cloudurl

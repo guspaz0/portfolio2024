@@ -15,6 +15,7 @@ export default {
                     v-else v-bind:src="skill.path" 
                     v-bind:alt="skill.nombre" 
                     loading="lazy"/>
+                <small>{{skill.nombre}}</small>
             </span>
             </div>
         </div>
@@ -37,7 +38,7 @@ export default {
                 }
                 let carousel = document.querySelector(".carousel")
                 carousel.style.transform = `translate3d(${counter}px, 0px, 0px)`
-            }, 5);
+            }, 10);
         }
     }, 
     mounted(){

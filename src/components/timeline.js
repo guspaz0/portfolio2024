@@ -9,7 +9,10 @@ export default {
                         <div className="dot"></div>
                         <div>
                             <h3>{{elem.nombre}}</h3>
-                            <h4 v-if="elem.empresa">{{elem.empresa}}</h4>
+                            <span>
+                                <img v-show="elem.imagen" v-bind:src='elem.imagen' v-bind:alt="elem.empresa"/>    
+                                <h4 v-if="elem.empresa">{{elem.empresa}}</h4>
+                            </span>
                             <time>{{elem.fecha.toLocaleDateString([],{day: '2-digit', month: '2-digit', year: 'numeric'})}}
                             - {{elem.fechaFin? elem.fechaFin.toLocaleDateString([],{day: '2-digit', month: '2-digit', year: 'numeric'}) : '' }}</time>
                         </div>
