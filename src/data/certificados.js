@@ -1,32 +1,36 @@
 import Aptitudes from "./aptitudes.js";
 import Escuelas from "./escuelas.js";
-import vars from '../utils/var.js'
+import vars from '../utils/var.js';
 
 export default {
     data: [
         { id: 1, nombre: 'Full Stack Developer', escuela: 1, path: '', fecha: new Date(2023,9,1), aptitudes: [1,2,4,5,6,7,8,9,17,11,24,25]},
         { id: 2, nombre: 'Full Stack Developer', escuela: 2, path: '', fecha: new Date(2024,3,1), aptitudes: [1,2,4,5,6,8,10,17,24,25,26]},
         { id: 2, nombre: 'Full Stack Developer Java', escuela: 7, path: '', fecha: new Date(2024,6,1), aptitudes: [3,6,16,10,15,17,24,25]},
-        { id: 3, nombre: 'Excel Completo de principiante a avanzado', escuela: 3, path: '', fecha: new Date(2024,7,1), aptitudes: [22]},
-        { id: 4, nombre: 'Google Sheets y mas', escuela: 3, path: '', fecha: new Date(2024,7,15), aptitudes: [23]},
+        { id: 3, nombre: 'Excel Completo de principiante a avanzado', escuela: 3, path: 'udemy_excel_completo_qltlnl.jpg', fecha: new Date(2024,7,26), aptitudes: [22]},
+        { id: 4, nombre: 'Tablas dinámicas, dashboards, macros y mas con Google Sheets', escuela: 3, path: 'udemy_google_sheets_jonjmo.jpg', fecha: new Date(2024,7,27), aptitudes: [23]},
         { id: 5, nombre: 'Docker Fundamentos', escuela: 4, path: '', fecha: new Date(2024,3,15), aptitudes: [18]},
         { id: 6, nombre: 'Serverless framework avanzado con AWS', escuela: 4, path: '', fecha: new Date(2024,7,30), aptitudes: [20,21]},
-        { id: 6, nombre: 'Cloud computing y machine learning en la nube con AWS', escuela: 4, path: '', fecha: new Date(2024,3,15), aptitudes: [21]}
+        { id: 7, nombre: 'Cloud computing y machine learning en la nube con AWS', escuela: 4, path: '', fecha: new Date(2024,3,15), aptitudes: [21]},
+        { id: 8, nombre: 'Aprende todo sobre Looker Studio 2024 (Data Studio)', escuela: 3, path: 'udemy_looker_studio_bbzzjy.jpg', fecha: new Date(2024,3,15), aptitudes: [27]},
+        { id: 9, nombre: 'Excel y Power BI - Análisis y Visualizacion de Datos', escuela: 3, path: 'udemy_powerbi_mu1c2e.jpg', fecha: new Date(2024,9,8), aptitudes: [28]}
     ],
     findAll: function (){
         return this.data.map(cert => {
             return {...cert,
                 escuela: Escuelas.findOne(cert.escuela),
-                aptitudes: cert.aptitudes.map(t => Aptitudes.findOne(t))
+                aptitudes: cert.aptitudes.map(t => Aptitudes.findOne(t)),
+                path: cert.path? vars.certurl+cert.path : cert.path
             }
         })
     },
     findOne: function(id) {
-        const certificado = this.data.find(cert => cert.id == id)
-        if (certificado) {
-            return {...certificado, 
-                escuela: Escuelas.findOne(certificado.escuela),
-                aptitudes: cert.aptitudes.map(t => Aptitudes.findOne(t))
+        const cert = this.data.find(cert => cert.id == id)
+        if (cert) {
+            return {...cert, 
+                escuela: Escuelas.findOne(cert.escuela),
+                aptitudes: cert.aptitudes.map(t => Aptitudes.findOne(t)),
+                path: cert.path? vars.certurl+cert.path : cert.path
             }
         } else throw new Error('No se encontró el certificado')
     }
