@@ -46,7 +46,7 @@ export default {
                         </span>
                     </dialog>
                 </div>
-                <a v-bind:href="cert.path" rel="noreferrer noopener">Certificado</a>
+                <a v-if="cert.path" v-bind:href="cert.path" rel="noreferrer noopener">Certificado</a>
             </article>
         </div>
     </section>

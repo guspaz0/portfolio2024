@@ -303,6 +303,7 @@ span.skills:hover img {
 }
 .timeline span img {
     max-height: 50px;
+    filter: drop-shadow(1px 1px 1px white);
 }
 .contacto {
     display: flex;
@@ -492,6 +493,7 @@ span.expand::after {
 .carousel img {
     max-width: 50px;
     max-height: 50px;
+    filter: drop-shadow(1px 1px 1px white);
 }
 
 .carousel > span {
