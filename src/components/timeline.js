@@ -14,7 +14,11 @@ export default {
                                 <h4 v-if="elem.empresa">{{elem.empresa}}</h4>
                             </span>
                             <time>{{elem.fecha.toLocaleDateString([],{day: '2-digit', month: '2-digit', year: 'numeric'})}}
-                            - {{elem.fechaFin? elem.fechaFin.toLocaleDateString([],{day: '2-digit', month: '2-digit', year: 'numeric'}) : '' }}</time>
+                            - {{elem.fechaFin? elem.fechaFin.toLocaleDateString([],{day: '2-digit', month: '2-digit', year: 'numeric'}) : '' }}
+                            ( <b v-show="elem.tiempo.años > 0">{{elem.tiempo.años}} {{ elem.tiempo.años > 1? 'años ' : 'año ' }} </b>
+                            <b v-show="elem.tiempo.años > 0 && elem.tiempo.meses > 0"> y </b>
+                            <b v-show="elem.tiempo.meses > 0"> {{elem.tiempo.meses}} {{elem.tiempo.meses > 1? 'meses ' : 'mes '}} </b> )
+                            </time>
                         </div>
                         <p>{{elem.descripcion}}</p>
                     </div>
@@ -25,33 +29,7 @@ export default {
     data(){
         return {
             Titulo: 'Experiencia',
-            timeline: 'laboral',
-            Linea: [],
-            Proyectos: [],
-            Certificados: [],
-            Laboral: [],
-            filtros: `<fieldset>
-                <legend>Filtros</legend>
-                <label for="exp-laboral">Experiencia Laboral</label>
-                <input v-model="timeline" id="exp-laboral" type="radio" name="timeline" value="laboral"/>
-                <label for="proyectos">Proyectos</label>
-                <input v-model="timeline" id="proyectos" type="radio" name="timeline" value="proyectos"/>
-                <label for="educacion">Educacion</label>
-                <input v-model="timeline" id="educacion" type="radio" name="timeline" value="educacion"/>
-                <label for="todos">Todos</label>
-                <input v-model="timeline" id="todos" type="radio" name="timeline" value="todos"/>
-            </fieldset>`
-        }
-    },
-    watch: {
-        timeline(valActual, valAnterior){
-            switch(valActual) {
-                case 'laboral':
-                    this.Linea = data.Experiencia.findAll()
-                    break
-                default:
-                    break
-            }
+            Linea: []
         }
     },
     mounted(){
