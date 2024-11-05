@@ -10,9 +10,17 @@
         <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
         <script src="https://unpkg.com/vue-router@4"></script>
         <script type="module" src="./src/app.js"></script>
+        <noscript>
+            <style type="text/css">
+                .pagecontainer {display:none;} .noscriptmsg {display: flex; align-items: center; justify-content: center;}
+            </style>
+            <div class="noscriptmsg">Para que este sitio funcione, debes tener JavaScript habilitado.</div>
+            <p>Te dejo enlace a mi <a href="https://drive.google.com/file/d/1otmq9F_jcLdmL0niyZgp1wg_EQj3YyIJ/view?usp=sharing" rel="noreferrer noopener"><b>CV</b></a></p>
+            </div>
+        </noscript>
     </head>
     <body>
-        <div id="app">
+        <div id="app" class="pagecontainer">
             <navmain :darkmode="darkmode" @setdarkmode="setdarkmode"></navmain>
             <main>
                 <router-view></router-view>

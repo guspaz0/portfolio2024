@@ -7,9 +7,11 @@ export default {
         <span>
             <p>{{mensaje}}</p>
             <p>{{parrafo2}}</p>
-            <span className="card resume">
-                <a v-bind:href="resumeDrive"> CV / Resume</a>
-            </span>
+            <a v-bind:href="resumeDrive" rel="noreferrer noopener">
+                <span className="card resume">
+                    CV / Resume
+                </span>
+            </a>
         </span>
         <div className="perfil">
             <img @contextmenu.prevent="" 

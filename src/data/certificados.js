@@ -13,7 +13,8 @@ export default {
         { id: 6, nombre: 'Serverless framework avanzado con AWS', escuela: 4, path: '', fecha: new Date(2024,7,30), aptitudes: [20,21]},
         { id: 7, nombre: 'Cloud computing y machine learning en la nube con AWS', escuela: 4, path: '', fecha: new Date(2024,3,15), aptitudes: [21]},
         { id: 8, nombre: 'Aprende todo sobre Looker Studio 2024 (Data Studio)', escuela: 3, path: 'udemy_looker_studio_bbzzjy.jpg', fecha: new Date(2024,3,15), aptitudes: [27]},
-        { id: 9, nombre: 'Excel y Power BI - Análisis y Visualizacion de Datos', escuela: 3, path: 'udemy_powerbi_mu1c2e.jpg', fecha: new Date(2024,9,8), aptitudes: [28]}
+        { id: 9, nombre: 'Excel y Power BI - Análisis y Visualizacion de Datos', escuela: 3, path: 'udemy_powerbi_mu1c2e.jpg', fecha: new Date(2024,9,8), aptitudes: [28]},
+        { id: 10, nombre: 'Curso completo de bases de datos con MySQL', escuela: 3, path: 'udemy_curso_MySQL_clykpf.jpg', fecha: new Date(2024,9,26), aptitudes: [10]}
     ],
     findAll: function (){
         return this.data.map(cert => {
