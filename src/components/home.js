@@ -1,4 +1,3 @@
-import nabvar from './nav.js'
 import aptitudes from './aptitudes.js'
 import proyectos from './proyectos.js'
 import about from './about.js'

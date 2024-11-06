@@ -29,7 +29,7 @@ export default {
         {id: 22, nombre: 'Microsoft Excel', path: 'excel_logo_zp7tlj.png', categoria: 2},
         {id: 23, nombre: 'Google Sheets', path: 'google_sheets_logol_t8vgn6.png', categoria: 2},
         {id: 27, nombre: 'Looker Studio', path: 'looker-icon_jcoh1k.svg', categoria: 2},
-        {id: 28, nombre: 'Power Bi', path: 'Power_BI_Logo_rxo5lf.png', categoria: 2},
+        {id: 28, nombre: 'Microsoft Power Bi', path: 'Power_BI_Logo_rxo5lf.png', categoria: 2},
         {id: 24, nombre: 'HTML', path: 'sezi2wjipb7bdz559m29.png', categoria: 2},
         {id: 25, nombre: 'CSS', path: 'uoh394nb7dzo5c5tnglr.png', categoria: 2},
         {id: 26, nombre: 'EJS', path: 'yrnyuxgl2lm3urhbzd5x.png', categoria: 2}
