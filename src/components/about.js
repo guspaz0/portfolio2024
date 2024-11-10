@@ -14,8 +14,11 @@ export default {
             </a>
         </span>
         <div className="perfil">
-            <img @contextmenu.prevent="" 
-                v-bind:src="cloudurl+'perfil_cv_l8xbne.png'" alt="perfil" loading="lazy"/>
+            <span className="">
+                <img @contextmenu.prevent="" 
+                    v-bind:src="cloudurl+'perfil_cv_l8xbne.png'" alt="perfil" loading="lazy"/>
+                <div className="shadow"></div>
+            </span>
             <img @contextmenu.prevent="" 
                 id="flag" src="https://codingweek.org/wp-content/uploads/2023/09/chris-ried-ieic5Tq8YMk-unsplash-2048x1367.jpg" 
                 alt="country flag" loading="lazy"/>
