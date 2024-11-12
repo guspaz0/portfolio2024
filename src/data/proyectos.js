@@ -10,7 +10,7 @@ export default {
             aptitudes: [ 1, 12, 13, 14, 18,4,5,6,8,9,11 ],
             fecha: new Date(),
             imagen: 'fichadas_beqpmi.png',
-            repositorio: '',
+            repositorio: 'https://github.com/guspaz0/api-relojes',
             deploy: ''
         },
         {
