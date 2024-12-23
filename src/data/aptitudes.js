@@ -32,7 +32,9 @@ export default {
         {id: 28, nombre: 'Microsoft Power Bi', path: 'Power_BI_Logo_rxo5lf.png', categoria: 2},
         {id: 24, nombre: 'HTML', path: 'sezi2wjipb7bdz559m29.png', categoria: 2},
         {id: 25, nombre: 'CSS', path: 'uoh394nb7dzo5c5tnglr.png', categoria: 2},
-        {id: 26, nombre: 'EJS', path: 'yrnyuxgl2lm3urhbzd5x.png', categoria: 2}
+        {id: 26, nombre: 'EJS', path: 'yrnyuxgl2lm3urhbzd5x.png', categoria: 2},
+        {id: 27, nombre: 'Spring', path: 'spring-logo_wwp0hp.png', categoria: 2},
+        {id: 28, nombre: 'Solidity', path: 'Solidity-Logo_sw7yw3.png', categoria: 2},
     ],
     findAll(){
         const countProyect = this.countProyects()
