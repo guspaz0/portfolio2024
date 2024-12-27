@@ -17,7 +17,8 @@ export default {
         { id: 10, nombre: 'Curso completo de bases de datos con MySQL', escuela: 3, path: 'udemy_curso_MySQL_clykpf.jpg', fecha: new Date(2024,9,26), aptitudes: [10]},
         { id: 11, nombre: 'Microsoft Power Bi Desktop', escuela: 3, path: 'UC_Power_Bi_Desktop_ouylap.jpg', fecha: new Date(2024,10,4), aptitudes: [10]},
         { id: 12, nombre: 'Power Query', escuela: 3, path: 'UC-power_query_hfh5gf.jpg', fecha: new Date(2024,10,5), aptitudes: [10]},
-        { id: 13, nombre: 'Backend con java', escuela: 1, path: 'diploma-backend-java_henry_nat6ad.png', fecha: new Date(2024,11,2), aptitudes: [3,6,16,10,15,17,24,25,27]}
+        { id: 13, nombre: 'Backend con java', escuela: 1, path: 'diploma-backend-java_henry_nat6ad.png', fecha: new Date(2024,11,2), aptitudes: [3,6,16,10,15,17,24,25,27]},
+        { id: 13, nombre: 'Fundamentos de Data Analitycs', escuela: 8, path: 'diploma_Guayerd_data_analitycs_ijit48.png', fecha: new Date(2024,11,2), aptitudes: [10,22,23,27,28]}
     ],
     findAll: function (){
         return this.data.map(cert => {
