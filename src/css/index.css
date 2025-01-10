@@ -88,8 +88,9 @@ body {
 ul > h2 {
     margin-top: 1px;
     margin-bottom: 1px;
-    filter: drop-shadow(2px 2px 2px white);
+    filter: drop-shadow(0 0 1px white) contrast(2);
 }
+
 .navbar > ul {
     list-style-type: none;
     padding: 10px;
@@ -164,6 +165,17 @@ section {
     max-width: 400px;
 }
 
+.about > span {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.about > span > picture img {
+    mask-image: none;
+}
 
 .overview {
     display: flex;
@@ -199,7 +211,8 @@ section {
 
 .about img {
     max-width: 350px;
-    mask-image: linear-gradient(black 70%, transparent)
+    mask-image: linear-gradient(black 70%, transparent);
+    filter: drop-shadow(0 0 2px white);
 }
 
 div.perfil {
@@ -325,7 +338,7 @@ span.skills:hover img {
 }
 .timeline span img {
     max-height: 50px;
-    filter: drop-shadow(1px 1px 1px white);
+    filter: drop-shadow(0 0 1px white) contrast(2);
 }
 .contacto {
     display: flex;
@@ -448,6 +461,7 @@ article .skills {
 }
 .certificados img {
     width: 150px;
+    filter: drop-shadow(0 0 1px white);
 }
 
 .resume > a {
@@ -515,7 +529,7 @@ span.expand::after {
 .carousel img {
     max-width: 50px;
     max-height: 50px;
-    filter: drop-shadow(1px 1px 1px white);
+    filter: drop-shadow(0 0 1px white);
 }
 
 .carousel > span {

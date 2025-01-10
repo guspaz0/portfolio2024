@@ -5,6 +5,28 @@ export default {
     <h2>Sobre mi</h2>
     <section id="about" className="about">
         <span>
+            <picture>
+              <source
+                srcset="https://github-readme-stats.vercel.app/api?username=guspaz0&show_icons=true&theme=dark"
+                media="(prefers-color-scheme: dark)"
+              />
+              <source
+                srcset="https://github-readme-stats.vercel.app/api?username=guspaz0&show_icons=true"
+                media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
+              />
+              <img src="https://github-readme-stats.vercel.app/api?username=guspaz0&show_icons=true" />
+            </picture>
+             <picture>
+              <source
+                srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=guspaz0&layout=compact"
+                media="(prefers-color-scheme: dark)"
+              />
+              <source
+                srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=guspaz0&layout=compact"
+                media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
+              />
+              <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=guspaz0&layout=compact" />
+            </picture>
             <p>{{mensaje}}</p>
             <p>{{parrafo2}}</p>
             <a v-bind:href="resumeDrive" rel="noreferrer noopener">
@@ -27,7 +49,7 @@ export default {
     data(){
         return {
             resumeDrive: 'https://drive.google.com/file/d/1otmq9F_jcLdmL0niyZgp1wg_EQj3YyIJ/view?usp=sharing',
-            mensaje: "Desde que era niño me gustó jugar en las computadoras y me sumergi en este apasionante mundo de la computacion. Hoy en dia me considero un entusiasta de la informatica.",
+            mensaje: "Desde que era niño me gustó aprender y jugar en computadores y me sumergi en este apasionante mundo de la tecnologia. Hoy en dia me considero un entusiasta de la informatica.",
             parrafo2: 'Soy una persona proactiva, curiosa, flexible y perseverante. Nunca paro de aprender.',
             style: 'overview',
             cloudurl: vars.cloudurl
