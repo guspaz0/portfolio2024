@@ -47,7 +47,7 @@ export default {
             id: 5,
             nombre: 'CAC Movies',
             descripcion: 'Proyecto Backend de API rest con Servlets Java. Desde el Front se puede buscar peliculas consumiendo la API de TMDB o de la API local. CRUD de peliculas y Usuarios, con encriptacion de contraseñas',
-            aptitudes: [ 16, 3, 2, 6, 15, 10, 18,24,25],
+            aptitudes: [ 16, 3, 2, 6, 10, 18,24,25],
             fecha: new Date(),
             imagen: 'cac-Movies_zltzex.png',
             repositorio: 'https://github.com/guspaz0/Movies-FS-Java.git',
