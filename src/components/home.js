@@ -6,6 +6,7 @@ import eventos from './eventos.js'
 import certificados from './certificados.js'
 import timeline from './timeline.js'
 import vars from '../utils/var.js'
+import perfiles from './perfiles.js'
 
 export default {
     template: `
@@ -19,14 +20,18 @@ export default {
                 <p>{{mensaje}}</p>
             </div>
         </section>
-        
+        <perfiles :profile="profile" @setProfile="this.$emit('setProfile',$event)"></perfiles>
         <timeline></timeline>
-        <certificados></certificados>
-        <proyectos></proyectos>
-        <aptitudes></aptitudes>
+        <certificados :profile="profile"></certificados>
+        <proyectos :profile="profile"></proyectos>
+        <aptitudes :profile="profile"></aptitudes>
         <about></about>
         <contacto></contacto>
     </section>`,
+    props: {
+        profile: {type: Number, required: true}
+    },
+    emit: ['setProfile'],
     data(){
         return {
             darkmode: false,
@@ -38,6 +43,19 @@ export default {
             cloudurl: vars.cloudurl
         }
     },
+    watch:{
+        profile(e) {
+            console.log("linea 60: home: "+ e)
+        }
+    },
+    mounted(){
+      // setInterval(()=> {
+      //     let sessionProf = sessionStorage.getItem('profileId');
+      //     if(this.profile !== sessionProf) {
+      //           this.profile = sessionProf;
+      //     }
+      // })
+    },
     components: {
         'aptitudes': aptitudes,
         'proyectos': proyectos,
@@ -45,6 +63,7 @@ export default {
         'contacto': contacto,
         'eventos': eventos,
         'certificados': certificados,
-        'timeline': timeline
+        'timeline': timeline,
+        'perfiles': perfiles
     }
 }

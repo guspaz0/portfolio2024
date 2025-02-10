@@ -20,18 +20,22 @@ export default {
             </div>
         </div>
     </section>`,
+    props: {
+        profile: {type: Number, required: true},
+    },
     data: ()=> {
         return {
             el: 'aptitudes',
-            aptitudes: Aptitudes.findAll(),
+            aptitudes: [],
             style: 'translate:none;rotate:none;scale:none;transform:translate3d(0px,0px,0px);',
+            carousel: setInterval(()=>{},10)
         }
     },
     methods: {
-        carousel(){
-            const anchoCarousel = Aptitudes.findAll().length*(50+60)
+        setCarousel(length){
+            const anchoCarousel = length*(50+60)
             var counter = window.visualViewport.width/2
-            setInterval(function() {
+            this.carousel = setInterval(function() {
                 counter--;
                 if(counter < (anchoCarousel-window.visualViewport.width/2)*-1){
                     counter = window.visualViewport.width/2
@@ -40,8 +44,20 @@ export default {
                 carousel.style.transform = `translate3d(${counter}px, 0px, 0px)`
             }, 10);
         }
-    }, 
-    mounted(){
-        this.carousel()
+    },
+    watch: {
+        profile(id){
+            this.aptitudes = Aptitudes.findByProfile(+id);
+        },
+        aptitudes(curr){
+            clearInterval(this.carousel);
+            console.log(curr.length)
+            this.setCarousel(+curr.length)
+        }
+    },
+    created(){
+        this.aptitudes = this.profile != null
+            ? Aptitudes.findByProfile(+this.profile)
+            : Aptitudes.findAll()
     }
 }

@@ -1,17 +1,28 @@
 import navmain from './components/nav.js'
 import pie from './components/pie.js'
-import router from './router.js'
+//import router from './router.js'
+import home from './components/home.js'
 
 const{ createApp } = Vue
 
 const app = createApp({
+    template: `
+        <navmain 
+            :darkmode="darkmode" @setdarkmode="setdarkmode"
+            :profile="profile" @setProfile="setProfile"
+        ></navmain>
+        <home :profile="profile" @setProfile="setProfile"></home>
+        <pie></pie>
+    `,
     components: {
         'navmain': navmain,
-        'pie': pie
+        'pie': pie,
+        'home': home
     },
     data() {
         return {
-            darkmode: false
+            darkmode: false,
+            profile: null
         }
     },
     methods: {
@@ -20,6 +31,10 @@ const app = createApp({
         },
         colorSchema(mode) {
             return window.matchMedia(`(prefers-color-scheme: ${mode})`).matches
+        },
+        setProfile(id){
+            sessionStorage.setItem('profileId', id)
+            this.profile = +id
         }
     },
     watch: {
@@ -46,10 +61,13 @@ const app = createApp({
             appTheme.classList.remove('light')
             appTheme.classList.add('dark') 
         }
+        this.profile = sessionStorage.getItem('profile') || 1;
     }
 })
 
-app.use(router)
+//app.use(router)
 
 app.mount('#app')
+
+export default app
 

@@ -1,10 +1,7 @@
 export default {
     data: [
-        { id: 1, nombre: 'Frontend developer' },
-        { id: 2, nombre: 'Backend developer' },
-        { id: 3, nombre: 'DevOps: Developer Operations' },
-        { id: 4, nombre: 'QA: quality assurance' },
-        { id: 5, nombre: 'Data Analitycs' }
+        { id: 1, nombre: 'Hard Skill' },
+        { id: 2, nombre: 'Soft Skill' }
     ],
     findAll(){
         return this.data

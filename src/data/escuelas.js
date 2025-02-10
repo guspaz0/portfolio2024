@@ -9,7 +9,8 @@ export default {
         { id: 5, nombre: 'Codigo Facilito', path: 'codigo_facilito_i3qn6f.png'},
         { id: 6, nombre: 'IBM Skills Builds', path: 'IBM-SkillsBuild-logo_gagtra.png'},
         { id: 7, nombre: 'Codo a codo', path: 'Logos_BA_Agencia_ounbqi.png'},
-        { id: 8, nombre: 'Guayerd', path: 'guayerd_biwubp.png'}
+        { id: 8, nombre: 'Guayerd', path: 'guayerd_biwubp.png'},
+        { id: 9, nombre: 'ETH-KIPU', path: 'ethkipu-logo_ydxggv.png'}
     ],
     findAll: function (){
         return this.data.map((esc) => ({

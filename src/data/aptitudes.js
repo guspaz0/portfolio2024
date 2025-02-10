@@ -2,6 +2,7 @@ import vars from '../utils/var.js'
 import categorias from './categorias.js'
 import Proyectos from './proyectos.js'
 import Certificados from './certificados.js'
+import aptitudesPerfil from "./aptitudes_perfil.js";
 
 export default {
     data: [
@@ -35,7 +36,7 @@ export default {
         {id: 26, nombre: 'EJS', path: 'yrnyuxgl2lm3urhbzd5x.png', categoria: 2},
         {id: 30, nombre: 'Solidity', path: 'Solidity-Logo_sw7yw3.png', categoria: 2},
         {id: 31, nombre: 'Postman', path: 'postman-logo_cocohi.png', categoria: 2},
-        {id: 32, nombre: 'IntelliJ Idea', path: 'intellij-idea-logo_ct1hhg.png', categoria: 2},
+        {id: 32, nombre: 'IntelliJ Idea', path: 'intellij-idea-logo_ct1hhg.png', categoria: 2 },
         {id: 33, nombre: 'VsCode', path: 'vs-code-logo_vbh10j.png', categoria: 2},
         {id: 34, nombre: 'Microsoft Azure', path: 'Azure-Logo-2020-present_p0rrmx.png', categoria: 2 }
     ],
@@ -84,5 +85,10 @@ export default {
             }
             if(+i == certificados.length-1) return count
         }
+    },
+    findByProfile(profileId) {
+        return this.findAll()
+            .filter(apt => aptitudesPerfil.data
+                .some(([aptId,profId]) => profId === profileId && aptId === apt.id))
     }
 }

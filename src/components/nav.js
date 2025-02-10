@@ -1,7 +1,16 @@
+import dataPerfiles from '../data/perfiles.js'
+
 export default {
     template: `<nav v-bind:id="el" className="navbar">
         <ul>
-            <h2>{{Titulo}} </h2>
+            <h2>{{Titulo}}</h2>
+            <li>
+                <select name="perfil" v-model="selected" @change.prevent="$event.target.blur()">
+                    <option v-for="perfil in perfiles" v-bind:value="perfil.id">
+                     {{perfil.nombre}}
+                    </option>
+                </select>
+            </li>
             <li v-for="list in listasNav">
                 <a v-bind:href="list.href">{{list.nombre}}</a>
             </li>
@@ -15,6 +24,8 @@ export default {
             </li>
         </ul>
     </nav>`,
+    props: ['darkmode','profile'],
+    emit: ['setdarkmode', 'setProfile'],
     data(){
         return {
             el: '#nav',
@@ -30,14 +41,14 @@ export default {
             ],
             old: `<div className="darkmode">
                     <span v-bind:id="Switch" @click="handleSwitch" className="switch"></span>
-                </div>`
+                </div>`,
+            perfiles: dataPerfiles.findAll(),
+            selected: this.profile
         }
     },
-    props: ['darkmode'],
-    emit: ['setdarkmode'],
     created(){
         window.addEventListener('scroll', this.handleScroll);
-        this.$router.push({name: 'home', path: '/' })
+        //this.$router.push({name: 'home', path: '/' })
     },
     methods: {
         handleScroll(e){
@@ -50,6 +61,16 @@ export default {
                 this.$el.style.position = 'relative'
                 this.$el.style.height = 'auto'
             }
+        },
+        handleSelect(e){
         }
     },
+    watch: {
+        profile(curr) {
+            this.selected = +curr
+        },
+        selected(curr) {
+            this.$emit('setProfile', +curr);
+        }
+    }
 }

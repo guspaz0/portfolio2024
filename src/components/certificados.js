@@ -51,6 +51,9 @@ export default {
         </div>
     </section>
     `,
+    props: {
+        profile: {type: Number, required: true}
+    },
     data(){
         return {
             Titulo: 'Certificados',
@@ -63,15 +66,13 @@ export default {
         }
     },
     mounted(){
-        this.Certificados = data.Certificados.findAll().slice(0,3)
-        this.Aptitudes = data.Aptitudes.findAll().filter(apt => data.Certificados.data.some(cert => cert.aptitudes.includes(apt.id)))
-        this.Escuelas = data.Escuelas.findAll().filter(apt => data.Certificados.data.some(cert => cert.escuela == apt.id))
+
     },
     methods: {
         reset(){
             this.filterTecnologia = ''
             this.filterEscuela = ''
-            this.Certificados = data.Certificados.findAll()
+            this.Certificados = data.Certificados.findByProfile(+this.profile)
         },
         showAptitudes(e){
             const skills = Array.from(e.target.parentNode.childNodes).filter(s => s.tagName == "DIALOG")
@@ -86,14 +87,28 @@ export default {
         filterEscuela(val){
             if (val != ''){
                 this.filterTecnologia = ''
-                this.Certificados = data.Certificados.findAll().filter(cert => +cert.escuela.id == +val)
+                this.Certificados = data.Certificados.findByProfile(+this.profile)
+                    .filter(cert => +cert.escuela.id === +val)
             }
         },
         filterTecnologia(val){
             if (val != ''){
                 this.filterEscuela = ''
-                this.Certificados = data.Certificados.findAll().filter(cert => cert.aptitudes.some(tec => tec.id == +val))
+                this.Certificados = data.Certificados.findByProfile(+this.profile)
+                    .filter(cert => cert.aptitudes.some(tec => tec.id === +val))
             }
+        },
+        profile(curr){
+            this.Certificados = data.Certificados.findByProfile(+curr)
+                .slice(0,3)
+            this.Aptitudes = data.Aptitudes.findByProfile(+curr)
+                .filter(apt => data.Certificados.data.some(cert => cert.aptitudes.includes(apt.id)))
+            this.totalCertificados = data.Certificados.findByProfile(+curr).length
+            this.Escuelas = data.Escuelas.findAll()
+                 .filter((escuela,i) =>
+                     data.Certificados.findByProfile(+curr)
+                         .some(cert => +cert.escuela.id === +escuela.id))
+            console.log(this.Escuelas.length)
         }
     }
 }
