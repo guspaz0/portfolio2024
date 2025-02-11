@@ -1,9 +1,12 @@
-import db from '../data/perfiles.js';
+import perfiles from '../services/perfiles.js';
+import aptitudes from './aptitudes.js'
+import proyectos from './proyectos.js'
+import certificados from "./certificados.js";
 
 export default {
     template: `
     <fieldset className="perfiles">
-        <legend>Selecciona un perfil</legend>
+        <legend>Perfiles</legend>
         <span v-for="perfil in perfiles">
             <input 
                 type="radio" 
@@ -15,22 +18,27 @@ export default {
             <label v-bind:for="'perfil'+perfil.id">{{perfil.nombre}}</label>
         </span>
     </fieldset>
+    <certificados :perfil="perfil"></certificados>
+    <proyectos :perfil="perfil"></proyectos>
+    <aptitudes :perfil="perfil"></aptitudes>
     `,
     props: ['profile'],
     emit: ['setProfile'],
     data() {
         return {
             perfiles: [],
-            selected: +this.profile
+            selected: +this.profile,
+            perfil: null
         }
     },
     watch: {
         profile(cur) {
             this.selected = +cur
         },
-        selected(cur) {
-            this.$emit('setProfile', +cur)
-            this.selected = +cur
+        selected(curr) {
+            this.$emit('setProfile', +curr)
+            this.selected = +curr
+            this.perfil = this.perfiles.find(perfil => perfil.id === +curr)
         }
     },
     methods: {
@@ -39,6 +47,11 @@ export default {
         }
     },
     mounted() {
-        this.perfiles = db.findAll();
+        this.perfiles = perfiles.findAll();
+    },
+    components: {
+        'aptitudes': aptitudes,
+        'proyectos': proyectos,
+        'certificados': certificados
     }
 }

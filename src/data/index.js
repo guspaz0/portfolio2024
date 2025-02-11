@@ -4,6 +4,7 @@ import Certificados from './certificados.js'
 import Escuelas from './escuelas.js'
 import Eventos from './eventos.js'
 import Experiencia from './experiencia.js'
+import AptitudesPerfil from './aptitudes_perfil.js'
 
 export default {
     Aptitudes,
@@ -11,5 +12,6 @@ export default {
     Certificados,
     Escuelas,
     Eventos,
-    Experiencia
+    Experiencia,
+    AptitudesPerfil: AptitudesPerfil.data
 }

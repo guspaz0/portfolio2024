@@ -1,4 +1,4 @@
-import data from '../data/index.js'
+import Experiencias from '../services/Experiencias.js'
 
 export default {
     template: `<section id="timeline" className="timeline-container">
@@ -33,6 +33,6 @@ export default {
         }
     },
     mounted(){
-        this.Linea = data.Experiencia.findAll()
+        this.Linea = Experiencias.findAll()
     }
 }

@@ -1,4 +1,4 @@
-import dataPerfiles from '../data/perfiles.js'
+import Perfiles from '../services/perfiles.js'
 
 export default {
     template: `<nav v-bind:id="el" className="navbar">
@@ -42,7 +42,7 @@ export default {
             old: `<div className="darkmode">
                     <span v-bind:id="Switch" @click="handleSwitch" className="switch"></span>
                 </div>`,
-            perfiles: dataPerfiles.findAll(),
+            perfiles: Perfiles.findAll(),
             selected: this.profile
         }
     },

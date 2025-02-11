@@ -1,4 +1,6 @@
-import data from '../data/index.js'
+import Aptitudes from '../services/Aptitudes.js'
+import Proyectos from '../services/Proyectos.js'
+import {Perfil} from "../models/Perfil.js";
 
 export default {
     template: `
@@ -14,7 +16,7 @@ export default {
                     </option>
                 </select>
             </fieldset>
-            <small>Mostrando {{Proyectos.length}} de {{totalProyects}} Proyectos</small>
+            <small>Mostrando {{Proyectos.length}} de {{perfil?.proyectos.length}} Proyectos</small>
             <span className="card" @click.prevent="reset">Ver Todos</span>
         </form>
         <div v-bind:className="el">
@@ -48,31 +50,28 @@ export default {
         </div>
     </section>
     `,
+    props: {
+        perfil: {type: Perfil, required: true, default: new Perfil(1, 'Frontend developer')}
+    },
     data(){
         return {
             Titulo: "Proyectos",
             el: 'proyectos',
             Proyectos: [],
             Aptitudes: [],
-            totalProyects: data.Proyectos.data.length,
             filterTecnologia: ''
         }
-    },
-    mounted(){
-        this.Aptitudes = data.Aptitudes.findAll()
-            .filter(apt => data.Proyectos.data.some(pr => pr.aptitudes.includes(apt.id)));
-        this.Proyectos = data.Proyectos.findAll().slice(0,3);
     },
     methods: {
         reset(){
             this.filterTecnologia = ''
-            this.Proyectos = data.Proyectos.findAll()
+            this.Proyectos = this.perfil.proyectos
         },
         showAptitudes(e){
-            const skills = Array.from(e.target.parentNode.childNodes).filter(s => s.tagName == "DIALOG")
-            if (e.type == "mouseenter") {
+            const skills = Array.from(e.target.parentNode.childNodes).filter(s => s.tagName === "DIALOG")
+            if (e.type === "mouseenter") {
                 skills[0].open = true
-            } else if (e.type == "mouseleave") {
+            } else if (e.type === "mouseleave") {
                 skills[0].open = false
             }
         }
@@ -81,8 +80,17 @@ export default {
         filterTecnologia(val){
             if (val != ''){
                 this.filterTecnologia = ''
-                this.Proyectos = data.Proyectos.findAll().filter(pr => pr.aptitudes.some(tec => +tec.id == +val))
+                this.Proyectos = this.perfil.proyectos
+                    .filter(pr => pr.aptitudes
+                        .some(tec => +tec.id === +val))
             }
+        },
+        perfil(curr) {
+            this.Aptitudes = this.perfil.aptitudes
+                .filter(apt => this.perfil.proyectos
+                    .some(pr => pr.aptitudes
+                        .some(prAp => prAp.id === apt.id)));
+            this.Proyectos = this.perfil.proyectos.slice(0,3);
         }
     }
 }

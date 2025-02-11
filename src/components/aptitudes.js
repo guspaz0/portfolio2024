@@ -1,4 +1,4 @@
-import Aptitudes from '../data/aptitudes.js'
+import Aptitudes from '../services/Aptitudes.js'
 
 export default {
     template: `
@@ -51,7 +51,6 @@ export default {
         },
         aptitudes(curr){
             clearInterval(this.carousel);
-            console.log(curr.length)
             this.setCarousel(+curr.length)
         }
     },

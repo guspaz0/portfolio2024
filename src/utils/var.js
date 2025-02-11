@@ -1,6 +1,5 @@
 const url ='https://res.cloudinary.com/dbowsjk6p/image/upload'
 
-
 export default {
     cloudurl: url+'/v1724456108/aptitudes/',
     escuelaurl: url+'/v1725312748/escuelas/',

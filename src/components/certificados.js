@@ -1,4 +1,5 @@
-import data from '../data/index.js'
+import Escuelas from "../services/Escuelas.js";
+import {Perfil} from "../models/Perfil.js";
 
 export default {
     template: `
@@ -20,7 +21,7 @@ export default {
                     </option>
                 </select>
             </fieldset>
-            <small>Mostrando {{Certificados.length}} de {{totalCertificados}} Certificados</small>
+            <small>Mostrando {{Certificados.length}} de {{perfil?.certificados.length}} Certificados</small>
             <span className="card" @click.prevent="reset">Ver Todos</span>
         </form>
         <div className="certificados">
@@ -52,27 +53,23 @@ export default {
     </section>
     `,
     props: {
-        profile: {type: Number, required: true}
+        perfil: {type: Perfil, required: true, default: new Perfil(1,'Frontend Developer')}
     },
     data(){
         return {
             Titulo: 'Certificados',
             Certificados: [],
-            totalCertificados: data.Certificados.data.length,
             Escuelas: [],
             Aptitudes: [],
             filterEscuela: '',
             filterTecnologia: '',
         }
     },
-    mounted(){
-
-    },
     methods: {
         reset(){
             this.filterTecnologia = ''
             this.filterEscuela = ''
-            this.Certificados = data.Certificados.findByProfile(+this.profile)
+            this.Certificados = this.perfil.certificados
         },
         showAptitudes(e){
             const skills = Array.from(e.target.parentNode.childNodes).filter(s => s.tagName == "DIALOG")
@@ -87,28 +84,22 @@ export default {
         filterEscuela(val){
             if (val != ''){
                 this.filterTecnologia = ''
-                this.Certificados = data.Certificados.findByProfile(+this.profile)
+                this.Certificados = this.perfil.certificados
                     .filter(cert => +cert.escuela.id === +val)
             }
         },
         filterTecnologia(val){
             if (val != ''){
                 this.filterEscuela = ''
-                this.Certificados = data.Certificados.findByProfile(+this.profile)
+                this.Certificados = this.perfil.certificados
                     .filter(cert => cert.aptitudes.some(tec => tec.id === +val))
             }
         },
-        profile(curr){
-            this.Certificados = data.Certificados.findByProfile(+curr)
-                .slice(0,3)
-            this.Aptitudes = data.Aptitudes.findByProfile(+curr)
-                .filter(apt => data.Certificados.data.some(cert => cert.aptitudes.includes(apt.id)))
-            this.totalCertificados = data.Certificados.findByProfile(+curr).length
-            this.Escuelas = data.Escuelas.findAll()
-                 .filter((escuela,i) =>
-                     data.Certificados.findByProfile(+curr)
-                         .some(cert => +cert.escuela.id === +escuela.id))
-            console.log(this.Escuelas.length)
+        perfil(curr){
+            this.Certificados = this.perfil.certificados.slice(0,3)
+            this.Aptitudes = this.perfil.aptitudes;
+            this.Escuelas = [...new Set(this.perfil.certificados.map(cert => cert.escuela.id))]
+                .map(esc_id => Escuelas.findOne(esc_id));
         }
     }
 }
