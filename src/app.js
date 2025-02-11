@@ -1,6 +1,6 @@
 import navmain from './components/nav.js'
 import pie from './components/pie.js'
-//import router from './router.js'
+import router from './router.js'
 import home from './components/home.js'
 
 const{ createApp } = Vue
@@ -71,7 +71,7 @@ const app = createApp({
     }
 })
 
-//app.use(router)
+app.use(router)
 
 app.mount('#app')
 
