@@ -1,4 +1,4 @@
-import Perfiles from '../services/perfiles.js'
+import Perfiles from '../services/Perfiles.js'
 
 export default {
     template: `<nav v-bind:id="el" className="navbar">

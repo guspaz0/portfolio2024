@@ -1,5 +1,3 @@
-import Aptitudes from '../services/Aptitudes.js'
-import Proyectos from '../services/Proyectos.js'
 import {Perfil} from "../models/Perfil.js";
 
 export default {

@@ -1,4 +1,4 @@
-import perfiles from '../services/perfiles.js';
+import perfiles from '../services/Perfiles.js';
 import aptitudes from './aptitudes.js'
 import proyectos from './proyectos.js'
 import certificados from "./certificados.js";
