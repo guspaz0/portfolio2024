@@ -62,6 +62,12 @@ const app = createApp({
             appTheme.classList.add('dark') 
         }
         this.profile = sessionStorage.getItem('profile') || 1;
+    },
+    created(){
+        this.$router.push({
+            name: 'home',
+            path: '/'
+        });
     }
 })
 
