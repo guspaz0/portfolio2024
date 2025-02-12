@@ -31,5 +31,12 @@ export default [
     {id: 31, nombre: 'Postman', path: 'postman-logo_cocohi.png', categoria: 2},
     {id: 32, nombre: 'IntelliJ Idea', path: 'intellij-idea-logo_ct1hhg.png', categoria: 2 },
     {id: 33, nombre: 'VsCode', path: 'vs-code-logo_vbh10j.png', categoria: 2},
-    {id: 34, nombre: 'Microsoft Azure', path: 'Azure-Logo-2020-present_p0rrmx.png', categoria: 2 }
+    {id: 34, nombre: 'Microsoft Azure', path: 'Azure-Logo-2020-present_p0rrmx.png', categoria: 2 },
+    {id: 35, nombre: 'Mockito', path: 'mockito_logo_m6aprp.png', categoria: 2 },
+    {id: 36, nombre: 'JUnit', path: 'junit5_logo_p0seqh.png', categoria: 2 },
+    {id: 37, nombre: 'MongoDb', path: 'mongodb_logo_dtukdx.png', categoria: 2 },
+    {id: 38, nombre: 'Hardhat', path: 'Hardhat_logo_sftqws.png', categoria: 2},
+    {id: 39, nombre: 'Web3', path: 'web3js-seeklogo_tp5u9s.png', categoria: 2},
+    {id: 40, nombre: 'Ethers', path: 'ethers-seeklogo_m5iwz9.png', categoria: 2},
+    {id: 41, nombre: 'Ethereum', path: 'Ethereum-logo_zzpqts.png', categoria: 2}
 ]

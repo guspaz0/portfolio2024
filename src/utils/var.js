@@ -5,5 +5,6 @@ export default {
     escuelaurl: url+'/v1725312748/escuelas/',
     proyectourl: url+'/v1725672587/proyectos/',
     certurl: url+'/v1726016093/certificados/',
-    expurl: url+'/v1726317578/laboral/'
+    expurl: url+'/v1726317578/laboral/',
+    github: 'https://github.com/'
 }

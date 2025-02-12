@@ -33,7 +33,7 @@ export default {
             resumeDrive: 'https://drive.google.com/file/d/1otmq9F_jcLdmL0niyZgp1wg_EQj3YyIJ/view?usp=sharing',
             titulo: 'Hola! Soy Gustavo Paz ',
             tituloGradient:  'Desarrollador de Software',
-            mensaje: "Selecciona un perfil asi puedo mostrarte la informacion pertinente a cada uno",
+            mensaje: "Selecciona un perfil para mostrar informacion pertinente",
             style: 'overview',
             cloudurl: vars.cloudurl,
             profile: null

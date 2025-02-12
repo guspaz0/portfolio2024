@@ -1,4 +1,4 @@
-import Aptitudes from '../services/Aptitudes.js'
+import {Perfil} from "../models/Perfil.js";
 
 export default {
     template: `
@@ -21,7 +21,7 @@ export default {
         </div>
     </section>`,
     props: {
-        profile: {type: Number, required: true},
+        perfil: {type: Perfil, required: true},
     },
     data: ()=> {
         return {
@@ -46,17 +46,12 @@ export default {
         }
     },
     watch: {
-        profile(id){
-            this.aptitudes = Aptitudes.findByProfile(+id);
+        perfil(curr){
+            this.aptitudes = curr.aptitudes;
         },
         aptitudes(curr){
             clearInterval(this.carousel);
-            this.setCarousel(+curr.length)
+            this.setCarousel(this.perfil.aptitudes.length)
         }
-    },
-    created(){
-        this.aptitudes = this.profile != null
-            ? Aptitudes.findByProfile(+this.profile)
-            : Aptitudes.findAll()
     }
 }

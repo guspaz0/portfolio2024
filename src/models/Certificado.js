@@ -5,10 +5,9 @@ import Escuelas from "../services/Escuelas.js";
 export class Certificado {
 
     constructor(id, nombre, path, fecha, escuela) {
-        this._path = vars.certurl+path;
         this._id = id;
         this._nombre = nombre;
-        this._path = vars.escuelaurl+path;
+        this._path = vars.certurl+path;
         this._fecha = fecha;
         this._escuela = Escuelas.findOne(escuela);
         this._aptitudes = Aptitudes.findByCertificate(id);

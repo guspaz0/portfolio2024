@@ -16,8 +16,8 @@ export class Proyecto {
         this._nombre = nombre;
         this._descripcion = descripcion;
         this._fecha = fecha;
-        this._imagen =  vars.proyectourl+imagen;
-        this._repositorio = repositorio;
+        this._imagen =  imagen? vars.proyectourl+imagen : '';
+        this._repositorio = repositorio? vars.github+repositorio : '';
         this._deploy = deploy;
         this._aptitudes = proyectos_aptitudes.filter(([projId,]) => projId === id)
             .map(([,aptId]) => Aptitudes.findOne(aptId));

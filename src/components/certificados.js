@@ -1,5 +1,6 @@
 import Escuelas from "../services/Escuelas.js";
 import {Perfil} from "../models/Perfil.js";
+import Aptitudes from "../services/Aptitudes.js";
 
 export default {
     template: `
@@ -96,9 +97,12 @@ export default {
             }
         },
         perfil(curr){
-            this.Certificados = this.perfil.certificados.slice(0,3)
-            this.Aptitudes = this.perfil.aptitudes;
-            this.Escuelas = [...new Set(this.perfil.certificados.map(cert => cert.escuela.id))]
+            this.Certificados = curr.certificados.slice(0,3)
+            this.Aptitudes = curr.aptitudes
+                .filter(apt=> curr.certificados
+                    .some(cert => cert.aptitudes
+                        .some(tec => tec.id === apt.id)));
+            this.Escuelas = [...new Set(curr.certificados.map(cert => cert.escuela.id))]
                 .map(esc_id => Escuelas.findOne(esc_id));
         }
     }
