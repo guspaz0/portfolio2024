@@ -6,31 +6,14 @@ import {Proyecto} from "../models/Proyecto.js";
 
 export default {
     findAll: function (){
-        return Proyectos.map(pr =>
-            new Proyecto(
-                pr.id,
-                pr.nombre,
-                pr.descripcion,
-                pr.fecha,
-                pr.imagen,
-                pr.repositorio,
-                pr.deploy
-            )
+        return Proyectos.map(([id,nombre,descripcion,fecha,imagen,repositorio,deploy]) =>
+            new Proyecto(id,nombre,descripcion,fecha,imagen,repositorio,deploy)
         )
     },
     findOne: function(id) {
-        const pr = Proyectos.find(proyect => proyect.id === id)
-        if (pr) {
-            return new Proyecto(
-                pr.id,
-                pr.nombre,
-                pr.descripcion,
-                pr.fecha,
-                pr.imagen,
-                pr.repositorio,
-                pr.deploy
-            )
-        } else throw new Error('No se encontró el proyecto')
+        const pr = this.findAll().find(proyect => proyect.id === +id)
+        if (pr) return pr
+        else throw new Error('No se encontró el proyecto')
     },
     findProyectosAptitudes: function (project_id){
         return ProyectosAptitudes.filter(([proId, aptId]) => proId === project_id)

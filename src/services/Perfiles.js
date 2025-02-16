@@ -3,9 +3,9 @@ import {Perfil} from "../models/Perfil.js";
 
 export default {
     findAll: function (){
-        return perfiles.map(perf => new Perfil(perf.id,perf.nombre))
+        return perfiles.map(([id,nombre]) => new Perfil(id,nombre))
     },
     findOne: function (id){
-        return perfiles.find(perf => perf.id === id)
+        return this.findAll().find(perf => perf.id === +id)
     }
 }

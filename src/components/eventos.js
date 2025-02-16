@@ -1,4 +1,4 @@
-import Eventos from '../data/eventos.js'
+import Eventos from '../services/Eventos.js'
 
 export default {
     template: `

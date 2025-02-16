@@ -3,14 +3,12 @@ import {Escuela} from "../models/Escuela.js";
 
 export default {
     findAll: function (){
-        return Escuelas.map((esc) =>
-            new Escuela(esc.id,esc.nombre,esc.path))
+        return Escuelas.map(([id,nombre,path]) => new Escuela(id,nombre,path))
     },
     findOne: function(id) {
-        const escuela = Escuelas.find((esc) => esc.id === +id)
-        if (escuela) {
-            return new Escuela(escuela.id, escuela.nombre, escuela.path)
-        } else throw new Error('No se encontró la escuela')
+        const escuela = this.findAll().find((esc) => esc.id === +id)
+        if (escuela) return escuela
+        else throw new Error('No se encontró la escuela')
     },
     findByPerfil: function(id){
 

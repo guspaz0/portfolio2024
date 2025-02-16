@@ -2,6 +2,7 @@ import Aptitudes from "../services/Aptitudes.js";
 import Certificados from "../services/Certificados.js";
 import Proyectos from "../services/Proyectos.js";
 import Escuelas from "../services/Escuelas.js";
+import Experiencia from "../services/Experiencias.js";
 
 export class Perfil {
     constructor(id, nombre) {
@@ -10,12 +11,16 @@ export class Perfil {
         this._proyectos = Proyectos.findByPerfil(id);
         this._certificados = Certificados.findByPerfil(id);
         this._aptitudes = Aptitudes.findByPerfil(id);
+        this._experiencias = Experiencia.findByPerfil(id);
         //this._escuelas = Escuelas.findByPerfil(id);
     }
 
     // get escuelas() {
     //     return this._escuelas;
     // }
+    get experiencias(){
+        return this._experiencias;
+    }
 
     get proyectos() {
         return this._proyectos;

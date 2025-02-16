@@ -4,12 +4,12 @@ import Escuelas from "../services/Escuelas.js";
 
 export class Certificado {
 
-    constructor(id, nombre, path, fecha, escuela) {
+    constructor(id, nombre, escuela, path, fecha) {
         this._id = id;
         this._nombre = nombre;
-        this._path = vars.certurl+path;
-        this._fecha = fecha;
         this._escuela = Escuelas.findOne(escuela);
+        this._path = vars.certurl+path;
+        this._fecha = new Date(fecha);
         this._aptitudes = Aptitudes.findByCertificate(id);
     }
 

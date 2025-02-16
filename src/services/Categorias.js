@@ -1,14 +1,11 @@
-import data from '../data/categorias.js';
+import categorias from '../data/categorias.js';
 import {Categoria} from '../models/Categoria.js';
 
 export default {
     findAll(){
-        return data.map(cat =>
-            new Categoria(cat.id, cat.nombre)
-        )
+        return categorias.map(([id,nombre]) => new Categoria(id, nombre))
     },
     findOne(id){
-        const cat = data.find(cat => +cat.id === +id)
-        return new Categoria(cat.id,cat.nombre)
+        return this.findAll().find(cat => cat.id === +id)
     }
 }

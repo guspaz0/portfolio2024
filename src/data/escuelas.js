@@ -1,11 +1,11 @@
 export default [
-    { id: 1, nombre: 'Henry', path: 'henry_logo_bdd8ny.png'},
-    { id: 2, nombre: 'DigitalHouse', path: 'dh_logo_umrtjw.svg'},
-    { id: 3, nombre: 'Udemy', path: 'Udemy_logo_x9xzgg.png'},
-    { id: 4, nombre: 'Platzi', path: 'platzi_logoo_y3yzdf.png'},
-    { id: 5, nombre: 'Codigo Facilito', path: 'codigo_facilito_i3qn6f.png'},
-    { id: 6, nombre: 'IBM Skills Builds', path: 'IBM-SkillsBuild-logo_gagtra.png'},
-    { id: 7, nombre: 'Codo a codo', path: 'Logos_BA_Agencia_ounbqi.png'},
-    { id: 8, nombre: 'Guayerd', path: 'guayerd_biwubp.png'},
-    { id: 9, nombre: 'ETH-KIPU', path: 'ethkipu-logo_ydxggv.png'}
+    [1, 'Henry', 'henry_logo_bdd8ny.png'],
+    [2, 'DigitalHouse', 'dh_logo_umrtjw.svg'],
+    [3, 'Udemy', 'Udemy_logo_x9xzgg.png'],
+    [4, 'Platzi', 'platzi_logoo_y3yzdf.png'],
+    [5, 'Codigo Facilito', 'codigo_facilito_i3qn6f.png'],
+    [6, 'IBM Skills Builds', 'IBM-SkillsBuild-logo_gagtra.png'],
+    [7, 'Codo a codo', 'Logos_BA_Agencia_ounbqi.png'],
+    [8, 'Guayerd', 'guayerd_biwubp.png'],
+    [9, 'ETH-KIPU', 'ethkipu-logo_ydxggv.png']
 ]

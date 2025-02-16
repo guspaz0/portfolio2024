@@ -589,6 +589,7 @@ fieldset.perfiles {
     flex-direction: row;
     flex-wrap: wrap;
     border-color: var(--text-color);
+    max-width: 750px;
 }
 input[type="radio"] {
     display: none;

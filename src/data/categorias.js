@@ -1,4 +1,4 @@
 export default [
-    { id: 1, nombre: 'Hard Skill' },
-    { id: 2, nombre: 'Soft Skill' }
+    [1, 'Hard Skill'],
+    [2, 'Soft Skill']
 ]

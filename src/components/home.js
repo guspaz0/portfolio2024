@@ -2,7 +2,6 @@ import navmain from './nav.js'
 import about from './about.js'
 import contacto from './contacto.js'
 import eventos from './eventos.js'
-import timeline from './timeline.js'
 import vars from '../utils/var.js'
 import perfiles from './perfiles.js'
 
@@ -23,7 +22,6 @@ export default {
             </div>
         </section>
         <perfiles :profile="profile" @setProfile="setProfile"></perfiles>
-        <timeline></timeline>
         <about></about>
         <contacto></contacto>
     </section>`,
@@ -84,7 +82,6 @@ export default {
         'about': about,
         'contacto': contacto,
         'eventos': eventos,
-        'timeline': timeline,
         'perfiles': perfiles
     }
 }

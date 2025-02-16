@@ -4,29 +4,14 @@ import {Certificado} from "../models/Certificado.js";
 
 export default {
     findAll: function (){
-        return Certificados.map(cert =>
-            new Certificado(
-                cert.id,
-                cert.nombre,
-                cert.path,
-                cert.fecha,
-                cert.escuela,
-                cert.id,
-            )
+        return Certificados.map(([id,nombre, escuela_id,path,fecha]) =>
+            new Certificado(id,nombre,escuela_id,path,fecha)
         )
     },
     findOne: function(id) {
-        const cert = Certificados.find(cert => cert.id === id)
-        if (cert) {
-            return new Certificado(
-                cert.id,
-                cert.nombre,
-                cert.path,
-                cert.fecha,
-                cert.escuela,
-                cert.id,
-            )
-        } else throw new Error('No se encontró el certificado')
+        const cert = this.findAll().find(cert => cert.id === +id)
+        if (cert) return cert
+        else throw new Error('No se encontró el certificado')
     },
     findByPerfil(prof_Id) {
         return certificadosPerfil.filter(([,profId])=> +profId === +prof_Id)

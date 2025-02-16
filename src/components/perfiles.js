@@ -2,6 +2,7 @@ import perfiles from '../services/Perfiles.js';
 import aptitudes from './aptitudes.js'
 import proyectos from './proyectos.js'
 import certificados from "./certificados.js";
+import timeline from './timeline.js'
 
 export default {
     template: `
@@ -18,6 +19,7 @@ export default {
             <label v-bind:for="'perfil'+perfil.id">{{perfil.nombre}}</label>
         </span>
     </fieldset>
+    <timeline :perfil="perfil"></timeline>
     <certificados :perfil="perfil"></certificados>
     <proyectos :perfil="perfil"></proyectos>
     <aptitudes :perfil="perfil"></aptitudes>
@@ -52,6 +54,7 @@ export default {
     components: {
         'aptitudes': aptitudes,
         'proyectos': proyectos,
-        'certificados': certificados
+        'certificados': certificados,
+        'timeline': timeline
     }
 }
