@@ -13,5 +13,5 @@ export default {
     Escuelas,
     Eventos,
     Experiencia,
-    AptitudesPerfil: AptitudesPerfil.data
+    AptitudesPerfil
 }

@@ -11,6 +11,7 @@
   * certificados
   * proyectos
   * aptitudes
+  * experiencia
 * Esta completamente alojado en github pages asi que el contenido es completamente publico.
 --- 
 *  in this repo, i pretend to do my portfolio of projects to publish as a software developer.

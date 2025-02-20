@@ -38,5 +38,7 @@ export default [
     [38, 'Hardhat', 'Hardhat_logo_sftqws.png', 2],
     [39, 'Web3', 'web3js-seeklogo_tp5u9s.png', 2],
     [40, 'Ethers', 'ethers-seeklogo_m5iwz9.png', 2],
-    [41, 'Ethereum', 'Ethereum-logo_zzpqts.png', 2]
+    [41, 'Ethereum', 'Ethereum-logo_zzpqts.png', 2],
+    [42, 'TypeScript', 'Typescript_logo_fv66vp.png',2],
+    [43, 'TypeORM', 'typeOrm_logo_v5wbsw.png',2]
 ]

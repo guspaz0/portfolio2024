@@ -7,7 +7,7 @@ export default [
     [6, 'PI Countries', 'Proyecto de entrenamiento de bootcamps', '', 'countries_mnuxdc.jpg', '', ''],
     [7, 'PI Foods', 'Proyecto de entrenamiento de bootcamps', '', 'food_pi_oghuxf.jpg', '', ''],
     [8, 'PI Video Games', 'Proyecto de entrenamiento de bootcamps', '', '', '', ''],
-    [9, 'Rick & Morty', 'Proyecto de entrenamiento de bootcamps', '', 'rick_morty_om7ayj.jpg', '', ''],
+    [9, 'Rick & Morty', 'App sobre una serie animada, donde, atravez del consumo de una api oficial de la serie, se puede buscar cartas de cada personaje para obtener su informacion y episodio en que actuaron. El usuario puede guardar personajes como Favoritos localmente', '', 'rick_morty_om7ayj.jpg', '', 'guspaz0/rick_and_morty'],
     [10, 'ExpenseTracker', 'Proyecto backend. Es una API para hacer seguimiento de expensas, registrar vencimientos y recibir notificaciones via email. Exportacion de reportes en Excel. Multiusuario, Seguridad, testing y mas', '2024-11-20', '', 'guspaz0/expenseTracker', ''],
     [11, 'Defi Token Farm', 'Proyecto de Defi, los usarios depositan tokens para respaldar otro token, y reciben recompensas variables por mantener el stack por intervalos de bloques. el propietario puede cobrar comisiones. El contrato es upgradeable mediante proxy transparente admin. cobertura de tests al 80%', '2024-12-20', '', 'guspaz0/SimpleDefiTokenFarm', ''],
     [12, 'Potenciar Solidario', 'Proyecto de dashboard sobre informacion contable de una organizacion sin fines de lucro. "ETL" y normalizacion de tablas con MySql', '2024-12-20', '', 'guspaz0/SimpleDefiTokenFarm', 'https://lookerstudio.google.com/reporting/e566f43a-bd98-4115-8da3-f8b46ebf7b46']

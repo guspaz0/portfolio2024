@@ -25,7 +25,7 @@ export default {
                     </div>
                 </li>
             </ol>
-            <p v-if="Linea.length === 0">No hay experiencias disponibles para {{perfil.nombre}}</p>
+            <p v-if="Linea.length === 0">No hay experiencias disponibles para {{perfil?.nombre}}</p>
             <small>Solo hago mencion a mis hitos en tecnologia</small>
     </section>`,
     props: {
