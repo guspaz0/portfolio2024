@@ -8,13 +8,15 @@ import certificados from './components/certificados.js'
 
 const { createRouter, createWebHistory} = VueRouter
 
+const queryParam = new URLSearchParams(window.location.search)
+
 const root = window.location.pathname
 
 const router = createRouter({
     history: createWebHistory(),
     mode: 'history',
     routes: [
-        {path: `${root}`, name: 'home', component: home},
+        {path: `${root}`, name: 'home', component: home, props: {perfil: queryParam.get('perfil') || 1}},
         {path: `${root}/about`, name: 'about', component: about},
         {path: `${root}/contacto`, name: 'contacto', component: contacto},
         {path: `${root}/aptitudes`, name: 'aptitudes', component: aptitudes},

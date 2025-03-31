@@ -40,5 +40,7 @@ export default [
     [40, 'Ethers', 'ethers-seeklogo_m5iwz9.png', 2],
     [41, 'Ethereum', 'Ethereum-logo_zzpqts.png', 2],
     [42, 'TypeScript', 'Typescript_logo_fv66vp.png',2],
-    [43, 'TypeORM', 'typeOrm_logo_v5wbsw.png',2]
+    [43, 'TypeORM', 'typeOrm_logo_v5wbsw.png',2],
+    [44, 'npm', 'npm-1024_b4zwmj.png',2],
+    [45, 'Jest', 'jest-logo_a1y4ry.png',2]
 ]

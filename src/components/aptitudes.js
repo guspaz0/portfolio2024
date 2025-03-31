@@ -6,7 +6,7 @@ export default {
         <h2>Tecnologias:</h2>
         <div className="carousel-container"> 
             <div className="carousel" v-bind:style="style">
-            <span v-for="skill in aptitudes" >
+            <span v-for="skill in aptitudes">
                 <img @contextmenu.prevent="" 
                     v-if="skill.alt" v-bind:src="skill.alt" 
                     v-bind:alt="skill.nombre" 

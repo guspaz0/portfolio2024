@@ -25,6 +25,9 @@ export default {
         <about></about>
         <contacto></contacto>
     </section>`,
+    props: {
+        perfil: {type: Number, required: false, default: 1 }
+    },
     data(){
         return {
             darkmode: false,
@@ -75,7 +78,7 @@ export default {
             appTheme.classList.remove('light')
             appTheme.classList.add('dark')
         }
-        this.profile = sessionStorage.getItem('profile') || 1;
+        this.profile = sessionStorage.getItem('profile') || this.perfil;
     },
     components: {
         'navmain': navmain,

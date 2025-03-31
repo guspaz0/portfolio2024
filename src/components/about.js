@@ -16,7 +16,7 @@ export default {
               />
               <img src="https://github-readme-stats.vercel.app/api?username=guspaz0&show_icons=true" />
             </picture>
-             <picture>
+            <picture>
               <source
                 srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=guspaz0&layout=compact"
                 media="(prefers-color-scheme: dark)"
@@ -38,7 +38,7 @@ export default {
         <div className="perfil">
             <span className="">
                 <img @contextmenu.prevent="" 
-                    v-bind:src="cloudurl+'perfil_cv_l8xbne.png'" alt="perfil" loading="lazy"/>
+                    src="https://avatars.githubusercontent.com/u/103156469?v=4" height="" alt="perfil" loading="lazy"/>
                 <div className="shadow"></div>
             </span>
             <img @contextmenu.prevent="" 

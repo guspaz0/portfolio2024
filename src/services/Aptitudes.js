@@ -2,17 +2,16 @@ import aptitudesPerfil from "../data/aptitudes_perfil.js";
 import CertificadosAptitudes from "../data/certificados_aptitudes.js";
 import Aptitudes from "../data/aptitudes.js";
 import {Aptitud} from "../models/Aptitud.js";
+import { AptitudNotFound } from "../exceptions/Aptitud.js";
 
 export default {
     findAll() {
-        return Aptitudes.map(([id,nombre,path,categoria_id]) =>
-            new Aptitud(id, nombre, path, categoria_id)
-        )
+        return Aptitudes.map(aptitud => new Aptitud(...aptitud))
     },
     findOne: function (id) {
-        const tec = this.findAll().find(apt => apt.id === id)
+        const tec = new Aptitud(...Aptitudes.find(([aptId]) => aptId === id))
         if (tec) return tec
-        else throw new Error("No se encuentra la Tecnologia");
+        else throw new AptitudNotFound(`La Aptitud Id: ${id} no se encuentra`);
     },
     findByPerfil(profileId) {
         return aptitudesPerfil.filter(([aptId,profId]) => +profileId === +profId)

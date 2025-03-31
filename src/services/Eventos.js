@@ -1,11 +1,14 @@
 import eventos from '../data/eventos.js'
+import { EventoNotFound } from '../exceptions/Evento.js';
 import Evento from '../models/Evento.js';
 
 export default {
     findAll: function() {
-        return eventos.map(([id,titulo,descripcion,fecha,imagen]) => new Evento(id,titulo,descripcion,fecha,imagen));
+        return eventos.map(evento => new Evento(...evento));
     },
     findOne: function(id) {
-        return this.findAll().find(ev => ev.id === +id);
+        const evento = new Evento(...eventos.find(([evId]) => evId === +id))
+        if(evento) return evento
+        else throw new EventoNotFound(`Evento id: ${id} not found`)
     }
 }
