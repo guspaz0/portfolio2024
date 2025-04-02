@@ -1,21 +1,33 @@
-import Experiencias from "../data/experiencia.js";
 import Experiencia from '../models/Experiencia.js'
-import experiencia_perfil from "../data/experiencia_perfil.js";
 import { ExperienciaNotFound } from "../exceptions/Experiencia.js";
+import db from '../data/dataSource.js'
 
 export default {
     findAll: function (){
-        return Experiencias.map(experiencia => new Experiencia(...experiencia))
-            .sort((a,b) => (b.fecha - a.fecha))
+        let stmt;
+        try {
+            stmt = db.prepare(`select * from experiencias`)
+            let Experiencias = []
+            while (stmt.step()) Experiencias.push(new Experiencia(...stmt.get()))
+            return Experiencias.sort((a,b) => (b.fecha - a.fecha))
+        } catch (e) {
+            throw e
+        } finally {
+            stmt.free();
+        }
     },
     findOne(id) {
-        const Exp = new Experiencia(...Experiencias.find(([expId]) => expId === +id))
-        if (Exp) return Exp
+        const stmt = db.prepare(`select * from experiencias where id = ${id}`)
+        if (stmt.step()) return new Experiencia(...stmt.get())
         else throw new ExperienciaNotFound(`La expenriencia id: ${id} no se encontró`)
     },
     findByPerfil(perfId){
-        return experiencia_perfil.filter(([,perf_id]) => perf_id === +perfId)
-            .map(([exp_id,]) => this.findOne(exp_id))
-            .sort((a,b) => (b.fecha - a.fecha))
+        const stmt = db.prepare(`select e.* from experiencias e 
+            left join experiencias_perfil ep on e.id = ep.experiencia_id
+            left join perfiles p on p.id = ep.perfil_id
+            where p.id = ${perfId}`)
+        let Experiencias = []
+        while (stmt.step()) Experiencias.push(new Experiencia(...stmt.get()))
+        return Experiencias.sort((a,b) => (b.fecha - a.fecha))
     }
 }

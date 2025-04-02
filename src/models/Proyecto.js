@@ -1,6 +1,6 @@
 import vars from "../utils/var.js"
-import proyectos_aptitudes from "../data/proyectos_aptitudes.js";
-import Aptitudes from "../services/Aptitudes.js"
+import Proyectos from "../services/Proyectos.js";
+import Aptitudes from "../services/Aptitudes.js";
 
 export class Proyecto {
     constructor(
@@ -19,12 +19,10 @@ export class Proyecto {
         this._imagen =  imagen? vars.proyectourl+imagen : '';
         this._repositorio = repositorio? vars.github+repositorio : '';
         this._deploy = deploy;
-        this._aptitudes = proyectos_aptitudes.filter(([projId,]) => projId === id)
-            .map(([,aptId]) => Aptitudes.findOne(aptId));
     }
 
     get aptitudes() {
-        return this._aptitudes;
+        return Aptitudes.findByProject(this._id);
     }
 
     get id() {

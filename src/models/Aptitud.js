@@ -1,7 +1,6 @@
 import vars from "../utils/var.js";
-import proyectos_aptitudes from "../data/proyectos_aptitudes.js";
-import certificados_aptitudes from "../data/certificados_aptitudes.js";
 import categorias from '../services/Categorias.js'
+import Aptitudes from "../services/Aptitudes.js";
 
 export class Aptitud {
     constructor(id, nombre, path, categoria_id) {
@@ -9,16 +8,6 @@ export class Aptitud {
         this._nombre = nombre;
         this._path = vars.cloudurl+path;
         this._categoria = categorias.findOne(categoria_id);
-        this._countProyects = proyectos_aptitudes.filter(([,aptId]) => aptId === id).length;
-        this._countCertificados = certificados_aptitudes.filter(([,aptId]) => aptId === id).length;
-    }
-
-    get countProyects() {
-        return this._countProyects;
-    }
-
-    get countCertificados() {
-        return this._countCertificados;
     }
 
     get id() {
@@ -35,5 +24,11 @@ export class Aptitud {
 
     get categoria() {
         return this._categoria;
+    }
+    get countProyects() {
+        return Aptitudes.countProject(this._id)
+    }
+    get countCertificados(){
+        return Aptitudes.countCertificados(this._id)
     }
 }
