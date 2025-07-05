@@ -514,7 +514,7 @@ span.expand::after {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 30px;
+    padding: 35px;
     width: 90%;
     overflow: hidden;
 }
@@ -527,8 +527,10 @@ span.expand::after {
     white-space: nowrap;
 }
 .carousel img {
-    max-width: 50px;
-    max-height: 50px;
+    width: 50px;
+    /*max-height: 50px;*/
+    aspect-ratio: 1/1;
+    object-fit: contain;
     filter: drop-shadow(0 0 1px white);
 }
 

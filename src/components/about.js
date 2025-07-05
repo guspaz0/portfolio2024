@@ -18,14 +18,14 @@ export default {
             </picture>
             <picture>
               <source
-                srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=guspaz0&layout=compact"
+                srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=guspaz0&size_weight=0.5&count_weight=0.5&hide=dockerfile,ejs,css,scss,html,handlebars,procfile&layout=compact&langs_count=6&theme=dracula"
                 media="(prefers-color-scheme: dark)"
               />
               <source
-                srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=guspaz0&layout=compact"
+                srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=guspaz0&size_weight=0.5&count_weight=0.5&hide=dockerfile,ejs,css,scss,html,handlebars,procfile&layout=compact&langs_count=6&theme=dracula"
                 media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
               />
-              <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=guspaz0&layout=compact" />
+              <img src= />
             </picture>
             <p>{{mensaje}}</p>
             <p>{{parrafo2}}</p>
