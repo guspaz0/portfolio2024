@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>Portfolio</title>
+        <link rel="icon" type="image/svg+xml" href="portfolio2024/src/assets/vue.svg" onerror="this.onerror=null; this.href='src/assets/vue.svg'"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+        <link href="./src/css/index.css" rel="stylesheet"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.13.0/sql-wasm.js"></script>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script src="https://unpkg.com/vue-router@4"></script>
+        <script type="module" src="./src/app.js"></script>
+        <noscript>
+            <style type="text/css">
+                .pagecontainer {display:none;} .noscriptmsg {display: flex; align-items: center; justify-content: center;}
+            </style>
+            <div class="noscriptmsg">Para que este sitio funcione, debes tener JavaScript habilitado.</div>
+            <p>Te dejo enlace a mi <a href="https://drive.google.com/file/d/1otmq9F_jcLdmL0niyZgp1wg_EQj3YyIJ/view?usp=sharing" rel="noreferrer noopener"><b>CV</b></a></p>
+            </div>
+        </noscript>
+    </head>
+    <body>
+        <div id="app" class="pagecontainer">
+            <router-view></router-view>
+            <pie></pie>
+        </div>
+    </body>
+</html>
