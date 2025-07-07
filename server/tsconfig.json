@@ -1,3 +1,18 @@
 {
-  "extends": "../.nuxt/tsconfig.server.json"
+  "extends": "../.nuxt/tsconfig.server.json",
+  "compilerOptions": {                                                                   
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    /* Modules */
+    "rootDir": "./lib",
+    /* Emit */
+    "outDir": "./dist",
+    "forceConsistentCasingInFileNames": true,
+    /* Type Checking */
+    "strict": true,
+    "noImplicitAny": true,
+    "strictPropertyInitialization": false,
+    "skipLibCheck": true
+  },
+  "include": ["server/**/*.ts"],
 }

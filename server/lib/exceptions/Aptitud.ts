@@ -1,5 +1,5 @@
 export class AptitudNotFound extends Error {
-    constructor(message) {
+    constructor(message: string) {
         super(message)
     }
 };

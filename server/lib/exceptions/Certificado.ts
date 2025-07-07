@@ -1,5 +1,5 @@
 export class CertificadoNotFound extends Error {
-    constructor(message) {
+    constructor(message: string) {
         super(message)
     }
 };

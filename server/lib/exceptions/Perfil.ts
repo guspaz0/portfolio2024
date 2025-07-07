@@ -1,5 +1,5 @@
 export class PerfilNotFound extends Error {
-    constructor(message) {
+    constructor(message: string) {
         super(message)
     }
 };
