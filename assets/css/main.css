@@ -208,10 +208,7 @@ span.skills:hover img {
     position: absolute;
     z-index: 50;
 }
-.timeline span img {
-    max-height: 50px;
-    filter: drop-shadow(0 0 1px white) contrast(2);
-}
+
 .contacto {
     display: flex;
     flex-direction: column;
@@ -346,7 +343,7 @@ dialog {
 
 dialog:hover {
     position: absolute;
-    
+
 }
 
 dialog[open] {
@@ -415,32 +412,6 @@ span.expand::after {
     padding: 5px;
 }
 
-.timeline {
-    position: relative;
-    max-width: 600px;
-}
-
-ol.timeline {
-    border-left: solid 3px var(--text-color);
-    list-style: none;
-    padding: 20px;
-}
-
-ol > li > div > div.dot {
-    position: absolute;
-    left: -7px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-image: var(--theme-em-gradient-pink);
-}
-.timeline-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-}
 .loading > span {
     animation: loading 1.4s infinite ease-in-out;
 }
@@ -454,39 +425,12 @@ ol > li > div > div.dot {
 .loading > span:nth-child(2) {
     animation-delay: -0.16s;
 }
-fieldset.perfiles {
-    position: relative;
-    transform: translate(-50%,0%);
-    top: 50%;
-    left: 50%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    border-color: var(--text-color);
-    max-width: 750px;
-}
+
 input[type="radio"] {
     display: none;
 }
-.navbar select {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    opacity: inherit;
-}
-.navbar option {
-    opacity: 0.5;
-}
-fieldset.perfiles label {
-    position: relative;
-    color: var(--text-color);
-    font-size: 20px;
-    border: 2px solid var(--text-color);
-    border-radius: 5px;
-    padding: 10px 50px;
-    display: flex;
-    align-items: center;
-    transition: 400ms;
-}
+
+
 /*fieldset.perfiles label:before {*/
 /*    content: "";*/
 /*    height: 20px;*/
@@ -496,16 +440,7 @@ fieldset.perfiles label {
 /*    margin-right: 20px;*/
 /*}*/
 
-fieldset.perfiles input[type="radio"]:checked + label {
-    background-color: var(--text-color);
-    color: var(--bg-color);
-}
-fieldset.perfiles input[type="radio"]:checked + label:before {
-    height: 10px;
-    width: 10px;
-    border: 6px solid var(--bg-color);
-    background-color: var(--text-color);
-}
+
 
 @media (min-width: 600px) {
     #certificados form, #certificados fieldset, #proyectos form, #proyectos fieldset, #timeline fieldset {

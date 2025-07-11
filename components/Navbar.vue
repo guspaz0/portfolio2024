@@ -3,13 +3,11 @@
         <ul>
             <h2>{{ titulo }}</h2>
             <li>
-                <select 
-                    name="perfil" 
-                    v-model="selected" 
+                <select name="perfil"
+                    v-model="selected"
                     @change="handleSelectChange"
                 >
-                    <option 
-                        v-for="perfil in perfiles" 
+                    <option v-for="perfil in perfiles"
                         :key="perfil.id"
                         :value="perfil.id"
                     >
@@ -18,19 +16,19 @@
                 </select>
             </li>
             <li v-for="item in listasNav" :key="item.href">
-                <a 
-                    :href="item.href" 
-                    @click="handleNavClick(item.href)"
-                    class="nav-link"
+                <a
+                   :href="item.href"
+                   @click="handleNavClick(item.href)"
+                   class="nav-link"
                 >
                 {{ item.nombre }}
                 </a>
             </li>
             <li>
-                <input 
-                    type="checkbox" 
-                    id="switch" 
-                    class="checkbox" 
+                <input
+                    type="checkbox"
+                    id="switch"
+                    class="checkbox"
                     @click="toggleDarkMode"
                     :checked="darkmode"
                 />
@@ -40,9 +38,8 @@
     </nav>
 </template>
 
-<script setup>
-// Import your Perfiles service (you'll need to convert this to ESM too)
-// import { findAll } from '~/services/Perfiles.js'
+<script setup lang="ts">
+const data = await $fetch('/api/perfiles')
 
 // Props
 const props = defineProps({
@@ -74,15 +71,8 @@ const listasNav = [
     { href: '#contacto', nombre: 'Contacto' }
 ]
 
-// Mock data - replace with your actual Perfiles service
-const perfiles = ref([
-    { id: 1, nombre: 'Desarrollador Frontend' },
-    { id: 2, nombre: 'Desarrollador Backend' },
-    { id: 3, nombre: 'Desarrollador Full Stack' }
-])
-
 // You can uncomment this when you convert your Perfiles service
-// const perfiles = ref(findAll())
+const perfiles = ref(data)
 
 // Selected profile
 const selected = ref(+props.profile)
@@ -146,6 +136,14 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.navbar select {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    opacity: inherit;
+}
+.navbar option {
+    opacity: 0.5;
+}
 .navbar {
     position: relative;
     place-items: center;
@@ -206,7 +204,7 @@ li > a:hover {
     height: 26px;
     border-radius: 50%;
     background-color: rgba(0,0,255,0.3);
-    top: 2px; 
+    top: 2px;
     left: 2px;
     background-image: url('https://res.cloudinary.com/dbowsjk6p/image/upload/v1726354393/sun_qemswh.svg');
     background-position: center;
@@ -220,7 +218,7 @@ li > a:hover {
 }
 
 .checkbox:checked + .toggle::after {
-    left : 26px; 
+    left : 26px;
     background-image: url('https://res.cloudinary.com/dbowsjk6p/image/upload/v1726354393/crescent-moon-moon_x8fbf8.svg');
     background-position: center;
     background-size: cover;
@@ -229,7 +227,7 @@ li > a:hover {
     background-color: rgba(9,162,182,0.5);
 }
 
-.checkbox { 
+.checkbox {
     display : none;
 }
 </style>

@@ -1,173 +1,165 @@
 <template>
-    <section :id="el">
+  <section :id="el">
     <h2>{{ titulo }}</h2>
     <form>
-        <fieldset>
-            <legend>Filtros</legend>
-            <label for="filterTec">Aptitud:</label>
-            <select id="filterTec" v-model="filterTecnologia">
-                <option value="">Todas</option>
-                <option v-for="tec in aptitudes" :key="tec.id" :value="tec.id">
-                    {{ tec.nombre }} ({{ tec.countProyects }})
-                </option>
-            </select>
-        </fieldset>
-        <small>Mostrando {{ proyectos.length }} de {{ perfil?.proyectos.length }} Proyectos</small>
-        <span class="card" @click.prevent="reset">Ver Todos</span>
+      <fieldset>
+        <legend>Filtros</legend>
+        <label for="filterTec">Aptitud:</label>
+        <select id="filterTec" v-model="filterTecnologia">
+          <option v-for="tec in aptitudes" :key="tec.id" :value="tec.id">
+            {{ tec.nombre }} ({{ tec.countProyects }})
+          </option>
+        </select>
+      </fieldset>
+      <small>Mostrando {{ proyectos.length }} de {{ perfil?.proyectos.length }} Proyectos</small>
+      <span class="card" @click.prevent="reset">Ver Todos</span>
     </form>
+
     <div :class="el">
-        <p v-if="proyectos.length == 0">No hay proyectos con la Aptitud seleccionada</p>
-        <article v-for="pr in proyectos" :key="pr.id" @contextmenu.prevent="">
-            <span 
-                class="img" 
-                :style="'background-image:linear-gradient(to bottom, rgba(109, 105, 105, 0.655), rgba(109, 105, 105, 0.1)), url('+pr.imagen+');'"
-            ></span>
-            <h2>{{ pr.nombre }}</h2>
-            <p>{{ pr.descripcion }}</p>
-            <b>Tecnologias:</b>
-            <div class="proyectos">
-                <span 
-                    v-for="tec in pr.aptitudes.slice(0,2)" 
-                    :key="tec.id"
-                    class="skills" 
-                    @contextmenu.prevent=""
-                >
-                    <small>{{ tec.nombre }}</small>
-                    <img :src="tec.path" :alt="tec.nombre" loading="lazy"/>
-                </span>
-                <span 
-                    v-if="pr.aptitudes.length > 2" 
-                    class="expand" 
-                    @mouseenter.prevent="showAptitudes" 
-                    @contextmenu.prevent=""
-                >
-                    <b>+{{ pr.aptitudes.length - 2 }}</b>
-                </span>
-                <dialog 
-                    v-if="pr.aptitudes.length > 3" 
-                    @mouseleave.prevent="showAptitudes" 
-                    @contextmenu.prevent=""
-                >
-                    <span 
-                        v-for="tec in pr.aptitudes" 
-                        :key="tec.id"
-                        class="skills"
-                    >
-                        <small>{{ tec.nombre }}</small>
-                        <img :src="tec.path" :alt="tec.nombre" loading="lazy"/>
-                    </span>
-                </dialog>
-            </div>
-            <span class="links" @contextmenu.prevent="">
-                <a 
-                    v-if="pr.repositorio" 
-                    :href="pr.repositorio" 
-                    rel="noreferrer noopener" 
-                    id="repo"
-                >
-                    Repositorio
-                </a>
-                <a 
-                    v-if="pr.deploy" 
-                    :href="pr.deploy" 
-                    rel="noreferrer noopener" 
-                    id="deploy"
-                >
-                Link Deploy
-                </a>
+      <p v-if="proyectos.length === 0">No hay proyectos con la Aptitud seleccionada</p>
+      <article v-for="proyecto in proyectos" :key="proyecto.id" @contextmenu.prevent>
+        <span
+          class="img"
+          :style="{
+            backgroundImage: `linear-gradient(to bottom, rgba(109, 105, 105, 0.655), rgba(109, 105, 105, 0.1)), url(${proyecto.imagen})`
+          }"
+        />
+        <h2>{{ proyecto.nombre }}</h2>
+        <p>{{ proyecto.descripcion }}</p>
+        <b>Tecnologias:</b>
+        <div class="proyectos">
+          <span
+            v-for="tec in proyecto.aptitudes?.slice(0, 2)"
+            :key="tec.id"
+            class="skills"
+            @contextmenu.prevent
+          >
+            <small>{{ tec.nombre }}</small>
+            <img :src="tec.path" :alt="tec.nombre" loading="lazy" />
+          </span>
+          <span
+            v-if="proyecto.aptitudes?.length > 2"
+            class="expand"
+            @mouseenter="showAptitudes"
+            @contextmenu.prevent
+          >
+            <b>+{{ proyecto.aptitudes?.length - 2 }}</b>
+          </span>
+          <dialog
+            v-if="proyecto.aptitudes?.length > 3"
+            @mouseleave="showAptitudes"
+            @contextmenu.prevent
+          >
+            <span v-for="tec in proyecto.aptitudes" :key="tec.id" class="skills">
+              <small>{{ tec.nombre }}</small>
+              <img :src="tec.path" :alt="tec.nombre" loading="lazy" />
             </span>
-        </article>
+          </dialog>
+        </div>
+        <span class="links" @contextmenu.prevent>
+          <a
+            v-if="proyecto.repositorio"
+            :href="proyecto.repositorio"
+            rel="noreferrer noopener"
+            id="repo"
+            target="_blank"
+          >
+            Repositorio
+          </a>
+          <a
+            v-if="proyecto.deploy"
+            :href="proyecto.deploy"
+            rel="noreferrer noopener"
+            id="deploy"
+            target="_blank"
+          >
+            Link Deploy
+          </a>
+        </span>
+      </article>
     </div>
-    </section>
+  </section>
 </template>
 
-<script>
-import { ref, watch, onMounted } from 'vue'
-import { Perfil } from "../models/Perfil.js"
+<script setup lang="ts">
+import { ref, watch } from 'vue'
 
-export default {
-    name: 'Proyectos',
-    props: {
-        perfil: {
-            type: Perfil,
-            required: true,
-            default: () => new Perfil(1, 'Frontend developer')
-        }
-    },
-    setup(props) {
-        const titulo = ref("Proyectos")
-        const el = ref('proyectos')
-        const proyectos = ref([])
-        const aptitudes = ref([])
-        const filterTecnologia = ref('')
-
-        const reset = () => {
-        filterTecnologia.value = ''
-        proyectos.value = props.perfil.proyectos
-        }
-
-        const showAptitudes = (e) => {
-            const skills = Array.from(e.target.parentNode.childNodes).filter(s => s.tagName === "DIALOG")
-            if (e.type === "mouseenter") {
-                skills[0].open = true
-            } else if (e.type === "mouseleave") {
-                skills[0].open = false
-            }
-        }
-
-        // Watch for filter changes
-        watch(filterTecnologia, (val) => {
-            if (val !== '') {
-                proyectos.value = props.perfil.proyectos
-                .filter(pr => pr.aptitudes
-                    .some(tec => +tec.id === +val))
-            } else {
-                proyectos.value = props.perfil.proyectos
-            }
-        })
-
-        // Watch for perfil changes
-        watch(() => props.perfil, (curr) => {
-            if (curr && curr.aptitudes && curr.proyectos) {
-                aptitudes.value = curr.aptitudes
-                .filter(apt => curr.proyectos
-                    .some(pr => pr.aptitudes
-                    .some(prAp => prAp.id === apt.id)))
-                .map(apt => ({
-                    ...apt,
-                    countProyects: curr.proyectos
-                    .filter(pr => pr.aptitudes.some(prAp => prAp.id === apt.id)).length
-                }))
-                
-                proyectos.value = curr.proyectos.slice(0, 3)
-            }
-        }, { immediate: true })
-
-        onMounted(() => {
-            if (props.perfil && props.perfil.aptitudes && props.perfil.proyectos) {
-                aptitudes.value = props.perfil.aptitudes
-                .filter(apt => props.perfil.proyectos
-                    .some(pr => pr.aptitudes
-                    .some(prAp => prAp.id === apt.id)))
-                .map(apt => ({
-                    ...apt,
-                    countProyects: props.perfil.proyectos
-                    .filter(pr => pr.aptitudes.some(prAp => prAp.id === apt.id)).length
-                }))
-                
-                proyectos.value = props.perfil.proyectos.slice(0, 3)
-            }
-        })
-
-        return {
-            titulo,
-            el,
-            proyectos,
-            aptitudes,
-            filterTecnologia,
-            reset,
-            showAptitudes
-        }
-    }
+// Types
+interface Aptitud {
+  id: number
+  nombre: string
+  path: string
+  countProyects: number
 }
+
+interface Proyecto {
+  id: number
+  nombre: string
+  descripcion: string
+  imagen: string
+  repositorio?: string
+  deploy?: string
+  aptitudes: Aptitud[]
+}
+
+// Props
+const props = defineProps({
+  perfil: {
+    //type: Object,
+    required: true,
+    default: {}
+  }
+})
+
+// Reactive state
+const titulo = ref('Proyectos')
+const el = ref('proyectos')
+const proyectos = ref<Proyecto[]>([])
+const aptitudes = ref<Aptitud[]>([])
+const filterTecnologia = ref('')
+
+// Methods
+const reset = () => {
+  filterTecnologia.value = ''
+  proyectos.value = props.perfil?.proyectos || [];
+}
+
+const showAptitudes = (e: MouseEvent) => {
+  const target = e.target as HTMLElement
+  const skills = Array.from(target.parentNode?.childNodes ?? [])
+    .filter(s => (s as HTMLElement).tagName === 'DIALOG')
+
+  if (e.type === 'mouseenter') {
+    (skills[0] as HTMLDialogElement).open = true
+  } else if (e.type === 'mouseleave') {
+    (skills[0] as HTMLDialogElement).open = false
+  }
+}
+
+// Watchers
+watch(filterTecnologia, (val) => {
+  if (val !== '') {
+    filterTecnologia.value = ''
+    proyectos.value = props.perfil?.proyectos
+      .filter(proyecto => proyecto.aptitudes?.some(tec => +tec.id === +val)) || [];
+  }
+})
+
+watch(() => props.perfil, (currentPerfil) => {
+  aptitudes.value = currentPerfil?.aptitudes
+    .filter(apt => currentPerfil.proyectos
+      .some(proyecto => proyecto.aptitudes?.some(prApt => prApt.id === apt.id))) || [];
+
+  proyectos.value = currentPerfil?.proyectos?.slice(0, 3) || [];
+}, { immediate: true })
+onMounted(() => {
+  // if (!props.perfil) {
+  //   props.perfil = async ()=> $fetch('/api/perfiles/1')
+  // }
+})
 </script>
+
+<style scoped>
+/* Add your styles here if needed */
+
+</style>

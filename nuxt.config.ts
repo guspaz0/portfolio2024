@@ -1,17 +1,52 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+//import typescript from '@rollup/plugin-typescript';
+
 export default defineNuxtConfig({
-  compatibilityDate: '2025-05-15',
+  //compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
-  // Static site generation
+  ssr: true,
+
+  modules: [
+    //'@nuxt/image',
+    '@nuxtjs/google-fonts',
+    "nuxt-typeorm"
+  ],
+
+  typeorm: {
+    type: 'sqlite',
+    database: './data/portfolio_db.sql',
+    synchronize: false,
+    dropSchema: false,
+    logging: false
+  },
+  // Nitro configuration
   nitro: {
     prerender: {
       routes: ['/sitemap.xml']
-    }
+    },
+    esbuild: {
+      options: {
+        tsconfigRaw: {
+          compilerOptions: {
+            //emitDecoratorMetadata: true,
+            experimentalDecorators: true,
+          },
+        },
+      },
+    },
+    typescript: {
+      tsConfig: {
+        compilerOptions: {
+          emitDecoratorMetadata: true,
+          experimentalDecorators: true,
+          strictPropertyInitialization: false,
+        },
+      },
+    },
   },
-  
   // GitHub Pages configuration
   app: {
-    baseURL: '/portfolio2024/', // Replace with your repo name
+    baseURL: '/portfolio2024/',
     buildAssetsDir: 'assets',
     head: {
       charset: 'utf-8',
@@ -22,23 +57,14 @@ export default defineNuxtConfig({
       ]
     }
   },
-  
-  // CSS framework (optional)
-  css: [ 
-    '~/assets/css/main.css' 
+  // CSS framework
+  css: [
+    '~/assets/css/main.css'
   ],
-  
-  // Modules
-  modules: [
-    '@nuxt/image',
-    '@nuxtjs/google-fonts'
-  ],
-  
   // Google Fonts configuration
   googleFonts: {
     families: {
-      Inter: [400, 500, 600, 700],
-      // Add your preferred fonts
+      Inter: [400, 500, 600, 700]
     }
-  },
+  }
 })

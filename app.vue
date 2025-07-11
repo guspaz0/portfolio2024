@@ -5,7 +5,6 @@
 <template>
   <div>
     <NuxtRouteAnnouncer />
-    <Navbar/>
     <Home/>
   </div>
 </template>
