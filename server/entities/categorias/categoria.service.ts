@@ -1,5 +1,5 @@
 import { Categoria } from './Categorias.entity';
-import Prisma from '~/lib/prisma'
+import prisma from '~/lib/prisma'
 
 class CategoriasService {
   private repo;

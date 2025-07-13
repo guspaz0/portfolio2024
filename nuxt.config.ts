@@ -4,16 +4,23 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
-  ssr: true,
-
+  //ssr: true,
+  vite: {
+    resolve: {
+      alias: {
+        ".prisma/client/index-browser":
+          "./node_modules/.prisma/client/index-browser.js",
+      },
+    },
+  },
   modules: [
-    //'@nuxt/image',
+    '@nuxt/image',
     '@nuxtjs/google-fonts',
     "@prisma/nuxt"
   ],
-  // experimental: {
-  //   componentIslands: true,
-  // },
+  experimental: {
+    componentIslands: true,
+  },
 
   // Nitro configuration
   nitro: {

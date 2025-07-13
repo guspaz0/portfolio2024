@@ -3,7 +3,7 @@ import { Perfil } from "../perfiles/Perfiles.entity";
 import { Assets } from "~/server/types/contacto";
 import { Escuelas } from "@prisma/client"
 
-export class Escuela implements Escuelas {
+export class Escuela {
   id: number;
   nombre: string;
   image: string | null;
@@ -13,7 +13,7 @@ export class Escuela implements Escuelas {
   constructor(e: Escuelas) {
     this.id = e.id;
     this.nombre = e.nombre;
-    this.image = e.image && Assets.ESCUELA_URL + this.image;
+    this.image = e.image ? `${Assets.ESCUELA_URL}${e.image}` : '';
     this.certificados = e.certificados?.flatMap((c) => new Certificado(c?.certificado)) || undefined;
     this.perfiles = e.perfiles?.flatMap((p) => new Perfil(p?.perfil)) || undefined;
   }

@@ -8,7 +8,7 @@
           <div>
             <h3>{{ elem.nombre }}</h3>
             <span>
-              <img
+              <NuxtImg
                 v-if="elem.imagen"
                 :src="elem.imagen"
                 :alt="elem.empresa"

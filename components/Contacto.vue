@@ -15,7 +15,7 @@
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img
+          <NuxtImg
             :src="assets.CLOUD_URL + red.logo"
             :alt="red.nombre + ' logo'"
             loading="lazy"

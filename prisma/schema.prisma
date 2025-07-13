@@ -1,16 +1,14 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
-  provider          = "sqlite"
-  url               = "file:../data/portfolio_db.sql"
-  directUrl         = "file:../data/portfolio_db.sql"
-  shadowDatabaseUrl = "file:../data/shadow.db"
-  relationMode      = "foreignKeys"
+  provider     = "sqlite"
+  url          = env("DATABASE_URL")
+  relationMode = "foreignKeys"
 }
 
 model Aptitudes {

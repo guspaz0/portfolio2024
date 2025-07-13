@@ -16,11 +16,10 @@ export class Certificado {
   constructor(c: Certificados) {
     this.id = c.id;
     this.nombre = c.nombre;
-    this.image = c.image && Assets.CERT_URL + c.image ;
+    this.image = c.image ? `${Assets.CERT_URL}${c.image}` : '';
     this.fecha = c.fecha;
-    this.escuela = c.escuela || undefined;
+    this.escuela = c.escuela ? new Escuela(c.escuela) : '';
     this.perfiles = c.perfiles?.flatMap(p => new Perfil(p?.perfil)) || undefined;
     this.aptitudes = c.aptitudes?.flatMap(a => new Aptitud(a?.aptitud)) || undefined;
   }
-
 }

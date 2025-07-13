@@ -35,7 +35,7 @@
             @contextmenu.prevent
           >
             <small>{{ tec.nombre }}</small>
-            <img :src="tec.path" :alt="tec.nombre" loading="lazy" />
+            <NuxtImg :src="tec.path" :alt="tec.nombre" loading="lazy" />
           </span>
           <span
             v-if="proyecto.aptitudes?.length > 2"
@@ -52,7 +52,7 @@
           >
             <span v-for="tec in proyecto.aptitudes" :key="tec.id" class="skills">
               <small>{{ tec.nombre }}</small>
-              <img :src="tec.path" :alt="tec.nombre" loading="lazy" />
+              <NuxtImg :src="tec.path" :alt="tec.nombre" loading="lazy" />
             </span>
           </dialog>
         </div>

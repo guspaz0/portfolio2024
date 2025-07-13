@@ -1,5 +1,5 @@
 import { Proyecto } from "./Proyectos.entity";
-import Prisma from '~/lib/prisma'
+import prisma from '~/lib/prisma'
 
 class ProyectoService {
   private repo;

@@ -26,7 +26,7 @@
       <article v-for="cert in certificados" :key="cert.id" @contextmenu.prevent>
         <b>{{ cert.nombre }}</b>
         <span>
-          <img
+          <NuxtImg
             :src="cert?.escuela.image"
             :alt="cert?.escuela.nombre"
             format="webp"
@@ -41,7 +41,7 @@
             @contextmenu.prevent
           >
             <small>{{ tec.nombre }}</small>
-            <img
+            <NuxtImg
                 :src="tec.image"
                 :alt="tec.nombre"
                 format="webp"
@@ -63,7 +63,7 @@
           >
             <span v-for="tec in cert.aptitudes" :key="tec.id" class="skills">
               <small>{{ tec.nombre }}</small>
-              <img
+              <NuxtImg
                 :src="tec.path"
                 :alt="tec.nombre"
                 format="webp"
@@ -85,7 +85,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted, type PropType } from 'vue'
 import type { Aptitud } from '~/server/entities/aptitudes/Aptitudes.entity'
 import type { Certificado } from '~/server/entities/certificados/Certificados.entity'
 import type { Escuela } from '~/server/entities/escuelas/Escuelas.entity'
@@ -94,7 +94,7 @@ import { Perfil } from '~/server/entities/perfiles/Perfiles.entity'
 // Props
 const props = defineProps({
   perfil: {
-    type: Perfil,
+    type: Object as PropType<Perfil>,
     required: true
   }
 })

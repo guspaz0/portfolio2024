@@ -1,5 +1,5 @@
 import { Escuela } from './Escuelas.entity';
-import Prisma from '~/lib/prisma'
+import prisma from '~/lib/prisma'
 
 class EscuelasService {
   private repo;

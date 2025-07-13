@@ -1,8 +1,8 @@
 import { Perfil } from "./Perfiles.entity";
-import Prisma from '~/lib/prisma'
+import prisma from '~/lib/prisma'
 
 class PerfilesService {
-  private repo = Prisma.perfiles;
+  private repo = prisma.perfiles;
 
   async findAll(): Promise<Perfil[] | undefined> {
     try {
@@ -48,7 +48,7 @@ class PerfilesService {
     } catch (error) {
       console.error(error);
     } finally {
-      await Prisma.$disconnect();
+      await prisma.$disconnect();
     }
   }
 
@@ -97,7 +97,7 @@ class PerfilesService {
     } catch (error) {
       console.error(error);
     } finally {
-      await Prisma.$disconnect();
+      await prisma.$disconnect();
     }
   }
 }

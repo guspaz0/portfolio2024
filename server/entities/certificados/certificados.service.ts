@@ -1,5 +1,5 @@
 import { Certificado } from "./Certificados.entity";
-import Prisma from '~/lib/prisma'
+import prisma from '~/lib/prisma'
 
 class CertificadosService {
   private repo;

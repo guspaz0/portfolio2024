@@ -3,13 +3,13 @@
         <h2>Sobre mi</h2>
         <section id="about" class="about">
             <span>
-                <img
+                <NuxtImg
                     src="https://github-readme-stats.vercel.app/api?username=guspaz0&show_icons=true"
                     alt="GitHub Stats"
                     format="webp"
                 />
 
-                <img
+                <NuxtImg
                     src="https://github-readme-stats.vercel.app/api/top-langs/?username=guspaz0&size_weight=0.5&count_weight=0.5&hide=dockerfile,ejs,css,scss,html,handlebars,procfile&layout=compact&langs_count=6&theme=default"
                     alt="Top Languages"
                     format="webp"
@@ -24,7 +24,7 @@
             </span>
             <div class="perfil">
                 <span class="">
-                <img
+                <NuxtImg
                     @contextmenu.prevent=""
                     src="https://avatars.githubusercontent.com/u/103156469?v=4"
                     height=""
@@ -33,7 +33,7 @@
                 />
                 <div class="shadow"></div>
                 </span>
-                <img
+                <NuxtImg
                     @contextmenu.prevent=""
                     id="flag"
                     src="https://codingweek.org/wp-content/uploads/2023/09/chris-ried-ieic5Tq8YMk-unsplash-2048x1367.jpg"

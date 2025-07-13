@@ -17,7 +17,7 @@ export class Aptitud {
   constructor(a: Aptitudes) {
     this.id = a.id;
     this.nombre = a?.nombre;
-    this.image = a.image && Assets.CLOUD_URL + this.image;
+    this.image = a.image? `${Assets.CLOUD_URL}${a.image}` : "";
     this.categoria = a.categoria || undefined;
     this.perfiles = a.perfiles?.flatMap(p => new Perfil(p?.perfil)) || undefined;
     this.proyectos = a.proyectos?.flatMap(p => new Proyecto(p?.proyecto)) || undefined;

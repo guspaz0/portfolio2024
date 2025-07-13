@@ -1,8 +1,8 @@
 import { Experiencia } from './Experiencias.entity';
-import Prisma from '~/lib/prisma'
+import prisma from '~/lib/prisma'
 
 class ExperienciasService {
-  private repo = Prisma.experiencias;
+  private repo = prisma.experiencias;
 
   async findAll(): Promise<Experiencia[] | undefined> {
     try {
@@ -11,7 +11,7 @@ class ExperienciasService {
     } catch (error) {
       console.error("Error fetching experiences:", error);
     } finally {
-      await Prisma.$disconnect();
+      await prisma.$disconnect();
     }
 
   }
@@ -23,7 +23,7 @@ class ExperienciasService {
     } catch (error) {
       console.error("Error fetching experience:", error);
     } finally {
-      await Prisma.$disconnect();
+      await prisma.$disconnect();
     }
   }
 }
