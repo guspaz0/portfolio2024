@@ -1,38 +1,30 @@
-import { Repository } from 'typeorm';
-import { Experiencias } from './Experiencias.entity';
-import { getRepository } from '#typeorm';
+import { Experiencia } from './Experiencias.entity';
+import Prisma from '~/lib/prisma'
 
 class ExperienciasService {
-  private repo: Repository<Experiencias>;
+  private repo = Prisma.experiencias;
 
-  constructor() {this.initialize();}
+  async findAll(): Promise<Experiencia[] | undefined> {
+    try {
+      const experiences = await this.repo.findMany();
+      return experiences;
+    } catch (error) {
+      console.error("Error fetching experiences:", error);
+    } finally {
+      await Prisma.$disconnect();
+    }
 
-  private async initialize() {
-    this.repo = await getRepository(Experiencias);
   }
 
-  async create(data: Partial<Experiencias>): Promise<Experiencias> {
-    const newExperience = this.repo.create(data);
-    return await this.repo.save(newExperience);
-  }
-
-  async findAll(): Promise<Experiencias[]> {
-    return await this.repo.find();
-  }
-
-  async findOne(id: number): Promise<Experiencias | undefined> {
-    return await this.repo.findOneByOrFail({ id });
-  }
-
-  async update(id: number, data: Partial<Experiencias>): Promise<Experiencias | undefined> {
-    const experience = await this.repo.findOneBy({ id });
-    if (!experience) return undefined;
-    await this.repo.update(id, data);
-    return await this.findOne(id);
-  }
-
-  async delete(id: number): Promise<void> {
-    await this.repo.delete(id);
+  async findOne(id: number): Promise<Experiencia | undefined> {
+    try {
+      const experience = await this.repo.findFirst({ where: { id } });
+      return experience;
+    } catch (error) {
+      console.error("Error fetching experience:", error);
+    } finally {
+      await Prisma.$disconnect();
+    }
   }
 }
 

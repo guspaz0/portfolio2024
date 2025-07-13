@@ -1,56 +1,28 @@
-import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Aptitudes } from "../aptitudes/Aptitudes.entity";
-import { Certificados } from "../certificados/Certificados.entity";
-import { Escuelas } from "../escuelas/Escuelas.entity";
-import { Experiencias } from "../experiencias/Experiencias.entity";
-import { Proyectos } from "../proyectos/Proyectos.entity";
+import { Aptitud } from "../aptitudes/Aptitudes.entity";
+import { Certificado } from "../certificados/Certificados.entity";
+import { Escuela } from "../escuelas/Escuelas.entity";
+import { Experiencia } from "../experiencias/Experiencias.entity";
+import { Proyecto } from "../proyectos/Proyectos.entity";
+import { Perfiles } from "@prisma/client"
 
+export class Perfil {
+  protected id: number;
+  protected nombre: string;
+  aptitudes: Aptitud[];
+  certificados: Certificado[];
+  escuelas: Escuela[];
+  proyectos: Proyecto[];
+  experiencias: Experiencia[];
 
-@Entity("perfiles")
-export class Perfiles {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column("varchar", { name: "nombre", length: 50 })
-  nombre: string;
-
-  @ManyToMany(() => Aptitudes, (aptitud) => aptitud.perfiles)
-  @JoinTable({
-      name: "aptitudes_perfil",
-      inverseJoinColumn: { name: "aptitud_id", referencedColumnName: "id" },
-      joinColumn: { name: "perfil_id", referencedColumnName: "id" }
-  })
-  aptitudes: Aptitudes[];
-
-  @ManyToMany(() => Certificados, (certificado) => certificado.perfiles)
-  @JoinTable({
-      name: "certificados_perfil",
-      inverseJoinColumn: { name: "certificado_id", referencedColumnName: "id" },
-      joinColumn: { name: "perfil_id", referencedColumnName: "id" }
-  })
-  certificados: Certificados[];
-
-  @OneToMany(() => Escuelas, (escuela) => escuela.perfiles)
-  @JoinTable({
-      name: "perfiles_escuelas",
-      inverseJoinColumn: { name: "escuela_id", referencedColumnName: "id" },
-      joinColumn: { name: "perfil_id", referencedColumnName: "id" }
-  })
-  escuelas: Escuelas[];
-
-  @ManyToMany(() => Proyectos, (proyecto) => proyecto.perfiles)
-  @JoinTable({
-      name: "proyectos_perfil",
-      inverseJoinColumn: { name: "proyecto_id", referencedColumnName: "id" },
-      joinColumn: { name: "perfil_id", referencedColumnName: "id" }
-  })
-  proyectos: Proyectos[];
-
-  @ManyToMany(() => Experiencias, (experiencia) => experiencia.perfiles)
-  @JoinTable({
-      name: "experiencias_perfil",
-      inverseJoinColumn: { name: "experiencia_id", referencedColumnName: "id" },
-      joinColumn: { name: "perfil_id", referencedColumnName: "id" }
-  })
-  experiencias: Experiencias[];
+  constructor(
+    p: Perfiles
+  ) {
+    this.id = p.id;
+    this.nombre = p.nombre;
+    this.aptitudes = p.aptitudes?.flatMap(apt => new Aptitud(apt?.aptitud)) || [];
+    this.certificados = p.certificados?.flatMap(cert => new Certificado(cert?.certificado)) || [];
+    this.escuelas = p.escuelas?.flatMap(esc => new Escuela(esc?.escuela)) || [];
+    this.proyectos = p.proyectos?.flatMap(pr => new Proyecto(pr?.proyecto)) || [];
+    this.experiencias = p.experiencias?.flatMap(exp => new Experiencia(exp?.experiencia)) || [];
+  }
 }

@@ -1,59 +1,26 @@
-import {
-    AfterLoad,
-  Column,
-  Entity,
-  JoinColumn,
-  JoinTable,
-  ManyToMany,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from "typeorm";
-import { Categorias } from '../categorias/Categorias.entity';
-import { Certificados } from '../certificados/Certificados.entity';
-import { Perfiles } from '../perfiles/Perfiles.entity';
-import { Proyectos } from '../proyectos/Proyectos.entity';
+import { Categoria } from '../categorias/Categorias.entity';
+import { Certificado } from '../certificados/Certificados.entity';
+import { Perfil } from '../perfiles/Perfiles.entity';
+import { Proyecto } from '../proyectos/Proyectos.entity';
 import { Assets } from "~/server/types/contacto";
+import { Aptitudes, Perfiles } from "@prisma/client";
 
-
-@Entity("aptitudes")
-export class Aptitudes {
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @Column("varchar", { name: "nombre", length: 50 })
-    nombre: string;
-
-    @Column({ type: "varchar", name: "image", nullable: true, length: 100 })
+export class Aptitud {
+    protected id: number;
+    protected nombre: string;
     image: string | null;
+    categoria?: Categoria;
+    perfiles?: Perfil[];
+    proyectos?: Proyecto[];
+    certificados?: Certificado[];
 
-    @ManyToOne(() => Categorias, (categorias) => categorias.aptitudes, {eager: false})
-    @JoinColumn([{ name: "categoria_id", referencedColumnName: "id" }])
-    categoria: Categorias;
-
-    @OneToMany(() => Perfiles, (perfil) => perfil.aptitudes, {eager: false})
-    perfiles: Perfiles[];
-
-  @ManyToMany(() => Proyectos, (proyecto) => proyecto.aptitudes, {eager: false})
-    @JoinTable({
-        name: "proyectos_aptitudes",
-        inverseJoinColumn: { name: "proyecto_id", referencedColumnName: "id" },
-        joinColumn: { name: "aptitud_id", referencedColumnName: "id" }
-    })
-    proyectos: Proyectos[];
-
-    @ManyToMany(() => Certificados,(certificados) => certificados.aptitudes, {eager: false})
-    @JoinTable({
-        name: "certificados_aptitudes",
-        inverseJoinColumn: { name: "certificado_id", referencedColumnName: "id" },
-        joinColumn: { name: "aptitud_id", referencedColumnName: "id" }
-    })
-    certificados: Certificados[];
-
-    @AfterLoad()
-    loadAssets(){
-      this.image = this.image
-        ? Assets.CLOUD_URL + this.image
-        : '';
-    }
+  constructor(a: Aptitudes) {
+    this.id = a.id;
+    this.nombre = a?.nombre;
+    this.image = a.image && Assets.CLOUD_URL + this.image;
+    this.categoria = a.categoria || undefined;
+    this.perfiles = a.perfiles?.flatMap(p => new Perfil(p?.perfil)) || undefined;
+    this.proyectos = a.proyectos?.flatMap(p => new Proyecto(p?.proyecto)) || undefined;
+    this.certificados = a.certificados?.flatMap(c => new Certificado(c?.certificado)) || undefined;
+  }
 }

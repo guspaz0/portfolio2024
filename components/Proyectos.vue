@@ -82,7 +82,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 
 // Types
 interface Aptitud {
@@ -126,8 +126,7 @@ const reset = () => {
 
 const showAptitudes = (e: MouseEvent) => {
   const target = e.target as HTMLElement
-  const skills = Array.from(target.parentNode?.childNodes ?? [])
-    .filter(s => (s as HTMLElement).tagName === 'DIALOG')
+  const skills = Array.from(target.parentNode?.childNodes ?? [])?.filter(s => (s as HTMLElement).tagName === 'DIALOG')
 
   if (e.type === 'mouseenter') {
     (skills[0] as HTMLDialogElement).open = true
@@ -140,14 +139,12 @@ const showAptitudes = (e: MouseEvent) => {
 watch(filterTecnologia, (val) => {
   if (val !== '') {
     filterTecnologia.value = ''
-    proyectos.value = props.perfil?.proyectos
-      .filter(proyecto => proyecto.aptitudes?.some(tec => +tec.id === +val)) || [];
+    proyectos.value = props.perfil?.proyectos?.filter(proyecto => proyecto.aptitudes?.some(tec => +tec.id === +val)) || [];
   }
 })
 
 watch(() => props.perfil, (currentPerfil) => {
-  aptitudes.value = currentPerfil?.aptitudes
-    .filter(apt => currentPerfil.proyectos
+  aptitudes.value = currentPerfil?.aptitudes?.filter(apt => currentPerfil.proyectos
       .some(proyecto => proyecto.aptitudes?.some(prApt => prApt.id === apt.id))) || [];
 
   proyectos.value = currentPerfil?.proyectos?.slice(0, 3) || [];

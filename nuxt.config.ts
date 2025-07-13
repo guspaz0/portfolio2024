@@ -2,23 +2,19 @@
 //import typescript from '@rollup/plugin-typescript';
 
 export default defineNuxtConfig({
-  //compatibilityDate: '2024-04-03',
+  compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
   ssr: true,
 
   modules: [
     //'@nuxt/image',
     '@nuxtjs/google-fonts',
-    "nuxt-typeorm"
+    "@prisma/nuxt"
   ],
+  // experimental: {
+  //   componentIslands: true,
+  // },
 
-  typeorm: {
-    type: 'sqlite',
-    database: './data/portfolio_db.sql',
-    synchronize: false,
-    dropSchema: false,
-    logging: false
-  },
   // Nitro configuration
   nitro: {
     prerender: {

@@ -1,15 +1,3 @@
 {
   "extends": "./.nuxt/tsconfig.json"
-  // "compilerOptions": {
-  // "lib": ["es2021"],
-  // "target": "es2021",
-  // "moduleResolution": "node",
-  // "allowSyntheticDefaultImports": true,
-  // "outDir": "./build",
-  // "emitDecoratorMetadata": true,
-  // "experimentalDecorators": true,
-  // "sourceMap": true,
-  // "strictPropertyInitialization": false
-  //"esModuleInterop": true
-  // }
 }

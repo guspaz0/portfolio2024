@@ -1,65 +1,104 @@
-import { Repository } from "typeorm";
-import { Perfiles } from "./Perfiles.entity";
-import { getRepository } from '#typeorm';
+import { Perfil } from "./Perfiles.entity";
+import Prisma from '~/lib/prisma'
 
 class PerfilesService {
-  private repo: Repository<Perfiles>;
+  private repo = Prisma.perfiles;
 
-  constructor() {this.initialize();}
-
-  private async initialize() {
-    this.repo = await getRepository(Perfiles);
-  }
-
-  async findAll(): Promise<Perfiles[] | undefined> {
+  async findAll(): Promise<Perfil[] | undefined> {
     try {
-      return await this.repo.find({
-        relations: {
-          experiencias: true,
-          aptitudes: true,
+      const perfiles = await this.repo.findMany({
+        include: {
+          experiencias: { select: { experiencia: true } },
+          aptitudes: { select: { aptitud: true } },
           certificados: {
-            escuela: true,
-            aptitudes: true
+            include: {
+              certificado: {
+                include: {
+                  aptitudes: {
+                    include: {
+                      aptitud: true
+                    }
+                  },
+                  escuela: true
+                }
+              },
+            }
           },
-          proyectos: true
-        }
-      });
+          proyectos: {
+            select: {
+              proyecto: {
+                include: {
+                  aptitudes: {
+                    include: {
+                      aptitud: true
+                    }
+                  }
+                }
+              },
+            }
+          },
+          escuelas: {
+            include: {
+              escuela: true
+            }
+          }
+        },
+      })
+      return perfiles.map(p => new Perfil(p));
     } catch (error) {
       console.error(error);
+    } finally {
+      await Prisma.$disconnect();
     }
   }
 
-  async createPerfil(data: Perfiles): Promise<Perfiles> {
-    return await this.repo.save(data);
-  }
-
-  async updatePerfil(id: number, data: Perfiles): Promise<Perfiles> {
-    const perfil = await this.repo.findOneBy({ id });
-    if (!perfil) throw new Error('Perfil no encontrado');
-    return await this.repo.save({ ...perfil, ...data });
-  }
-
-  async deletePerfil(id: number): Promise<void> {
-    const perfil = await this.repo.findOneBy({ id });
-    if (!perfil) throw new Error('Perfil no encontrado');
-    await this.repo.remove(perfil);
-  }
-
-  async getPerfil(id: number): Promise<Perfiles | null> {
-    return await this.repo.findOneOrFail({
-      where: { id },
-      relations: {
-        experiencias: true,
-        aptitudes: true,
-        certificados: {
-          escuela: true,
-          aptitudes: true
+  async getPerfil(id: number): Promise<Perfil | undefined> {
+    try {
+      const perfil = await this.repo.findUniqueOrThrow({
+        where: { id },
+        include: {
+          experiencias: { select: { experiencia: true } },
+          aptitudes: { select: { aptitud: true } },
+          certificados: {
+            include: {
+              certificado: {
+                include: {
+                  aptitudes: {
+                    include: {
+                      aptitud: true
+                    }
+                  },
+                  escuela: true
+                },
+              }
+            }
+          },
+          proyectos: {
+            select: {
+              proyecto: {
+                include: {
+                  aptitudes: {
+                    select: {
+                      aptitud: true
+                    }
+                  }
+                }
+              },
+            }
+          },
+          escuelas: {
+            include: {
+              escuela: true
+            }
+          }
         },
-        proyectos: {
-          aptitudes: true
-        }
-      }
-    });
+      });
+      return new Perfil(perfil)
+    } catch (error) {
+      console.error(error);
+    } finally {
+      await Prisma.$disconnect();
+    }
   }
 }
 

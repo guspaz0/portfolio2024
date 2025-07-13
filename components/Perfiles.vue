@@ -14,14 +14,16 @@
             </span>
         </fieldset>
 
-        <Timeline :perfil="currentPerfil" />
-        <Certificados :perfil="currentPerfil" />
-        <Proyectos :perfil="currentPerfil" />
+        <Timeline v-if="currentPerfil?.id" :perfil="currentPerfil" />
+        <Certificados v-if="currentPerfil?.id" :perfil="currentPerfil" />
+        <Proyectos v-if="currentPerfil?.id" :perfil="currentPerfil" />
         <!-- <AptitudesComponent :perfil="currentPerfil" /> -->
     </div>
 </template>
 
 <script setup lang="ts">
+import { ref, watch, onMounted, onBeforeMount } from 'vue'
+import type { Perfil } from '~/server/entities/perfiles/Perfiles.entity'
 
 // Props
 const props = defineProps({
@@ -35,42 +37,42 @@ const props = defineProps({
 const emit = defineEmits(['setProfile'])
 
 // Reactive data
-const perfiles = ref([])
+const perfiles = ref<Perfil[]>([])
 const selected = ref(+props.profile)
-const currentPerfil = ref(null)
+const currentPerfil = ref<Perfil>()
 
 // Methods
 const loadPerfiles = async () => {
     // Replace with your actual service call
-    const perfilesTodos = await $fetch('/api/perfiles')
+    const perfilesTodos = await $fetch('/api/perfiles') as Perfil[]
 
-    perfiles.value = perfilesTodos;
+    perfiles.value = perfilesTodos || [];
 
     // Set initial perfil
-    updateCurrentPerfil(selected.value)
+    //updateCurrentPerfil(selected.value)
+    currentPerfil.value = perfilesTodos.find((perfil) => perfil.id === selected.value)
 }
 
-const updateCurrentPerfil = async (profileId) => {
-    const foundPerfil = await $fetch(`/api/perfiles/${profileId}`)
-    console.log(foundPerfil)
+const updateCurrentPerfil = async (profileId: number) => {
+    const foundPerfil = await $fetch(`/api/perfiles/${profileId}`) as Perfil
     if (foundPerfil) {
         currentPerfil.value = foundPerfil
     }
 }
 
 // Watchers
-watch(() => props.profile, (newValue) => {
+watch(() => props.profile, (newValue: number) => {
     selected.value = +newValue
     updateCurrentPerfil(newValue)
-})
+}, { immediate: true })
 
-watch(selected, (newValue) => {
+watch(() => selected.value, (newValue: number) => {
     emit('setProfile', +newValue)
     updateCurrentPerfil(newValue)
-})
+}, { immediate: true })
 
 // Lifecycle hooks
-onMounted(() => {
+onBeforeMount(() => {
     loadPerfiles()
 })
 </script>

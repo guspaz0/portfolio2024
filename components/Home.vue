@@ -35,7 +35,7 @@ const props = defineProps({
 
 // Reactive state
 const darkmode = ref(false)
-const profile = ref(null)
+const profile = ref(props.perfil || 1)
 const resumeDrive = ref('https://drive.google.com/file/d/1otmq9F_jcLdmL0niyZgp1wg_EQj3YyIJ/view?usp=sharing')
 const titulo = ref('Hola! Soy Gustavo Paz ')
 const tituloGradient = ref('Desarrollador de Software')
@@ -48,12 +48,12 @@ const setdarkmode = () => {
   darkmode.value = !darkmode.value
 }
 
-const colorSchema = (mode) => {
+const colorSchema = (mode: string) => {
   return window.matchMedia(`(prefers-color-scheme: ${mode})`).matches
 }
 
-const setProfile = (id) => {
-  sessionStorage.setItem('profileId', id)
+const setProfile = (id: number) => {
+  //sessionStorage?.setItem('profile', id.toString())
   profile.value = +id
 }
 
@@ -74,7 +74,7 @@ watch(darkmode, (val) => {
 })
 
 // Lifecycle hooks
-onMounted(() => {
+onMounted(async () => {
   const appTheme = document.documentElement
 
   if (colorSchema('dark')) {
@@ -87,6 +87,6 @@ onMounted(() => {
     appTheme.classList.add('dark')
   }
 
-  profile.value = sessionStorage.getItem('profile') || props.perfil
+  profile.value = +sessionStorage.getItem('profile') as number || props.perfil
 })
 </script>

@@ -35,7 +35,7 @@
         <b>Tecnologias:</b>
         <div class="proyectos">
           <span
-            v-for="tec in cert.aptitudes.slice(0, 2)"
+            v-for="tec in cert.aptitudes?.slice(0, 2)"
             :key="tec.id"
             class="skills"
             @contextmenu.prevent
@@ -85,22 +85,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
+import type { Aptitud } from '~/server/entities/aptitudes/Aptitudes.entity'
+import type { Certificado } from '~/server/entities/certificados/Certificados.entity'
+import type { Escuela } from '~/server/entities/escuelas/Escuelas.entity'
+import { Perfil } from '~/server/entities/perfiles/Perfiles.entity'
 
 // Props
 const props = defineProps({
   perfil: {
-    //type: Object,
-    required: true,
-    default: async () => await $fetch(`/api/perfiles/1`)
+    type: Perfil,
+    required: true
   }
 })
 
 // Reactive state
 const titulo = ref('Certificados')
-const certificados = ref([])
-const escuelas = ref([])
-const aptitudes = ref([])
+const certificados = ref<Certificado[]>([])
+const escuelas = ref<Escuela[]>([])
+const aptitudes = ref<Aptitud[]>([])
 const filterEscuela = ref('')
 const filterTecnologia = ref('')
 
@@ -126,31 +129,26 @@ const showAptitudes = (e) => {
 watch(filterEscuela, (val) => {
   if (val !== '') {
     filterTecnologia.value = ''
-    certificados.value = props.perfil?.certificados
-      .filter(cert => +cert.escuela.id === +val) || [];
+    certificados.value = props.perfil?.certificados?.filter(cert => +cert.escuela.id === +val) || [];
   }
 })
 
 watch(filterTecnologia, (val) => {
   if (val !== '') {
     filterEscuela.value = ''
-    certificados.value = props.perfil?.certificados
-      .filter(cert => cert.aptitudes.some(tec => tec.id === +val)) || [];
+    certificados.value = props.perfil?.certificados?.filter(cert => cert.aptitudes?.some(tec => tec.id === +val)) || [];
   }
 })
 
 watch(() => props.perfil, (currentPerfil) => {
   // Initialize certificados with first 3 items
-  certificados.value = currentPerfil?.certificados.slice(0, 3) || [];
+  certificados.value = currentPerfil?.certificados?.slice(0, 3) || [];
 
   // Filter aptitudes based on certificates
-  aptitudes.value = currentPerfil?.aptitudes
-    .filter(apt => currentPerfil?.certificados
-      .some(cert => cert.aptitudes
-        .some(tec => tec.id === apt.id))) || []
+  aptitudes.value = currentPerfil?.aptitudes?.filter(apt => currentPerfil?.certificados?.some(cert => cert.aptitudes?.some(tec => tec.id === apt.id))) || []
 
   // Get unique schools
-  escuelas.value = currentPerfil?.certificados.flatMap((cert) => cert.escuela) || [];
+  escuelas.value = currentPerfil?.certificados?.flatMap((cert) => cert.escuela) || [];
 }, { immediate: true })
 </script>
 

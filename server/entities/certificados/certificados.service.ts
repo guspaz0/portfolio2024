@@ -1,39 +1,20 @@
-import { Repository } from "typeorm";
-import { Certificados } from "./Certificados.entity";
-import { getRepository } from '#typeorm';
+import { Certificado } from "./Certificados.entity";
+import Prisma from '~/lib/prisma'
 
 class CertificadosService {
-  private repo: Repository<Certificados>;
+  private repo;
 
-  constructor() {this.initialize();}
-
-  private async initialize() {
-    this.repo = await getRepository(Certificados);
-  }
-
-  async findAll(): Promise<Certificados[]> {
+  async findAll(): Promise<Certificado[]> {
     return await this.repo.find();
   }
-
-  async create(certificado: Certificados): Promise<Certificados> {
+  async create(certificado: Certificado): Promise<Certificado> {
     return await this.repo.save(certificado);
   }
 
-  async findById(id: number): Promise<Certificados | undefined> {
+  async findById(id: number): Promise<Certificado | undefined> {
     return await this.repo.findOneByOrFail({ id });
   }
 
-  async update(id: number, certificado: Certificados): Promise<Certificados | undefined> {
-    const result = await this.repo.update(id, certificado);
-    if (!result.affected) {
-      throw new Error('Certificado not found');
-    }
-    return await this.findById(id);
-  }
-
-  async delete(id: number): Promise<void> {
-    await this.repo.delete(id);
-  }
 }
 
 export default new CertificadosService();

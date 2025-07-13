@@ -1,14 +1,14 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Aptitudes } from "../aptitudes/Aptitudes.entity";
+import { Aptitud } from "../aptitudes/Aptitudes.entity";
+import { Categorias } from "@prisma/client";
 
-@Entity("categorias")
-export class Categorias {
-  @PrimaryGeneratedColumn()
+export class Categoria {
   id: number;
-
-  @Column("varchar", { name: "nombre", length: 50 })
   nombre: string;
+  aptitudes?: Aptitud[];
 
-  @OneToMany(() => Aptitudes, (aptitudes) => aptitudes.categoria)
-  aptitudes: Aptitudes[];
+  constructor(c: Categorias) {
+    this.id = c.id;
+    this.nombre = c.nombre;
+    this.aptitudes = c.aptitudes?.map(a => new Aptitud(a?.aptitud)) || undefined;
+  }
 }

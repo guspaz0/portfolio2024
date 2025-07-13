@@ -1,17 +1,10 @@
-import { Repository } from "typeorm";
-import { Proyectos } from "./Proyectos.entity";
-import { getRepository } from '#typeorm';
+import { Proyecto } from "./Proyectos.entity";
+import Prisma from '~/lib/prisma'
 
 class ProyectoService {
-  private repo: Repository<Proyectos>;
+  private repo;
 
-  constructor() {this.initialize();}
-
-  private async initialize() {
-    this.repo = await getRepository(Proyectos);
-  }
-
-  async findAll(): Promise<Proyectos[] | undefined> {
+  async findAll(): Promise<Proyecto[] | undefined> {
     try {
         return await this.repo.find();
     } catch (error) {
@@ -19,7 +12,7 @@ class ProyectoService {
     }
   }
 
-  async findOne(id: number): Promise<Proyectos | undefined> {
+  async findOne(id: number): Promise<Proyecto | undefined> {
     return await this.repo.findOneByOrFail({ id });
   }
 }

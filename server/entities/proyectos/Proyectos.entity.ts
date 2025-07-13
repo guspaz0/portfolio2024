@@ -1,41 +1,29 @@
-import { AfterLoad, Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Aptitudes } from "../aptitudes/Aptitudes.entity";
-import { Perfiles } from "../perfiles/Perfiles.entity";
+import { Aptitud } from "../aptitudes/Aptitudes.entity";
+import { Perfil } from "../perfiles/Perfiles.entity";
 import { Assets } from "~/server/types/contacto";
+import { Proyectos } from "@prisma/client"
 
-@Entity("proyectos")
-export class Proyectos {
-  @PrimaryGeneratedColumn()
+export class Proyecto {
   id: number;
-
-  @Column("varchar", { name: "nombre", length: 50 })
   nombre: string;
-
-  @Column("varchar", { name: "descripcion", length: 255 })
   descripcion: string;
-
-  @Column("datetime", { name: "fecha", nullable: true })
   fecha: Date | null;
-
-  @Column("varchar", { name: "imagen", nullable: true, length: 100 })
   imagen: string | null;
-
-  @Column("varchar", { name: "depositorio", nullable: true, length: 100 })
-  depositorio: string | null;
-
-  @Column("varchar", { name: "deploy", nullable: true, length: 100 })
+  repositorio: string | null;
   deploy: string | null;
+  aptitudes?: Aptitud[];
+  perfiles?: Perfil[];
 
-  @ManyToMany(() => Aptitudes,(aptitud) => aptitud.proyectos, {eager: false})
-  aptitudes: Aptitudes[];
-
-  @OneToMany(() => Perfiles, (perfil) => perfil.proyectos, {eager: false})
-  perfiles: Perfiles[];
-
-  @AfterLoad()
-  setAssetUrl() {
-    this.imagen = this.imagen
-      ? Assets.PROYECTO_URL+this.imagen
-      : '';
+  constructor(p: Proyectos) {
+    this.id = p.id;
+    this.nombre = p.nombre;
+    this.descripcion = p.descripcion;;
+    this.fecha = p.fecha;
+    this.imagen = Assets.PROYECTO_URL + p.imagen;
+    this.repositorio = p.repositorio;
+    this.deploy = p.deploy;
+    this.aptitudes = p.aptitudes?.flatMap(a => new Aptitud(a?.aptitud)) || undefined;
+    this.perfiles = p.perfiles?.flatMap(p => new Perfil(p?.perfil)) || undefined;
   }
+
 }

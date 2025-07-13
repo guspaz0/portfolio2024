@@ -39,6 +39,8 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, watch, onUnmounted } from 'vue'
+
 const data = await $fetch('/api/perfiles')
 
 // Props
@@ -98,11 +100,11 @@ const handleScroll = () => {
     }
 }
 
-const handleSelectChange = (e) => {
+const handleSelectChange = (e: Event) => {
     e.target.blur()
 }
 
-const handleNavClick = (href) => {
+const handleNavClick = (href: string) => {
   // Smooth scroll to section
     if (href.startsWith('#')) {
             const element = document.querySelector(href)

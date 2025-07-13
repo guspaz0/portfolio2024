@@ -7,16 +7,22 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
+    "postinstall": "nuxt prepare && prisma generate",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate deploy",
+    "prisma:studio": "prisma studio",
+    "prisma:push": "prisma db push",
     "typeorm": "typeorm-ts-node-esm"
+  },
+  "prisma": {
+    "schema": "prisma/schema.prisma"
   },
   "dependencies": {
     "@nuxtjs/google-fonts": "^3.2.0",
+    "@prisma/nuxt": "^0.3.0",
     "nuxt": "^3.17.6",
-    "nuxt-typeorm": "^0.0.8",
     "reflect-metadata": "^0.2.1",
     "sqlite3": "^5.1.7",
-    "typeorm": "^0.3.25",
     "vue": "^3.4.21",
     "vue-router": "^4.5.1"
   },

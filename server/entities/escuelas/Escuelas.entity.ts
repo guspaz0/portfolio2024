@@ -1,29 +1,20 @@
-import { AfterLoad, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Certificados } from "../certificados/Certificados.entity";
-import { Perfiles } from "../perfiles/Perfiles.entity";
+import { Certificado } from "../certificados/Certificados.entity";
+import { Perfil } from "../perfiles/Perfiles.entity";
 import { Assets } from "~/server/types/contacto";
+import { Escuelas } from "@prisma/client"
 
-@Entity("escuelas")
-export class Escuelas {
-  @PrimaryGeneratedColumn()
+export class Escuela implements Escuelas {
   id: number;
-
-  @Column("varchar", { name: "nombre", length: 50 })
   nombre: string;
-
-  @Column("varchar", { name: "image", nullable: true, length: 100 })
   image: string | null;
+  certificados?: Certificado[];
+  perfiles?: Perfil[];
 
-  @OneToMany(() => Certificados, (certificados) => certificados.escuela)
-  certificados: Certificados[];
-
-  @OneToMany(() => Perfiles, (perfil) => perfil.escuelas)
-  perfiles: Perfiles[];
-
-  @AfterLoad()
-  setAssetUrl() {
-    if (this.image) {
-      this.image = Assets.ESCUELA_URL + this.image;
-    }
+  constructor(e: Escuelas) {
+    this.id = e.id;
+    this.nombre = e.nombre;
+    this.image = e.image && Assets.ESCUELA_URL + this.image;
+    this.certificados = e.certificados?.flatMap((c) => new Certificado(c?.certificado)) || undefined;
+    this.perfiles = e.perfiles?.flatMap((p) => new Perfil(p?.perfil)) || undefined;
   }
 }
