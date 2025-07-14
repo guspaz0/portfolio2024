@@ -1,4 +1,4 @@
-import { Perfil } from "../perfiles/Perfiles.entity";
+import { Perfil } from "../../types/Perfil";
 import { Assets } from "../../types/contacto";
 import { Experiencias } from "@prisma/client"
 
@@ -18,14 +18,13 @@ export class Experiencia {
     this.nombre = e.nombre;
     this.descripcion = e.descripcion;
     this.empresa = e.empresa;
-    this.imagen = e.imagen && Assets.EXP_URL + this.imagen;
-    this.fechaFin = e.fechaFin;
+    this.imagen = e.imagen? Assets.EXP_URL+e.imagen : undefined;
+    this.fecha = e.fecha ? new Date(e.fecha) : null;
     this.fechaFin = this.fechaFin
-      ? new Date(this.fechaFin).toString()
-      : new Date().toString();
+      ? new Date(this.fechaFin)
+      : new Date();
     this.duracion = new Duracion(this.fecha as Date, this.fechaFin);
-    this.perfiles = e.perfiles?.flatMap(p => new Perfil(p?.perfil)) || undefined;
-    this.duracion = new Duracion(this.fecha as Date, this.fechaFin);
+    this.perfiles = e.perfiles?.flatMap(p => p?.perfil) || undefined;
   }
 }
 
@@ -35,7 +34,7 @@ class Duracion {
   meses: number;
   años: number;
 
-  constructor(fecha: Date, fechaFin: string) {
+  constructor(fecha: Date, fechaFin: Date) {
     const fecha_f = new Date(fechaFin ? fechaFin : Date.now())
     this.#meses = ((fecha_f.getTime() - new Date(fecha).getTime()) / (1000 * 60 * 60 * 24 * 30))
     this.#años = 0;

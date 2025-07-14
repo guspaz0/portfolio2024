@@ -3,6 +3,10 @@
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
+  components: {
+    global: true,
+    dirs: ['~/components'],
+  },
   devtools: { enabled: true },
   //ssr: true,
   vite: {

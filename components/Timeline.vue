@@ -39,23 +39,22 @@
 </template>
 
 <script setup lang="ts">
+import type { Experiencia } from '~/server/entities/experiencias/Experiencias.entity'
 import { ref, watch } from 'vue'
 
 // Props definition
 const props = defineProps({
   perfil: {
-    //type: Object,
-    required: true,
-    default: {experiencias:[]}
+    type: Object as PropType<Experiencia>,
+    required: true
   }
 })
 
-// Reactive state
 const titulo = ref('Experiencia')
-const linea = ref([])
+const linea = ref<Experiencia[]>([])
 
-// Date formatter
-const formatDate = (date) => {
+
+const formatDate = (date: Date) => {
   return new Date(date).toLocaleDateString([], {
     day: '2-digit',
     month: '2-digit',
@@ -63,14 +62,13 @@ const formatDate = (date) => {
   })
 }
 
-// Watch for perfil changes
 watch(() => props.perfil, (currentPerfil) => {
   linea.value = currentPerfil?.experiencias || []
 }, { immediate: true })
 </script>
 
 <style scoped>
-/* Add your existing styles here if any */
+
 .timeline span img {
     max-height: 50px;
     filter: drop-shadow(0 0 1px white) contrast(2);

@@ -14,7 +14,7 @@ datasource db {
 model Aptitudes {
   id           Int                    @id @default(autoincrement())
   nombre       String
-  image        String?
+  imagen       String?
   categoria    Categorias             @relation(fields: [categoria_id], references: [id])
   categoria_id Int
   perfiles     AptitudesPerfil[]
@@ -35,7 +35,7 @@ model Categorias {
 model Certificados {
   id         Int                    @id @default(autoincrement())
   nombre     String
-  image      String?
+  imagen     String?
   fecha      DateTime?
   escuela    Escuelas               @relation("escuela", fields: [escuela_id], references: [id])
   escuela_id Int
@@ -48,7 +48,7 @@ model Certificados {
 model Escuelas {
   id           Int              @id @default(autoincrement())
   nombre       String
-  image        String?
+  imagen       String?
   certificados Certificados[]   @relation("escuela")
   perfiles     EscuelasPerfil[]
 

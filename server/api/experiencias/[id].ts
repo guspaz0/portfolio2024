@@ -1,7 +1,7 @@
-import { Experiencias } from '~/server/entities/experiencias/Experiencias.entity';
+import { Experiencia } from '~/server/entities/experiencias/Experiencias.entity';
 import experienciasService from '~/server/entities/experiencias/experiencias.services';
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event): Promise<Experiencia> => {
   // para cuando se hace una solicitud con /${id} parametros De ruta
   try {
     const id = getRouterParam(event, 'id');

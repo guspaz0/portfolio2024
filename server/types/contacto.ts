@@ -8,3 +8,12 @@ export enum Assets {
   EXP_URL = `${url}/v1726317578/laboral/`,
   GITHUB_URL = 'https://github.com/'
 }
+
+export enum AssetURL {
+  aptitudes = `${url}/v1724456108/aptitudes/`,
+  escuelas = `${url}/v1725312748/escuelas/`,
+  proyectos = `${url}/v1725672587/proyectos/`,
+  certificados = `${url}/v1726016093/certificados/`,
+  experiencias = `${url}/v1726317578/laboral/`,
+  github = Assets.GITHUB_URL
+}

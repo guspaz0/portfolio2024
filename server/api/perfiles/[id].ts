@@ -1,4 +1,4 @@
-import { Perfiles } from '~/server/entities/perfiles/Perfiles.entity';
+import { Perfiles } from '~/server/types/Perfil';
 import perfilesService from '~/server/entities/perfiles/perfiles.service';
 
 export default defineEventHandler(async (event) => {

@@ -66,10 +66,7 @@
 </template>
 
 <script setup>
-// Import your variables (you'll need to convert var.js to ESM)
-// import { cloudurl } from '~/utils/var.js'
 
-// Mock cloudurl - replace with your actual import
 const assets = await $fetch('/api/assets')
 
 // Reactive data

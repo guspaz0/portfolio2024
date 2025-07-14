@@ -15,15 +15,15 @@
         </fieldset>
 
         <Timeline v-if="currentPerfil?.id" :perfil="currentPerfil" />
-        <Certificados v-if="currentPerfil?.id" :perfil="currentPerfil" />
+        <Certificados v-if="currentPerfil?.id" :key="currentPerfil.id" :perfil="currentPerfil" />
         <Proyectos v-if="currentPerfil?.id" :perfil="currentPerfil" />
-        <!-- <AptitudesComponent :perfil="currentPerfil" /> -->
+        <Aptitudes v-if="currentPerfil?.id" :perfil="currentPerfil" />
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref, watch, onMounted, onBeforeMount } from 'vue'
-import type { Perfil } from '~/server/entities/perfiles/Perfiles.entity'
+import type { Perfil } from '~/server/types/Perfil'
 
 // Props
 const props = defineProps({

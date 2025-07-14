@@ -23,73 +23,18 @@
 
     <div class="certificados">
       <p v-if="certificados.length === 0">No hay certificados con la Escuela/Aptitud seleccionada</p>
-      <article v-for="cert in certificados" :key="cert.id" @contextmenu.prevent>
-        <b>{{ cert.nombre }}</b>
-        <span>
-          <NuxtImg
-            :src="cert?.escuela.image"
-            :alt="cert?.escuela.nombre"
-            format="webp"
-            loading="lazy" />
-        </span>
-        <b>Tecnologias:</b>
-        <div class="proyectos">
-          <span
-            v-for="tec in cert.aptitudes?.slice(0, 2)"
-            :key="tec.id"
-            class="skills"
-            @contextmenu.prevent
-          >
-            <small>{{ tec.nombre }}</small>
-            <NuxtImg
-                :src="tec.image"
-                :alt="tec.nombre"
-                format="webp"
-                loading="lazy"
-            />
-          </span>
-          <span
-            v-if="cert?.aptitudes.length > 2"
-            class="skills"
-            @mouseenter="showAptitudes"
-            @contextmenu.prevent
-          >
-            <b>+{{ cert.aptitudes.length - 2 }}</b>
-          </span>
-          <dialog
-            v-if="cert.aptitudes.length > 3"
-            @mouseleave="showAptitudes"
-            @contextmenu.prevent
-          >
-            <span v-for="tec in cert.aptitudes" :key="tec.id" class="skills">
-              <small>{{ tec.nombre }}</small>
-              <NuxtImg
-                :src="tec.path"
-                :alt="tec.nombre"
-                format="webp"
-                loading="lazy" />
-            </span>
-          </dialog>
-        </div>
-        <a
-          v-if="cert.path"
-          :href="cert.path"
-          rel="noreferrer noopener"
-          target="_blank"
-        >
-          Certificado
-        </a>
-      </article>
+      <CertificadoComp v-for="cert in certificados" :key="cert.id" :cert="cert" />
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, type PropType } from 'vue'
+import { ref, watch, type PropType } from 'vue'
 import type { Aptitud } from '~/server/entities/aptitudes/Aptitudes.entity'
 import type { Certificado } from '~/server/entities/certificados/Certificados.entity'
 import type { Escuela } from '~/server/entities/escuelas/Escuelas.entity'
-import { Perfil } from '~/server/entities/perfiles/Perfiles.entity'
+import type { Perfil } from '~/server/types/Perfil'
+const CertificadoComp = resolveComponent('certificados/CertificadoComp')
 
 // Props
 const props = defineProps({
@@ -104,8 +49,8 @@ const titulo = ref('Certificados')
 const certificados = ref<Certificado[]>([])
 const escuelas = ref<Escuela[]>([])
 const aptitudes = ref<Aptitud[]>([])
-const filterEscuela = ref('')
-const filterTecnologia = ref('')
+const filterEscuela = ref<string>('')
+const filterTecnologia = ref<string>('')
 
 // Methods
 const reset = () => {
@@ -114,22 +59,12 @@ const reset = () => {
   certificados.value = props.perfil?.certificados || [];
 }
 
-const showAptitudes = (e) => {
-  const skills = Array.from(e.target.parentNode.childNodes)
-    .filter(s => s.tagName === 'DIALOG')
-
-  if (e.type === 'mouseenter') {
-    skills[0].open = true
-  } else if (e.type === 'mouseleave') {
-    skills[0].open = false
-  }
-}
 
 // Watchers
 watch(filterEscuela, (val) => {
   if (val !== '') {
     filterTecnologia.value = ''
-    certificados.value = props.perfil?.certificados?.filter(cert => +cert.escuela.id === +val) || [];
+    certificados.value = props.perfil?.certificados?.filter(cert => +cert.escuela?.id === +val) || [];
   }
 })
 

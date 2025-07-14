@@ -1,10 +1,11 @@
-import { Perfil } from "./Perfiles.entity";
-import prisma from '~/lib/prisma'
+import { Perfil } from "../../types/Perfil";
+import { Perfiles } from "@prisma/client"
+import PerfilesRepository from "./Perfiles.repository";
 
 class PerfilesService {
-  private repo = prisma.perfiles;
+  private repo = PerfilesRepository.perfiles;
 
-  async findAll(): Promise<Perfil[] | undefined> {
+  async findAll(): Promise<Perfiles[] | undefined> {
     try {
       const perfiles = await this.repo.findMany({
         include: {
@@ -44,15 +45,15 @@ class PerfilesService {
           }
         },
       })
-      return perfiles.map(p => new Perfil(p));
+      return perfiles
     } catch (error) {
       console.error(error);
     } finally {
-      await prisma.$disconnect();
+      await PerfilesRepository.$disconnect();
     }
   }
 
-  async getPerfil(id: number): Promise<Perfil | undefined> {
+  async getPerfil(id: number): Promise<Perfiles | undefined> {
     try {
       const perfil = await this.repo.findUniqueOrThrow({
         where: { id },
@@ -93,11 +94,11 @@ class PerfilesService {
           }
         },
       });
-      return new Perfil(perfil)
+      return perfil
     } catch (error) {
       console.error(error);
     } finally {
-      await prisma.$disconnect();
+      await PerfilesRepository.$disconnect();
     }
   }
 }

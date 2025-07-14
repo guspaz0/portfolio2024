@@ -3,15 +3,18 @@
 <p align="center">
     <img src="https://img.shields.io/badge/git-latest-lightgrey">
     <img src="https://img.shields.io/badge/github-latest-darkblue">
+    <img src="https://img.shields.io/badge/github actions CI/CD-latest-lightgrey">
     <img src="https://img.shields.io/badge/Vue-3 latest-darkgreen">
     <img src="https://img.shields.io/badge/Vue Router-4 latest-darkgreen">
+    <img src="https://img.shields.io/badge/Nuxt-3-darkgreen">
+    <img src="https://img.shields.io/badge/Prisma-latest-darkgreen">
 </p>
 
 * en este repo, presento mis distintos perfiles tecnologicos y su respectiva informacion para cada uno como:
-  * certificados
-  * proyectos
-  * aptitudes
-  * experiencia
+* certificados
+* proyectos
+* aptitudes
+* experiencia
 * Esta completamente alojado en github pages asi que el contenido es completamente publico.
 ---
 *  in this repo, i pretend to do my portfolio of projects to publish as a software developer.
@@ -22,16 +25,12 @@
 
 # Nuxt Minimal Starter
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
-
 ## Setup
 
 Make sure to install dependencies:
 
 ```bash
-# npm
 npm install
-
 ```
 
 ## Development Server
@@ -39,9 +38,7 @@ npm install
 Start the development server on `http://localhost:3000/portfolio2024`:
 
 ```bash
-# npm
 npm run dev
-
 ```
 
 ## Production
@@ -49,17 +46,13 @@ npm run dev
 Build the application for production:
 
 ```bash
-# npm
 npm run build
-
 ```
 
 Locally preview production build:
 
 ```bash
-# npm
 npm run preview
-
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.

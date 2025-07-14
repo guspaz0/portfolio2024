@@ -1,5 +1,5 @@
 import { Aptitud } from "../aptitudes/Aptitudes.entity";
-import { Perfil } from "../perfiles/Perfiles.entity";
+import { Perfil } from "../../types/Perfil";
 import { Assets } from "~/server/types/contacto";
 import { Proyectos } from "@prisma/client"
 
@@ -20,10 +20,12 @@ export class Proyecto {
     this.descripcion = p.descripcion;;
     this.fecha = p.fecha;
     this.imagen = Assets.PROYECTO_URL + p.imagen;
-    this.repositorio = p.repositorio;
+    this.repositorio = p.repositorio
+      ? Assets.GITHUB_URL+p.repositorio
+      : null;
     this.deploy = p.deploy;
     this.aptitudes = p.aptitudes?.flatMap(a => new Aptitud(a?.aptitud)) || undefined;
-    this.perfiles = p.perfiles?.flatMap(p => new Perfil(p?.perfil)) || undefined;
+    this.perfiles = p.perfiles?.flatMap(p => p?.perfil) || undefined;
   }
 
 }
