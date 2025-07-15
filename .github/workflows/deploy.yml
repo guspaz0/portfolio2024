@@ -26,7 +26,8 @@ jobs:
     - name: Build
       run: npm run generate
       env:
-        NUXT_APP_BASE_URL: /portfolio2024/
+        NUXT_APP_BASE_URL: ${{ vars.NUXT_APP_BASE_URL }}
+        DATABASE_URL: ${{ vars.DATABASE_URL }}
     
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
