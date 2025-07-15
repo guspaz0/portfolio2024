@@ -16,7 +16,7 @@
           rel="noopener noreferrer"
         >
           <NuxtImg
-            :src="assets.CLOUD_URL + red.logo"
+            :src="Assets.CLOUD_URL + red.logo"
             :alt="red.nombre + ' logo'"
             loading="lazy"
           />
@@ -66,8 +66,7 @@
 </template>
 
 <script setup>
-
-const assets = await $fetch('/api/assets')
+import { Assets } from '~/server/types/contacto'
 
 // Reactive data
 const titulo = "Contacto"

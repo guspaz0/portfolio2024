@@ -16,9 +16,9 @@ export class Experiencia {
   constructor(e: Experiencias) {
     this.id = e.id;
     this.nombre = e.nombre;
-    this.descripcion = e.descripcion;
+    this.descripcion = e.descripcion as string;
     this.empresa = e.empresa;
-    this.imagen = e.imagen? Assets.EXP_URL+e.imagen : undefined;
+    this.imagen = e.imagen? Assets.EXP_URL+e.imagen : null;
     this.fecha = e.fecha ? new Date(e.fecha) : null;
     this.fechaFin = this.fechaFin
       ? new Date(this.fechaFin)

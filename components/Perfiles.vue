@@ -43,20 +43,28 @@ const currentPerfil = ref<Perfil>()
 
 // Methods
 const loadPerfiles = async () => {
-    // Replace with your actual service call
-    const perfilesTodos = await $fetch('/api/perfiles') as Perfil[]
+    try {
+        // Replace with your actual service call
+        const perfilesTodos = await $fetch('/api/perfiles')
 
-    perfiles.value = perfilesTodos || [];
+        perfiles.value = (perfilesTodos || []) as Perfil[];
 
-    // Set initial perfil
-    //updateCurrentPerfil(selected.value)
-    currentPerfil.value = perfilesTodos.find((perfil) => perfil.id === selected.value)
+        // Set initial perfil
+        //updateCurrentPerfil(selected.value)
+        currentPerfil.value = perfilesTodos.find((perfil) => perfil.id === selected.value) as Perfil
+    } catch(e) {
+        console.log("get all perfiles: \n",e)
+    }
 }
 
 const updateCurrentPerfil = async (profileId: number) => {
-    const foundPerfil = await $fetch(`/api/perfiles/${profileId}`) as Perfil
-    if (foundPerfil) {
-        currentPerfil.value = foundPerfil
+    try {
+        const foundPerfil = await $fetch(`/api/perfiles/${profileId}`);
+        if (foundPerfil) {
+            currentPerfil.value = foundPerfil as Perfil
+        }
+    } catch (e) {
+        console.log("update current Perfil\n",e)
     }
 }
 
