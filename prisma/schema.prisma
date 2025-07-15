@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider     = "sqlite"
-  url          = env("DATABASE_URL")
+  url          = "file:../prisma/portfolio_db.sql" //env("DATABASE_URL")
   relationMode = "foreignKeys"
 }
 
