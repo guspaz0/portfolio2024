@@ -24,7 +24,7 @@ const perfilRepo = Prisma.defineExtension((prisma) =>
                     )
                     return result as Perfil[]
                 },
-                async findUniqueOrThrow({ model, operation, args, query }) {
+                async findUnique({ model, operation, args, query }) {
                     const p = await query(args)
                     return {
                         ...p,

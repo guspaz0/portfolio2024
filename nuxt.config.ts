@@ -1,5 +1,4 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-//import typescript from '@rollup/plugin-typescript';
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
@@ -27,9 +26,6 @@ export default defineNuxtConfig({
   },
   prisma: {
     autoSetupPrisma: true
-  },
-  runtimeConfig: {
-    dbUrl: process.env.DATABASE_URL
   },
 
   // Nitro configuration

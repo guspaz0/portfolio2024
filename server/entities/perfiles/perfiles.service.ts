@@ -54,9 +54,9 @@ class PerfilesService {
     }
   }
 
-  async getPerfil(id: number): Promise<Perfiles | undefined> {
+  async getPerfil(id: number): Promise<Perfiles | undefined | null> {
     try {
-      const perfil = await this.repo.findUniqueOrThrow({
+      const perfil = await this.repo.findUnique({
         where: { id },
         include: {
           experiencias: { include: { experiencia: true } },
