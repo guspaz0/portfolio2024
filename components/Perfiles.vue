@@ -17,7 +17,7 @@
         <Timeline v-if="currentPerfil?.id" :perfil="currentPerfil" />
         <Certificados v-if="currentPerfil?.id" :key="currentPerfil.id" :perfil="currentPerfil" />
         <Proyectos v-if="currentPerfil?.id" :perfil="currentPerfil" />
-        <Aptitudes v-if="currentPerfil?.id" :perfil="currentPerfil" />
+        <AptitudesCarousel v-if="currentPerfil?.id" :perfil="currentPerfil" />
     </div>
 </template>
 

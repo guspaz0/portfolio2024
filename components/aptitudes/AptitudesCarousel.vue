@@ -5,14 +5,14 @@
       <div className="carousel" v-bind:style="style">
         <span v-for="skill in aptitudes">
           <NuxtImg @contextmenu.prevent=""
-               v-if="skill.alt"
+               v-if="(skill.alt as string)"
                :src="skill.alt"
                :alt="skill.nombre"
                loading="lazy"
             />
           <NuxtImg @contextmenu.prevent=""
                v-else
-               :src="skill.imagen"
+               :src="(skill.imagen as string)"
                :alt="skill.nombre"
                loading="lazy"
             />
@@ -48,13 +48,13 @@ function setCarousel(length: number) {
     if (counter < (anchoCarousel - window.visualViewport.width / 2) * -1) {
       counter = window.visualViewport.width / 2
     }
-    let carousel = document.querySelector('.carousel')
+    let carousel = document.querySelector('.carousel') as HTMLDivElement
     carousel.style.transform = `translate3d(${counter}px,0px,0px)`
   }, 10)
 }
 
 watch(() => props.perfil, (currentPerfil) => {
-  aptitudes.value = currentPerfil.aptitudes
+  aptitudes.value = currentPerfil.aptitudes as Aptitud[]
 },{immediate:true})
 
 watch(() => aptitudes.value, () => {
@@ -65,5 +65,37 @@ watch(() => aptitudes.value, () => {
 </script>
 
 <style scoped>
-/* Add your component styles here */
+.carousel-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 35px;
+    width: 90%;
+    overflow: hidden;
+}
+
+.carousel {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+    white-space: nowrap;
+}
+.carousel img {
+    width: 50px;
+    /*max-height: 50px;*/
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    filter: drop-shadow(0 0 1px white);
+}
+
+.carousel > span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    min-height: 70px;
+    padding: 5px;
+}
 </style>

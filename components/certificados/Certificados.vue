@@ -17,7 +17,7 @@
           </option>
         </select>
       </fieldset>
-      <small>Mostrando {{ certificados.length }} de {{ perfil?.certificados.length }} Certificados</small>
+      <small>Mostrando {{ certificados.length }} de {{ perfil?.certificados?.length }} Certificados</small>
       <span class="card" @click.prevent="reset">Ver Todos</span>
     </form>
 
@@ -76,18 +76,44 @@ watch(filterTecnologia, (val) => {
 })
 
 watch(() => props.perfil, (currentPerfil) => {
+  reset()
   // Initialize certificados with first 3 items
   certificados.value = currentPerfil?.certificados?.slice(0, 3) || [];
 
   // Filter aptitudes based on certificates
-  aptitudes.value = currentPerfil?.aptitudes?.filter(apt => currentPerfil?.certificados?.some(cert => cert.aptitudes?.some(tec => tec.id === apt.id))) || []
+  const uniqueAptitudes = new Map<number,Aptitud>()
+  const counter = new Map<number,number>();
+  const flatAptitudes = (currentPerfil?.certificados?.flatMap(cert => cert.aptitudes) || []) as Aptitud[]
+  flatAptitudes.forEach(apt => {
+    counter.has(apt.id)
+      ? counter.set(apt.id, (counter.get(apt.id) as number) +1)
+      : counter.set(apt.id, 1)
+    uniqueAptitudes.set(apt.id, { ...apt, countCertificados: counter.get(apt.id) })
+  })
+  aptitudes.value = uniqueAptitudes.values().toArray()
 
   // Get unique schools
-  escuelas.value = currentPerfil?.certificados?.flatMap((cert) => cert.escuela) || [];
+  const uniqueEscuelas = new Map<number,Escuela>()
+  const flatEscuelas = (currentPerfil?.certificados?.flatMap((cert) => cert.escuela) || []) as Escuela[];
+  flatEscuelas.forEach(esc => uniqueEscuelas.set(esc.id, esc))
+  escuelas.value = uniqueEscuelas.values().toArray();
 }, { immediate: true })
 </script>
 
 <style scoped>
-/* Add your styles here if needed */
+
+.certificados {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.certificados img, #certificados img {
+    width: 150px;
+    filter: drop-shadow(0 0 1px white);
+}
 
 </style>

@@ -10,16 +10,21 @@ class PerfilesService {
       const perfiles = await this.repo.findMany({
         include: {
           experiencias: { select: { experiencia: true } },
-          aptitudes: { select: { aptitud: true } },
+          aptitudes: { 
+            select: { 
+              aptitud: { 
+                include: { 
+                  certificados: { include: { certificado: true } },
+                  proyectos: { include: { proyecto: true } }
+                } 
+              } 
+            } 
+          },
           certificados: {
             include: {
               certificado: {
                 include: {
-                  aptitudes: {
-                    include: {
-                      aptitud: true
-                    }
-                  },
+                  aptitudes: { include: { aptitud: true } },
                   escuela: true
                 }
               },
@@ -29,11 +34,7 @@ class PerfilesService {
             select: {
               proyecto: {
                 include: {
-                  aptitudes: {
-                    include: {
-                      aptitud: true
-                    }
-                  }
+                  aptitudes: { include: { aptitud: true } }
                 }
               },
             }
@@ -58,31 +59,32 @@ class PerfilesService {
       const perfil = await this.repo.findUniqueOrThrow({
         where: { id },
         include: {
-          experiencias: { select: { experiencia: true } },
-          aptitudes: { select: { aptitud: true } },
+          experiencias: { include: { experiencia: true } },
+          aptitudes: { 
+            include: { 
+              aptitud: { 
+                include: { 
+                  certificados: { include: { certificado: true } },
+                  proyectos: { include: { proyecto: true } }
+                } 
+              } 
+            } 
+          },
           certificados: {
             include: {
               certificado: {
                 include: {
-                  aptitudes: {
-                    include: {
-                      aptitud: true
-                    }
-                  },
+                  aptitudes: { include: { aptitud: true } },
                   escuela: true
-                },
-              }
+                }
+              },
             }
           },
           proyectos: {
-            select: {
+            include: {
               proyecto: {
                 include: {
-                  aptitudes: {
-                    select: {
-                      aptitud: true
-                    }
-                  }
+                  aptitudes: { include: { aptitud: true } }
                 }
               },
             }

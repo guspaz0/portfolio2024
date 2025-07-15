@@ -10,33 +10,11 @@
         <p>{{ proyecto.descripcion }}</p>
         <b>Tecnologias:</b>
         <div class="proyectos">
-            <span
-                v-for="tec in proyecto.aptitudes?.slice(0, 2)"
-                :key="tec.id"
-                class="skills"
-                @contextmenu.prevent
-            >
-            <small>{{ tec.nombre }}</small>
-            <NuxtImg :src="tec.imagen" :alt="tec.nombre" loading="lazy" />
-            </span>
-            <span
-                v-if="proyecto.aptitudes?.length > 2"
-                class="expand"
-                @mouseenter="showAptitudes"
-                @contextmenu.prevent
-            >
-            <b>+{{ proyecto.aptitudes?.length - 2 }}</b>
-            </span>
-            <dialog
-                v-if="proyecto.aptitudes?.length > 3"
-                @mouseleave="showAptitudes"
-                @contextmenu.prevent
-            >
-            <span v-for="tec in proyecto.aptitudes" :key="tec.id" class="skills">
-                <small>{{ tec.nombre }}</small>
-                <NuxtImg :src="tec.imagen" :alt="tec.nombre" loading="lazy" />
-            </span>
-            </dialog>
+            <Aptitudes 
+                :key="(proyecto.nombre as string)" 
+                :aptitudes="proyecto.aptitudes"
+                :max="2"
+            />
         </div>
         <span class="links" @contextmenu.prevent>
             <a
@@ -64,6 +42,7 @@
 <script setup lang="ts">
 import { defineProps, type PropType } from 'vue';
 import type { Proyecto } from '~/server/entities/proyectos/Proyectos.entity'
+const Aptitudes = resolveComponent('Aptitudes')
 
 defineProps({
   proyecto: {
@@ -71,4 +50,18 @@ defineProps({
     required: true
   }
 });
+
+
+
 </script>
+
+<style scoped>
+.proyectos .skills {
+    filter: none;
+    mask-image: none;
+    background-color: rgba(5,5,5, 0.1);
+    padding: 5px;
+    min-width: 60px;
+    border-radius: 5px;
+}
+</style>
