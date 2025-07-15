@@ -1,3 +1,9 @@
 ./vscode
 .vscode
 .env
+.idea
+node_modules
+.output
+.nuxt
+package-lock.json
+.github
