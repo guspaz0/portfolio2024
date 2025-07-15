@@ -28,6 +28,7 @@ import type { Aptitud } from '~/server/entities/aptitudes/Aptitudes.entity'
 import type { Proyecto } from '~/server/entities/proyectos/Proyectos.entity'
 const ProyectoComp = resolveComponent('proyectos/ProyectoComp')
 
+
 // Props
 const props = defineProps({
   perfil: {
@@ -50,17 +51,6 @@ const reset = () => {
   proyectos.value = props.perfil?.proyectos || [];
 }
 
-const showAptitudes = (e: MouseEvent) => {
-  const target = e.target as HTMLElement
-  const skills = Array.from(target.parentNode?.childNodes ?? [])?.filter(s => (s as HTMLElement).tagName === 'DIALOG')
-
-  if (e.type === 'mouseenter') {
-    (skills[0] as HTMLDialogElement).open = true
-  } else if (e.type === 'mouseleave') {
-    (skills[0] as HTMLDialogElement).open = false
-  }
-}
-
 // Watchers
 watch(filterTecnologia, (val) => {
   if (val !== '') {
@@ -70,19 +60,28 @@ watch(filterTecnologia, (val) => {
 })
 
 watch(() => props.perfil, (currentPerfil) => {
-  aptitudes.value = currentPerfil?.aptitudes?.filter(apt => currentPerfil.proyectos
-      .some(proyecto => proyecto.aptitudes?.some(prApt => prApt.id === apt.id))) || [];
+  const test = new Map<number,Aptitud>()
+  const counter = new Map<number,number>();
+  const testFlat = currentPerfil?.proyectos.flatMap(p => p.aptitudes)
+
+  testFlat.forEach(apt => {
+    counter.has(apt.id)
+      ? counter.set(apt.id, (counter.get(apt.id) as number)+1)
+      : counter.set(apt.id, 1)
+    test.set(apt.id, {...apt, countProyects: counter.get(apt.id)})
+  })
+
+  aptitudes.value = test.values().toArray()
 
   proyectos.value = currentPerfil?.proyectos?.slice(0, 3) || [];
 }, { immediate: true })
-onMounted(() => {
-  // if (!props.perfil) {
-  //   props.perfil = async ()=> $fetch('/api/perfiles/1')
-  // }
-})
+
 </script>
 
 <style scoped>
-/* Add your styles here if needed */
+.proyectos article img {
+    width: 50px;
+    filter: drop-shadow(3px 3px 4px black);
+}
 
 </style>

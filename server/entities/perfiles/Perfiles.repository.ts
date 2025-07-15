@@ -5,6 +5,7 @@ import { Aptitud } from '../aptitudes/Aptitudes.entity';
 import { Certificado } from '../certificados/Certificados.entity';
 import { Proyecto } from '../proyectos/Proyectos.entity';
 import { Escuela } from '../escuelas/Escuelas.entity';
+import { Perfil } from '~/server/types/Perfil';
 
 const perfilRepo = Prisma.defineExtension((prisma) =>
     prisma.$extends({
@@ -21,7 +22,7 @@ const perfilRepo = Prisma.defineExtension((prisma) =>
                             escuelas: p.escuelas?.flatMap(e => new Escuela(e?.escuela)) || undefined
                         })
                     )
-                    return result
+                    return result as Perfil[]
                 },
                 async findUniqueOrThrow({ model, operation, args, query }) {
                     const p = await query(args)

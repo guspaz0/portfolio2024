@@ -11,6 +11,7 @@ dist
 
 # Node dependencies
 node_modules
+package-lock.json
 
 # Logs
 logs
@@ -27,3 +28,5 @@ logs
 !.env.example
 
 /generated/prisma
+
+.github/workflows/.test

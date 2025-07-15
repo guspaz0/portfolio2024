@@ -126,16 +126,7 @@ div.shadow {
 .shadow {
     animation: pulse 2.0s infinite;
 }
-.aptitudes {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items:center;
-    justify-content: space-between;
-    border-radius: 5px;
-    gap: 7px;
-    transition: 250ms;
-}
+
 .imgtext {
     display: flex;
     color: black;
@@ -153,16 +144,8 @@ div.shadow {
     object-fit: cover;
 }
 
-.proyectos .skills {
-    filter: none;
-    mask-image: none;
-    background-color: rgba(5,5,5, 0.1);
-    padding: 5px;
-    min-width: 60px;
-    border-radius: 5px;
-}
-
-.proyectos > article {
+.proyectos > article, 
+.certificados > article {
     position: relative;
 }
 
@@ -183,31 +166,12 @@ div.shadow {
 }
 
 
-span.skills:hover {
-    background-color: rgba(5,5,5, 0.2);
-    color: black;
-}
-span.skills small:hover{
-    position: absolute;
-    z-index: 50;
-}
-
 section > h2::first-letter {
     font-size: 26px;
     font-weight: 900;
 }
 
-span.skills img {
-    display: none;
-    max-width: 50px;
-    max-height: 50px;
-    transition: 500ms;
-}
-span.skills:hover img {
-    display: block;
-    position: absolute;
-    z-index: 50;
-}
+
 
 .contacto {
     display: flex;
@@ -280,7 +244,8 @@ fieldset {
     gap: 10px;
 }
 
-.proyectos div.proyectos {
+.proyectos div.proyectos, 
+.certificados div.proyectos {
     position: relative;
     justify-content: start;
 }
@@ -296,70 +261,12 @@ article {
     max-width: 300px;
 }
 
-.proyectos article img {
-    width: 50px;
-    filter: drop-shadow(3px 3px 4px black);
-}
-
-article .skills {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    flex-wrap: wrap;
-}
-
-.certificados {
-    display: flex;
-    flex-direction: row;
-    align-items: start;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.certificados > article {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    min-height: 250px;
-    justify-content: space-between;
-}
-.certificados img {
-    width: 150px;
-    filter: drop-shadow(0 0 1px white);
-}
 
 .resume > a {
     color: black;
     text-decoration: none;
 }
-dialog {
-    transition: 500ms;
-}
 
-dialog:hover {
-    position: absolute;
-
-}
-
-dialog[open] {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    bottom: -5px;
-    z-index: 15;
-    filter: drop-shadow(3px 3px 4px black);
-    border: none;
-    gap: 3px;
-    padding: 2px;
-    border-radius: 5px;
-}
 
 span.expand::after {
     content: "";
@@ -378,39 +285,7 @@ span.expand::after {
     animation: spin 2s linear infinite;
     z-index: 2;
 }
-.carousel-container {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 35px;
-    width: 90%;
-    overflow: hidden;
-}
 
-.carousel {
-    position: absolute;
-    display: flex;
-    flex-direction: row;
-    gap: 60px;
-    white-space: nowrap;
-}
-.carousel img {
-    width: 50px;
-    /*max-height: 50px;*/
-    aspect-ratio: 1/1;
-    object-fit: contain;
-    filter: drop-shadow(0 0 1px white);
-}
-
-.carousel > span {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    min-height: 70px;
-    padding: 5px;
-}
 
 .loading > span {
     animation: loading 1.4s infinite ease-in-out;
@@ -429,18 +304,6 @@ span.expand::after {
 input[type="radio"] {
     display: none;
 }
-
-
-/*fieldset.perfiles label:before {*/
-/*    content: "";*/
-/*    height: 20px;*/
-/*    width: 20px;*/
-/*    border: 3px solid var(--bg-color);*/
-/*    border-radius: 50%;*/
-/*    margin-right: 20px;*/
-/*}*/
-
-
 
 @media (min-width: 600px) {
     #certificados form, #certificados fieldset, #proyectos form, #proyectos fieldset, #timeline fieldset {

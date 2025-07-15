@@ -5,8 +5,8 @@ import { Assets } from "~/server/types/contacto";
 import { Certificados } from "@prisma/client"
 
 export class Certificado {
-    protected id: number;
-    protected nombre: string;
+    id: number;
+    nombre: string;
     imagen: string | null;
     fecha: Date | null;
     escuela?: Escuela;
