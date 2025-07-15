@@ -1,8 +1,11 @@
 import { PrismaClient } from '@prisma/client'
 import { AssetURL } from '../server/types/contacto'
+const config = useRuntimeConfig()
 
 const prismaClientSingleton = () => {
-  return new PrismaClient().$extends({
+  return new PrismaClient({
+    datasourceUrl: config.dbUrl as string
+  }).$extends({
     query: {
       async $allOperations({ model, operation, args, query }) {
         const result = await query(args);

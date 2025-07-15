@@ -46,20 +46,11 @@
 </template>
 
 <script setup lang="ts">
-// Import your variables (you'll need to convert var.js to ESM too)
-// import { cloudurl } from '~/utils/var.js'
-
 // Reactive data
 const resumeDrive = 'https://drive.google.com/file/d/1otmq9F_jcLdmL0niyZgp1wg_EQj3YyIJ/view?usp=sharing'
-const mensaje = "Desde que era niño me gustó aprender y jugar en computadores y me sumergi en este apasionante mundo de la tecnologia. Hoy en dia me considero un entusiasta de la informatica."
+const mensaje = "Un apasionado por la tecnologia y el analisis de datos"
 const parrafo2 = 'Soy una persona proactiva, curiosa, flexible y perseverante. Nunca paro de aprender.'
-//const style = 'overview'
-// const cloudurl = cloudurl // uncomment when you convert var.js
 
-// Lifecycle hooks
-onMounted(() => {
-    // Your mounted logic here
-})
 
 // SEO Meta tags (for Nuxt.js)
 useHead({
@@ -105,13 +96,29 @@ span.links {
     align-items: center;
 }
 
-.about > span > picture img {
+.about > span > img {
     mask-image: none;
+    min-width: 300px;
 }
 
 .about img {
     max-width: 300px;
     mask-image: linear-gradient(black 70%, transparent);
     filter: drop-shadow(0 0 2px white);
+}
+
+div.shadow {
+    position: absolute;
+    z-index: -11;
+    width: 20px;
+    height: 20px;
+    left: 140px;
+    bottom: 190px;
+    border-radius: 50%;
+    background-color: var(--text-color);
+    border: none;
+}
+.shadow {
+    animation: pulse 2.0s infinite;
 }
 </style>

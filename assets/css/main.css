@@ -112,20 +112,7 @@ section {
     border-radius: 50%;
     mask-image: linear-gradient(360deg, black 10%, transparent)
 }
-div.shadow {
-    position: absolute;
-    z-index: -11;
-    width: 20px;
-    height: 20px;
-    left: 140px;
-    bottom: 190px;
-    border-radius: 50%;
-    background-color: var(--text-color);
-    border: none;
-}
-.shadow {
-    animation: pulse 2.0s infinite;
-}
+
 
 .imgtext {
     display: flex;
@@ -285,7 +272,20 @@ span.expand::after {
     animation: spin 2s linear infinite;
     z-index: 2;
 }
-
+div.shadow {
+    position: absolute;
+    z-index: -11;
+    width: 20px;
+    height: 20px;
+    left: 140px;
+    bottom: 190px;
+    border-radius: 50%;
+    background-color: var(--text-color);
+    border: none;
+}
+.shadow {
+    animation: pulse 2.0s infinite;
+}
 
 .loading > span {
     animation: loading 1.4s infinite ease-in-out;

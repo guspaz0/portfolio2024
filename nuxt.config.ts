@@ -28,6 +28,9 @@ export default defineNuxtConfig({
   prisma: {
     autoSetupPrisma: true
   },
+  runtimeConfig: {
+    dbUrl: process.env.DATABASE_URL
+  },
 
   // Nitro configuration
   nitro: {
