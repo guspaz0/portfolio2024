@@ -5,6 +5,7 @@
             <span>
                 <NuxtImg
                     src="https://github-readme-stats.vercel.app/api?username=guspaz0&show_icons=true"
+                    height=""
                     alt="GitHub Stats"
                     format="webp"
                 />
@@ -12,6 +13,7 @@
                 <NuxtImg
                     src="https://github-readme-stats.vercel.app/api/top-langs/?username=guspaz0&size_weight=0.5&count_weight=0.5&hide=dockerfile,ejs,css,scss,html,handlebars,procfile&layout=compact&langs_count=6&theme=default"
                     alt="Top Languages"
+                    height=""
                     format="webp"
                 />
                 <p>{{ mensaje }}</p>
@@ -28,18 +30,12 @@
                     @contextmenu.prevent=""
                     src="https://avatars.githubusercontent.com/u/103156469?v=4"
                     height=""
+                    width=""
                     alt="perfil"
                     loading="lazy"
                 />
-                <div class="shadow"></div>
+                <!-- <div class="shadow"></div> -->
                 </span>
-                <NuxtImg
-                    @contextmenu.prevent=""
-                    id="flag"
-                    src="https://codingweek.org/wp-content/uploads/2023/09/chris-ried-ieic5Tq8YMk-unsplash-2048x1367.jpg"
-                    alt="country flag"
-                    loading="lazy"
-                />
             </div>
         </section>
     </div>
@@ -102,7 +98,7 @@ span.links {
 }
 
 .about img {
-    max-width: 300px;
+    max-width: 250px;
     mask-image: linear-gradient(black 70%, transparent);
     filter: drop-shadow(0 0 2px white);
 }
@@ -112,8 +108,8 @@ div.shadow {
     z-index: -11;
     width: 20px;
     height: 20px;
-    left: 140px;
-    bottom: 190px;
+    left: 130px;
+    bottom: 110px;
     border-radius: 50%;
     background-color: var(--text-color);
     border: none;

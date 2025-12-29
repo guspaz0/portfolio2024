@@ -1,20 +1,39 @@
 <template>
   <section v-bind:id="el">
     <h2>Tecnologías</h2>
-    <div className="carousel-container">
-      <div className="carousel" v-bind:style="style">
-        <span v-for="skill in aptitudes">
+    <div class="carousel-container">
+      <div class="carousel">
+        <span v-for="skill in aptitudes" :key="skill.id">
           <NuxtImg @contextmenu.prevent=""
-               v-if="(skill.alt as string)"
-               :src="skill.alt"
-               :alt="skill.nombre"
-               loading="lazy"
+                v-if="(skill.alt as string)"
+                :width="50"
+                :src="skill.alt"
+                :alt="skill.nombre"
+                loading="lazy"
             />
           <NuxtImg @contextmenu.prevent=""
-               v-else
-               :src="(skill.imagen as string)"
-               :alt="skill.nombre"
-               loading="lazy"
+                v-else
+                :width="50"
+                :src="(skill.imagen as string)"
+                :alt="skill.nombre"
+                loading="lazy"
+            />
+          <small>{{skill.nombre}}</small>
+        </span>
+        <span v-for="skill in aptitudes" :key="skill.id + '-clone'" aria-hidden="true">
+          <NuxtImg @contextmenu.prevent=""
+                v-if="(skill.alt as string)"
+                :src="skill.alt"
+                :alt="skill.nombre"
+                :width="50"
+                loading="lazy"
+            />
+          <NuxtImg @contextmenu.prevent=""
+                v-else
+                :width="50"
+                :src="(skill.imagen as string)"
+                :alt="skill.nombre"
+                loading="lazy"
             />
           <small>{{skill.nombre}}</small>
         </span>
@@ -37,34 +56,23 @@ const props = defineProps({
 
 const el = ref<string>('aptitudes')
 const aptitudes = ref<Aptitud[]>([])
-const style = ref<string>('translate:none;rotate:none;scale:none;transform:translateX(0px,0px,0px);')
-const carousel = ref<NodeJS.Timeout>(setInterval(() => {}, 10))
-
-function setCarousel(length: number) {
-  const anchoCarousel = length * 50 + 60
-  var counter = window.visualViewport.width / 2
-  carousel.value = setInterval(function() {
-    counter--
-    if (counter < (anchoCarousel - window.visualViewport.width / 2) * -1) {
-      counter = window.visualViewport.width / 2
-    }
-    let carousel = document.querySelector('.carousel') as HTMLDivElement
-    carousel.style.transform = `translate3d(${counter}px,0px,0px)`
-  }, 10)
-}
 
 watch(() => props.perfil, (currentPerfil) => {
   aptitudes.value = currentPerfil.aptitudes as Aptitud[]
 },{immediate:true})
 
-watch(() => aptitudes.value, () => {
-  clearInterval(carousel.value)
-  setCarousel(aptitudes.value.length)
-},{immediate:true})
-
 </script>
 
 <style scoped>
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 .carousel-container {
     position: relative;
     display: flex;
@@ -76,15 +84,19 @@ watch(() => aptitudes.value, () => {
 }
 
 .carousel {
-    position: absolute;
     display: flex;
     flex-direction: row;
     gap: 60px;
     white-space: nowrap;
+    animation: scroll 30s linear infinite;
 }
+
+.carousel:hover {
+    animation-play-state: paused;
+}
+
 .carousel img {
     width: 50px;
-    /*max-height: 50px;*/
     aspect-ratio: 1/1;
     object-fit: contain;
     filter: drop-shadow(0 0 1px white);

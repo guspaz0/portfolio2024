@@ -2,6 +2,7 @@
   <Navbar
     :darkmode="darkmode"
     @setdarkmode="setdarkmode"
+    :profileData="profileData"
     :profile="profile"
     @setProfile="setProfile"
   />
@@ -15,7 +16,7 @@
         <p>{{ mensaje }}</p>
       </div>
     </section>
-    <Perfiles :profile="profile" @setProfile="setProfile" />
+    <Perfiles :profileData="profileData" :profile="profile" @setProfile="setProfile" />
     <About />
     <Contacto />
   </section>
@@ -23,6 +24,9 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
+import type { Perfil } from '~/server/types/Perfil'
+
+const data = await $fetch('/api/perfiles')
 
 // Props definition
 const props = defineProps({
@@ -36,6 +40,7 @@ const props = defineProps({
 // Reactive state
 const darkmode = ref(false)
 const profile = ref(props.perfil || 1)
+const profileData = ref<Perfil[]>(data)
 const resumeDrive = ref('https://drive.google.com/file/d/1otmq9F_jcLdmL0niyZgp1wg_EQj3YyIJ/view?usp=sharing')
 const titulo = ref('Hola! Soy Gustavo Paz ')
 const tituloGradient = ref('Desarrollador de Software')

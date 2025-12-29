@@ -6,6 +6,8 @@ export default defineEventHandler(async (event: any) => {
   try {
     return await perfilesService.findAll() as Perfil[]
   } catch (error: any) {
-    throw createError({ statusCode: 404, message: 'Perfil no encontrado' })
+    console.log("Error /api/perfiles server event : \n",error)
+    throw new Error(error)
+    //throw createError({ statusCode: 404, message: 'Perfil no encontrado' })
   }
 })

@@ -25,7 +25,8 @@ export default defineNuxtConfig({
     componentIslands: true,
   },
   prisma: {
-    autoSetupPrisma: true
+    autoSetupPrisma: true,
+    runMigration: false,
   },
 
   // Nitro configuration

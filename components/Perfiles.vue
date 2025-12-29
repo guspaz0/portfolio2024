@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, onBeforeMount } from 'vue'
+import { ref, watch, onMounted, type PropType } from 'vue'
 import type { Perfil } from '~/server/types/Perfil'
 
 // Props
@@ -30,6 +30,11 @@ const props = defineProps({
     profile: {
         type: Number,
         default: 1
+    },
+    profileData: {
+        type: Object as PropType<Perfil[]>,
+        required: true,
+        default: []
     }
 })
 
@@ -45,27 +50,17 @@ const currentPerfil = ref<Perfil>()
 const loadPerfiles = async () => {
     try {
         // Replace with your actual service call
-        const perfilesTodos = await $fetch('/api/perfiles')
-
-        perfiles.value = (perfilesTodos || []) as Perfil[];
-
+        //const perfilesTodos = await $fetch('/api/perfiles')
+        perfiles.value = (props.profileData || []) as Perfil[];
         // Set initial perfil
-        //updateCurrentPerfil(selected.value)
-        currentPerfil.value = perfilesTodos.find((perfil) => perfil.id === selected.value) as Perfil
+        currentPerfil.value = props.profileData.find((perfil) => perfil.id === props.profile) as Perfil
     } catch(e) {
         console.log("get all perfiles: \n",e)
     }
 }
 
 const updateCurrentPerfil = async (profileId: number) => {
-    try {
-        const foundPerfil = await $fetch(`/api/perfiles/${profileId}`);
-        if (foundPerfil) {
-            currentPerfil.value = foundPerfil as Perfil
-        }
-    } catch (e) {
-        console.log("update current Perfil\n",e)
-    }
+    currentPerfil.value = props.profileData.find((perfil) => perfil.id === profileId) as Perfil
 }
 
 // Watchers
@@ -79,12 +74,11 @@ watch(() => selected.value, (newValue: number) => {
     updateCurrentPerfil(newValue)
 }, { immediate: true })
 
-// Lifecycle hooks
-onBeforeMount(() => {
+//Lifecycle hooks
+onMounted(() => {
     loadPerfiles()
 })
 </script>
-
 <style scoped>
 
 fieldset.perfiles {

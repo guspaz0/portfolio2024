@@ -7,7 +7,7 @@
                     v-model="selected"
                     @change="handleSelectChange"
                 >
-                    <option v-for="perfil in perfiles"
+                    <option v-for="perfil in profileData"
                         :key="perfil.id"
                         :value="perfil.id"
                     >
@@ -17,9 +17,9 @@
             </li>
             <li v-for="item in listasNav" :key="item.href">
                 <a
-                   :href="item.href"
-                   @click="handleNavClick(item.href)"
-                   class="nav-link"
+                    :href="item.href"
+                    @click="handleNavClick(item.href)"
+                    class="nav-link"
                 >
                 {{ item.nombre }}
                 </a>
@@ -40,8 +40,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watch, onUnmounted } from 'vue'
-
-const data = await $fetch('/api/perfiles')
+import type { Perfil } from '~/server/types/Perfil'
 
 // Props
 const props = defineProps({
@@ -52,6 +51,9 @@ const props = defineProps({
     profile: {
         type: [Number, String],
         default: 1
+    },
+    profileData: {
+        type: Object as PropType<Perfil[]>
     }
 })
 
@@ -74,7 +76,7 @@ const listasNav = [
 ]
 
 // You can uncomment this when you convert your Perfiles service
-const perfiles = ref(data)
+//const perfiles = ref<>(data)
 
 // Selected profile
 const selected = ref(+props.profile)

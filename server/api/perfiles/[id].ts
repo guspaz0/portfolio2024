@@ -9,6 +9,7 @@ export default defineEventHandler(async (event) => {
     return await perfilesService.getPerfil(+id as number) as Perfil
   } catch (error: any) {
     console.error(error)
+    throw new Error(error)
     /* 
       genera una vista en el frontend, mostrando el error.
       throw createError({ statusCode: 404, message: 'Perfil no encontrado' })
