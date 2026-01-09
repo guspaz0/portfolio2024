@@ -3,7 +3,7 @@
     <h2>Tecnologías</h2>
     <div class="carousel-container">
       <div class="carousel">
-        <span v-for="skill in aptitudes" :key="skill.id">
+        <span v-for="skill in aptitudes" :key="skill.id+skill.nombre">
           <NuxtImg @contextmenu.prevent=""
                 v-if="(skill.alt as string)"
                 :width="50"
@@ -20,7 +20,7 @@
             />
           <small>{{skill.nombre}}</small>
         </span>
-        <span v-for="skill in aptitudes" :key="skill.id + '-clone'" aria-hidden="true">
+        <span v-for="skill in aptitudes" :key="skill.id + skill.nombre + '-clone'" aria-hidden="true">
           <NuxtImg @contextmenu.prevent=""
                 v-if="(skill.alt as string)"
                 :src="skill.alt"
@@ -58,7 +58,9 @@ const el = ref<string>('aptitudes')
 const aptitudes = ref<Aptitud[]>([])
 
 watch(() => props.perfil, (currentPerfil) => {
-  aptitudes.value = currentPerfil.aptitudes as Aptitud[]
+  const setAptitudes = new Map<string,Aptitud>()
+  currentPerfil.aptitudes?.forEach(apt => setAptitudes.set(apt.nombre,apt))
+  aptitudes.value = Array.from(setAptitudes.values())
 },{immediate:true})
 
 </script>

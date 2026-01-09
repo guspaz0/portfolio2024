@@ -4,10 +4,10 @@
             <h2>{{ titulo }}</h2>
             <li>
                 <select name="perfil"
-                    v-model="selected"
+                    v-model="currentProfile"
                     @change="handleSelectChange"
                 >
-                    <option v-for="perfil in profileData"
+                    <option v-for="perfil in perfiles"
                         :key="perfil.id"
                         :value="perfil.id"
                     >
@@ -30,7 +30,7 @@
                     id="switch"
                     class="checkbox"
                     @click="toggleDarkMode"
-                    :checked="darkmode"
+                    :checked="darkMode"
                 />
                 <label for="switch" class="toggle"></label>
             </li>
@@ -41,24 +41,10 @@
 <script setup lang="ts">
 import { ref, onMounted, watch, onUnmounted } from 'vue'
 import type { Perfil } from '~/server/types/Perfil'
-
-// Props
-const props = defineProps({
-    darkmode: {
-        type: Boolean,
-        default: false
-    },
-    profile: {
-        type: [Number, String],
-        default: 1
-    },
-    profileData: {
-        type: Object as PropType<Perfil[]>
-    }
-})
-
-// Emits
-const emit = defineEmits(['setdarkmode', 'setProfile'])
+import { useWebsiteStore } from '~/stores/perfiles'
+const website = useWebsiteStore()
+await callOnce(website.fetch)
+const { perfiles, currentProfile, darkMode } = storeToRefs(website)
 
 // Template ref
 const navRef = ref(null)
@@ -74,12 +60,6 @@ const listasNav = [
     { href: '#certificados', nombre: 'Certificados' },
     { href: '#contacto', nombre: 'Contacto' }
 ]
-
-// You can uncomment this when you convert your Perfiles service
-//const perfiles = ref<>(data)
-
-// Selected profile
-const selected = ref(+props.profile)
 
 // Methods
 const handleScroll = () => {
@@ -117,21 +97,24 @@ const handleNavClick = (href: string) => {
 }
 
 const toggleDarkMode = () => {
-    emit('setdarkmode')
+    darkMode.value = !darkMode.value
+    const appTheme = document.documentElement
+    if (darkMode.value) {
+        console.log('Dark mode enabled')
+        appTheme.classList.remove('light')
+        appTheme.classList.add('dark')
+    } else {
+        console.log('Dark mode disabled')
+        appTheme.classList.remove('light')
+        appTheme.classList.add('dark')
+    }
 }
-
-// Watchers
-watch(() => props.profile, (newValue) => {
-    selected.value = +newValue
-})
-
-watch(selected, (newValue) => {
-    emit('setProfile', +newValue)
-})
 
 // Lifecycle hooks
 onMounted(() => {
     window.addEventListener('scroll', handleScroll)
+    const userPrefer = window.matchMedia(`(prefers-color-scheme: dark)`).matches
+    darkMode.value = userPrefer
 })
 
 onUnmounted(() => {

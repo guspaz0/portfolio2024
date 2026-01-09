@@ -1,11 +1,4 @@
 <template>
-  <Navbar
-    :darkmode="darkmode"
-    @setdarkmode="setdarkmode"
-    :profileData="profileData"
-    :profile="profile"
-    @setProfile="setProfile"
-  />
   <section class="home container">
     <section id="inicio" class="about">
       <div :class="style">
@@ -16,7 +9,7 @@
         <p>{{ mensaje }}</p>
       </div>
     </section>
-    <Perfiles :profileData="profileData" :profile="profile" @setProfile="setProfile" />
+    <Perfiles :profileData="perfiles" :profile="profile" @setProfile="setProfile" />
     <About />
     <Contacto />
   </section>
@@ -25,8 +18,10 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
 import type { Perfil } from '~/server/types/Perfil'
+import { useWebsiteStore } from '~/stores/perfiles'
+const website = useWebsiteStore()
 
-const data = await $fetch('/api/perfiles')
+const { perfiles, currentProfile, darkMode } = website
 
 // Props definition
 const props = defineProps({
@@ -38,25 +33,16 @@ const props = defineProps({
 })
 
 // Reactive state
-const darkmode = ref(false)
 const profile = ref(props.perfil || 1)
-const profileData = ref<Perfil[]>(data)
 const resumeDrive = ref('https://drive.google.com/file/d/1otmq9F_jcLdmL0niyZgp1wg_EQj3YyIJ/view?usp=sharing')
 const titulo = ref('Hola! Soy Gustavo Paz ')
 const tituloGradient = ref('Desarrollador de Software')
 const mensaje = ref('Selecciona un perfil para mostrar informacion pertinente')
 const style = ref('overview')
-//const cloudurl = ref(vars.cloudurl)
+const loginSecuence = ref<string[]>('login'.split(""))
+const loginBuffer = ref<string[]>([])
 
 // Methods
-const setdarkmode = () => {
-  darkmode.value = !darkmode.value
-}
-
-const colorSchema = (mode: string) => {
-  return window.matchMedia(`(prefers-color-scheme: ${mode})`).matches
-}
-
 const setProfile = (id: number) => {
   //sessionStorage?.setItem('profile', id.toString())
   profile.value = +id
@@ -67,30 +53,24 @@ watch(profile, (newValue) => {
   // Profile change handler if needed
 })
 
-watch(darkmode, (val) => {
-  const appTheme = document.documentElement
-  if (val) {
-    appTheme.classList.add('light')
-    appTheme.classList.remove('dark')
-  } else {
-    appTheme.classList.remove('light')
-    appTheme.classList.add('dark')
+const handleKeyUp = (event: KeyboardEvent) => {
+  // Add your secret phrase logic here
+  const key = event.key.toLowerCase()
+  const updated = [ ...loginBuffer.value, key].slice(-loginSecuence.value.length)
+  if (updated.join('') === loginSecuence.value.join('')) {
+    navigateTo('/login')
   }
-})
+  loginBuffer.value = updated
+};
+
+// Clean up event listener on unmount
+onUnmounted(() => {
+  document.removeEventListener('keyup', handleKeyUp);
+});
 
 // Lifecycle hooks
 onMounted(async () => {
-  const appTheme = document.documentElement
-
-  if (colorSchema('dark')) {
-    darkmode.value = false
-    appTheme.classList.remove('light')
-    appTheme.classList.add('dark')
-  } else {
-    darkmode.value = true
-    appTheme.classList.remove('light')
-    appTheme.classList.add('dark')
-  }
+  document.addEventListener('keyup', handleKeyUp);
 
   profile.value = +sessionStorage.getItem('profile') as number || props.perfil
 })

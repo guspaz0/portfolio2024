@@ -7,7 +7,7 @@
                     type="radio"
                     name="selected"
                     :id="'perfil' + perfil.id"
-                    v-model="selected"
+                    v-model="currentProfile"
                     :value="perfil.id"
                 />
                 <label :for="'perfil' + perfil.id">{{ perfil.nombre }}</label>
@@ -24,59 +24,22 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, type PropType } from 'vue'
 import type { Perfil } from '~/server/types/Perfil'
+import { useWebsiteStore } from '~/stores/perfiles'
+const website = useWebsiteStore()
 
-// Props
-const props = defineProps({
-    profile: {
-        type: Number,
-        default: 1
-    },
-    profileData: {
-        type: Object as PropType<Perfil[]>,
-        required: true,
-        default: []
-    }
-})
-
-// Emits
-const emit = defineEmits(['setProfile'])
+const { perfiles, currentProfile } = storeToRefs(website)
 
 // Reactive data
-const perfiles = ref<Perfil[]>([])
-const selected = ref(+props.profile)
-const currentPerfil = ref<Perfil>()
+//const selected = ref(+currentProfile.value)
+const currentPerfil = ref<Perfil | null>(null)
 
-// Methods
-const loadPerfiles = async () => {
-    try {
-        // Replace with your actual service call
-        //const perfilesTodos = await $fetch('/api/perfiles')
-        perfiles.value = (props.profileData || []) as Perfil[];
-        // Set initial perfil
-        currentPerfil.value = props.profileData.find((perfil) => perfil.id === props.profile) as Perfil
-    } catch(e) {
-        console.log("get all perfiles: \n",e)
-    }
-}
-
-const updateCurrentPerfil = async (profileId: number) => {
-    currentPerfil.value = props.profileData.find((perfil) => perfil.id === profileId) as Perfil
-}
-
-// Watchers
-watch(() => props.profile, (newValue: number) => {
-    selected.value = +newValue
-    updateCurrentPerfil(newValue)
-}, { immediate: true })
-
-watch(() => selected.value, (newValue: number) => {
-    emit('setProfile', +newValue)
-    updateCurrentPerfil(newValue)
-}, { immediate: true })
+watch(() => currentProfile.value, (perfilId) => {
+    currentPerfil.value = perfiles.value.find((perfil) => perfil.id === perfilId) as Perfil
+})
 
 //Lifecycle hooks
 onMounted(() => {
-    loadPerfiles()
+    currentPerfil.value = perfiles.value.find((perfil) => perfil.id === currentProfile.value) as Perfil
 })
 </script>
 <style scoped>

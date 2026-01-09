@@ -5,6 +5,8 @@
 <template>
   <div>
     <NuxtRouteAnnouncer />
-    <Home/>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </div>
 </template>

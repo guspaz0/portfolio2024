@@ -31,3 +31,4 @@ logs
 .github/workflows/.test
 
 github_pages
+.continue

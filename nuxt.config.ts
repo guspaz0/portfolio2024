@@ -7,19 +7,21 @@ export default defineNuxtConfig({
     dirs: ['~/components'],
   },
   devtools: { enabled: true },
-  //ssr: true,
+  ssr: true,
   vite: {
     resolve: {
       alias: {
         ".prisma/client/index-browser":
-          "./node_modules/.prisma/client/index-browser.js",
+          "./node_modules/.prisma/client/index-browser.js"
       },
     },
+    //plugins: [ '@vitejs/plugin-vue' ],
   },
   modules: [
     '@nuxt/image',
     '@nuxtjs/google-fonts',
-    "@prisma/nuxt"
+    '@prisma/nuxt',
+    '@pinia/nuxt'
   ],
   experimental: {
     componentIslands: true,
@@ -36,23 +38,15 @@ export default defineNuxtConfig({
     },
     esbuild: {
       options: {
-        tsconfigRaw: {
-          compilerOptions: {
-            //emitDecoratorMetadata: true,
-            experimentalDecorators: true,
-          },
-        },
       },
     },
-    typescript: {
-      tsConfig: {
-        compilerOptions: {
-          emitDecoratorMetadata: true,
-          experimentalDecorators: true,
-          strictPropertyInitialization: false,
-        },
-      },
-    },
+    // typescript: {
+    //   tsConfig: {
+    //     compilerOptions: {
+    //       strictPropertyInitialization: false,
+    //     },
+    //   },
+    // },
   },
   // GitHub Pages configuration
   app: {
