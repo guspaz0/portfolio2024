@@ -17,7 +17,7 @@ export class Proyecto {
   constructor(p: Proyectos) {
     this.id = p.id;
     this.nombre = p.nombre;
-    this.descripcion = p.descripcion;;
+    this.descripcion = p.descripcion;
     this.fecha = p.fecha;
     this.imagen = Assets.PROYECTO_URL + p.imagen;
     this.repositorio = p.repositorio
