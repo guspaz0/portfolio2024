@@ -69,6 +69,9 @@ importers:
       globals:
         specifier: ^16.3.0
         version: 16.5.0
+      nuxt-file-storage:
+        specifier: ^0.3.1
+        version: 0.3.1(magicast@0.5.1)
       prettier:
         specifier: ^3.6.2
         version: 3.7.4
@@ -3350,6 +3353,9 @@ packages:
 
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
+
+  nuxt-file-storage@0.3.1:
+    resolution: {integrity: sha512-h1rRQR0zaWwhCeF//csGz0OQCiVHv02Mr/AnrEDsezkDc1rT5gpkCsMEiI0IFeGOxYRdV1KdxDOcjW/8DAZVbA==}
 
   nuxt@3.20.2:
     resolution: {integrity: sha512-DoayekzYjYmGj7A5iI7crBiLRTq1K8U1DLgAR/vGADh1IQfOLagn5Klg1Jn1xxIyN8x0iiFDf3dGd2JWyiKBLA==}
@@ -8274,6 +8280,13 @@ snapshots:
   nth-check@2.1.1:
     dependencies:
       boolbase: 1.0.0
+
+  nuxt-file-storage@0.3.1(magicast@0.5.1):
+    dependencies:
+      '@nuxt/kit': 3.20.2(magicast@0.5.1)
+      defu: 6.1.4
+    transitivePeerDependencies:
+      - magicast
 
   nuxt@3.20.2(@parcel/watcher@2.5.1)(@types/node@24.10.4)(@vue/compiler-sfc@3.5.26)(better-sqlite3@12.5.0)(cac@6.7.14)(db0@0.3.4(better-sqlite3@12.5.0))(eslint@9.39.2(jiti@2.6.1))(ioredis@5.9.1)(magicast@0.5.1)(optionator@0.9.4)(rollup@4.55.1)(terser@5.44.1)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@24.10.4)(jiti@2.6.1)(terser@5.44.1)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2):
     dependencies:

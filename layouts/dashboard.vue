@@ -34,6 +34,8 @@ const menu = ref<Record<string, string>[]>([
     gap: 5px;
 }
 .menu-links > li {
+    border: 1px solid rgba(0, 0,0, 0.3);
+    border-radius: 5px;
     padding: 5px;
 }
 .menu-links > li:hover {

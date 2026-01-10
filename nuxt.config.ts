@@ -21,7 +21,8 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/google-fonts',
     '@prisma/nuxt',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    'nuxt-file-storage'
   ],
   experimental: {
     componentIslands: true,

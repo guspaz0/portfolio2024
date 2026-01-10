@@ -1,24 +1,20 @@
 // server/api/upload.ts
-import { createRouter, defineEventHandler } from 'h3';
+import { createRouter, defineEventHandler, readFormData } from 'h3';
 import { writeFileSync } from 'fs';
 import { tmpdir } from 'os';
 import { v2 as cloudinary } from 'cloudinary'
 
-const router = createRouter();
-
-router.post('/', defineEventHandler(async (event) => {
-    const files = event.node.req.files;
-    if (!files || !files.certificate) {
+export default defineEventHandler(async (event) => {
+    const body = await readFormData(event);
+    const imagen = body.get('imagen')
+    const nombre = body.get('nombre')
+    const fecha = body.get('fecha')
+    if (!imagen) {
         return { success: false, message: 'No file uploaded' };
     }
-
-    const tempPath = `${tmpdir()}/${files.certificate.name}`;
-    writeFileSync(tempPath, files.certificate.data);
-    // cloudinary.uploader
-    // .upload("my_image.jpg", { folder: 'certificados' })
-    // .then(result => console.log(result));
+    cloudinary.uploader
+    .upload(imagen as File, { folder: 'certificados' })
+    .then(result => console.log(result));
 
     return { success: true, message: 'File uploaded successfully' };
-}));
-
-export default router;
+});

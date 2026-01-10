@@ -11,7 +11,7 @@ export const useWebsiteStore = defineStore('portfolioStore', {
     }),
     actions: {
         async fetch() {
-            this.perfiles.values = await $fetch('/api/perfiles')
+            this.perfiles = await $fetch('/api/perfiles')
         }
     }
 })

@@ -1,24 +1,24 @@
 <!-- components/createCertificado.vue -->
 
 <template>
-    <div class="create-certificado">
+    <div class="create-form-container">
         <h2>Nuevo Aptitud</h2>
         <form @submit.prevent="submitForm">
-            <div>
+            <div class="inputs-container">
                 <div>
                     <label for="certificate">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" v-model="nombre"/>
-                    <small v-if="errors.nombre" :class="errors">{{ errors.nombre }}</small>
+                    <small v-if="errors.nombre" class="errors">{{ errors.nombre }}</small>
                     </div>
                 <div>
                     <label for="certificate">Logo File:</label>
-                    <input type="date" id="fecha" name="fecha" v-model="fecha"/>
-                    <small v-if="errors.imagen" :class="errors">{{ errors.imagen }}</small>
+                    <input type="file" id="imagen" name="imagen" accept=".jpg,.png,.jpeg" :change="onFileChange"/>
+                    <small v-if="errors.imagen" class="errors">{{ errors.imagen }}</small>
                 </div>
             </div>
-            <div>
+            <div class="submit-btn-container">
                 <button type="submit">Enviar</button>
-                <small v-if="errors" :class="errors">Corregir los errores</small>
+                <small v-if="errors" class="errors">Corregir los errores</small>
             </div>
         </form>
     </div>
@@ -30,32 +30,33 @@ import type { Aptitud } from '~/server/entities/aptitudes/Aptitudes.entity';
 definePageMeta({
     layout: 'dashboard'
 })
-const imageFile = ref<File | null>(null);
+const imagen = ref<File | null>(null);
 const nombre = ref('')
-const fecha = ref('')
 const errors = ref<Partial<Aptitud>>({})
 
 const onFileChange = (event: Event) => {
   const target = event.target as HTMLInputElement;
   if (target.files && target.files.length > 0) {
-    imageFile.value = target.files[0];
+    imagen.value = target.files[0];
+    errors.value = { ...errors.value, imagen: undefined }
+  } else {
+    errors.value = { ...errors.value, imagen: 'Imagen es requerida.' }
   }
 };
 
-watch(nombre, (newVal) => nombre.value = newVal)
-watch(fecha, (newVal) => fecha.value = newVal)
-
-function validateForm(){
-  if (!imageFile.value) {
-    alert('Please select a file to upload.');
-    return;
+watch(() => nombre.value, (newVal) => {
+  nombre.value = newVal
+  if (newVal.length == 0) {
+    errors.value = { ... errors.value, nombre: 'Nombre es requerido.' }
+  } else {
+    errors.value = { ... errors.value, nombre: undefined }
   }
-}
+})
 
 const submitForm = async () => {
 
   const formData = new FormData();
-  formData.append('image', imageFile.value)
+  formData.append('imagen', imagen.value)
   formData.append('nombre', nombre.value)
 
   try {
@@ -78,7 +79,7 @@ const submitForm = async () => {
 </script>
 
 <style scoped>
-.create-certificado {
+.create-form-container {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
@@ -86,24 +87,24 @@ const submitForm = async () => {
   border-radius: 5px;
 }
 
-.create-certificado h2 {
+.create-form-container h2 {
   text-align: center;
 }
 
-.create-certificado form {
+.create-form-container form {
   display: flex;
   flex-direction: column;
 }
 
-.create-certificado label {
+.create-form-container label {
   margin-bottom: 5px;
 }
 
-.create-certificado input[type="file"] {
+.create-form-container input[type="file"] {
   margin-bottom: 10px;
 }
 
-.create-certificado button {
+.create-form-container button {
   padding: 10px;
   background-color: #007bff;
   color: #fff;
@@ -112,7 +113,25 @@ const submitForm = async () => {
   cursor: pointer;
 }
 
-.create-certificado button:hover {
+.create-form-container button:hover {
   background-color: #0056b3;
+}
+
+.create-form-container .inputs-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.create-form-container .submit-btn-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+}
+
+small.errors {
+  color: red;
 }
 </style>
