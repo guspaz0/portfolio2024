@@ -16,6 +16,7 @@
         </div>
     </div>
 </template>
+
 <script setup lang="ts">
 defineProps({
     data: {
@@ -25,7 +26,7 @@ defineProps({
 })
 </script>
 
-<style>
+<style scoped>
 .cards-container {
     display: flex;
     flex-direction: column;

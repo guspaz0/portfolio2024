@@ -9,7 +9,7 @@
         <p>{{ mensaje }}</p>
       </div>
     </section>
-    <Perfiles :profileData="perfiles" :profile="profile" @setProfile="setProfile" />
+    <Perfiles/>
     <About />
     <Contacto />
   </section>
