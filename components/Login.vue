@@ -22,7 +22,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useWebsiteStore } from '~/stores/perfiles'
 definePageMeta({
-  middlewares: ['login.middleware']
+  middlewares: ['components/login']
 })
 
 const website = useWebsiteStore()
@@ -53,6 +53,11 @@ const handleLogin = async () => {
     alert('An error occurred during login.');
   }
 };
+onMounted(() => {
+  // if (authenticated.value) {
+  //   navigateTo('/dashboard')
+  // }
+})
 </script>
 
 <style scoped>

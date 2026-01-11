@@ -1,24 +1,11 @@
 // server/api/upload.ts
-import { createRouter, defineEventHandler } from 'h3';
-import { writeFileSync } from 'fs';
-import { tmpdir } from 'os';
 import { v2 as cloudinary } from 'cloudinary'
+import aptitudesService from '~/server/entities/aptitudes/aptitudes.service';
 
-const router = createRouter();
-
-router.post('/', defineEventHandler(async (event) => {
-    const files = event.node.req.files;
-    if (!files || !files.certificate) {
-        return { success: false, message: 'No file uploaded' };
+export default defineEventHandler(async (event) => {
+    try {
+        return await aptitudesService.findAll();
+    } catch (error) {
+        throw createError({ statusCode: 404, message: (error as Error).message })
     }
-
-    const tempPath = `${tmpdir()}/${files.certificate.name}`;
-    writeFileSync(tempPath, files.certificate.data);
-    cloudinary.uploader
-    .upload("my_image.jpg", { folder: 'aptitudes' })
-    .then(result => console.log(result));
-
-    return { success: true, message: 'File uploaded successfully' };
-}));
-
-export default router;
+});

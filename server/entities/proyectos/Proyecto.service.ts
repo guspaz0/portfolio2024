@@ -2,18 +2,18 @@ import { Proyecto } from "./Proyectos.entity";
 import prisma from '~/lib/prisma'
 
 class ProyectoService {
-  private repo;
+  constructor(private repo = prisma.proyectos){}
 
   async findAll(): Promise<Proyecto[] | undefined> {
     try {
-        return await this.repo.find();
+        return await this.repo.findMany();
     } catch (error) {
       console.error(error);
     }
   }
 
   async findOne(id: number): Promise<Proyecto | undefined> {
-    return await this.repo.findOneByOrFail({ id });
+    return await this.repo.findUniqueOrThrow({ where: { id } });
   }
 }
 

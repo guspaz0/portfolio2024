@@ -1,3 +1,4 @@
+import experiencias from "~/server/api/experiencias";
 import { Perfil } from "../../types/Perfil";
 import { Assets } from "../../types/contacto";
 import { Experiencias } from "@prisma/client"

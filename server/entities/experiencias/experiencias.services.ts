@@ -4,26 +4,19 @@ import prisma from '~/lib/prisma'
 class ExperienciasService {
   private repo = prisma.experiencias;
 
-  async findAll(): Promise<Experiencia[] | undefined> {
+  async findAll() {
     try {
-      const experiences = await this.repo.findMany();
-      return experiences;
+      return await this.repo.findMany();
     } catch (error) {
       console.error("Error fetching experiences:", error);
-    } finally {
-      await prisma.$disconnect();
     }
-
   }
 
-  async findOne(id: number): Promise<Experiencia | undefined> {
+  async findOne(id: number) {
     try {
-      const experience = await this.repo.findFirst({ where: { id } });
-      return experience;
+      return await this.repo.findFirst({ where: { id } });
     } catch (error) {
       console.error("Error fetching experience:", error);
-    } finally {
-      await prisma.$disconnect();
     }
   }
 }

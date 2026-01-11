@@ -43,7 +43,7 @@ import { ref, onMounted, watch, onUnmounted } from 'vue'
 import type { Perfil } from '~/server/types/Perfil'
 import { useWebsiteStore } from '~/stores/perfiles'
 const website = useWebsiteStore()
-await callOnce(website.fetch)
+await callOnce(website.fetchPerfiles)
 const { perfiles, currentProfile, darkMode } = storeToRefs(website)
 
 // Template ref

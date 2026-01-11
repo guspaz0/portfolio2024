@@ -1,29 +1,56 @@
 <template>
-<header class="dashboard-header">
-    <h2>Dashboard</h2>
-    <ul class="menu-links">
-        <li v-for="link in menu">
-            <NuxtLink :to="link.link">{{ link.name }}</NuxtLink>
-        </li>
-    </ul>
-</header>
-<slot></slot>
+    <div class="dashboard-layout">
+        <header class="dashboard-header">
+            <h2>Dashboard</h2>
+            <ul class="menu-links">
+                <li v-for="link in menu" :id="link.name">
+                    <NuxtLink :to="link.link">
+                        {{ link.name }}
+                    </NuxtLink>
+                </li>
+            </ul>
+        </header>
+        <main class="dashboard-content">
+            <slot></slot>
+        </main>
+    </div>
 </template>
 <script setup lang="ts">
 const menu = ref<Record<string, string>[]>([
-    { name: 'Crear Aptitud', link: '/dashboard/addAptitud' },
-    { name: 'Crear Certificado', link: '/dashboard/addCertificado'},
     { name: 'Portfolio', link: '/'},
+    { name: 'Aptitudes', link: '/dashboard/aptitudes' },
+    { name: 'Certificados', link: '/dashboard/certificados'},
+    { name: 'Escuelas', link: '/dashboard/escuelas' },
+    { name: 'proyectos', link: '/dashboard/proyectos' },
+    { name: 'Logout', link: '/logout' }
 ])
+
+const activePage = ref('')
+
+function handleActivePage(e: Event) {
+    activePage.value = (e.target as HTMLElement).id
+}
 
 </script>
 
 <style>
+li .active {
+    background-color: rgba(0,0,0,0.3);
+}
+.dashboard-layout {
+    height: -webkit-fill-available;
+}
 .dashboard-header {
+    width: -webkit-fill-available;
+    padding-inline: 5px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    z-index: 10000;
+}
+.dashboard-content {
+    margin: 0;
 }
 .menu-links {
     display: flex;

@@ -2,14 +2,14 @@ import { Escuela } from './Escuelas.entity';
 import prisma from '~/lib/prisma'
 
 class EscuelasService {
-  private repo;
+  constructor(private repo = prisma.escuelas){}
 
   async findAll(): Promise<Escuela[]> {
-    return this.repo.find();
+    return await this.repo.findMany();
   }
 
   async findOne(id: number): Promise<Escuela | undefined> {
-    return await this.repo.findOneByOrFail({ id });
+    return await this.repo.findUniqueOrThrow({ where: { id } });
   }
 
 }

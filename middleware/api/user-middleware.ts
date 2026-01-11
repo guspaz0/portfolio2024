@@ -10,8 +10,7 @@ export default defineEventHandler((event) => {
     const key = process.env.JWT_KEY
     if (!key) throw new Error('server error: authentication key not found')
     
-    const blackList = ['certificados', 'aptitudes', ]
-    if (blackList.some(path => event.path.includes(`/api/${path}`))) {
+    if (event.path.includes('/dashboard')) {
         if (auth_token) {
             jwt.verify(auth_token, key, (err, data) => {
                 if (!err) {

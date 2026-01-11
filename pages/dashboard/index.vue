@@ -1,12 +1,13 @@
-<!-- pages/dashboard.vue -->
-
 <template>
     <div class="dashboard-container">
         <div>
             
         </div>
         <div class="dashboard-content">
-            
+            <h3>Contador de Entidades</h3>
+            <div class="content">
+                <span v-for="[entity, count] in Object.entries(entitiesCount)" :key="entity"><b>{{ entity }}: </b>{{ count }}</span>
+            </div>
         </div>
     </div>
 </template>
@@ -15,6 +16,11 @@
 definePageMeta({
     layout: 'dashboard'
 })
+import { useWebsiteStore } from '~/stores/perfiles'
+const store = useWebsiteStore()
+await callOnce(store.fetchCountEntities)
+const { entitiesCount } = storeToRefs(store)
+
 </script>
 
 <style scoped>
@@ -46,8 +52,15 @@ definePageMeta({
 
 .content {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
+    gap: 10px;
+}
+
+.content > span {
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    padding: 10px;
 }
 </style>
