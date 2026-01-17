@@ -39,7 +39,7 @@ export default defineNuxtConfig({
   // Nitro configuration
   nitro: {
     prerender: {
-      routes: ['/sitemap.xml']
+      routes: []
     },
     hooks: {
       'rollup:before': (nitro) =>{
