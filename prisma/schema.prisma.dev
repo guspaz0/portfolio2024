@@ -1,0 +1,200 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider        = "prisma-client-js"
+  output          = "../node_modules/.prisma/client"
+  previewFeatures = ["views"]
+}
+
+datasource db {
+  provider     = "sqlite"
+  url          = env("DATABASE_URL_DEV")
+  relationMode = "foreignKeys"
+}
+
+model Aptitudes {
+  id           Int                    @id @default(autoincrement())
+  nombre       String
+  imagen       String?
+  categoria    Categorias             @relation(fields: [categoria_id], references: [id])
+  categoria_id Int
+  perfiles     AptitudesPerfil[]
+  proyectos    AptitudesProyecto[]
+  certificados AptitudesCertificado[]
+
+  @@map("aptitudes")
+}
+
+model Categorias {
+  id        Int         @id @default(autoincrement())
+  nombre    String
+  aptitudes Aptitudes[]
+
+  @@map("categorias")
+}
+
+model Certificados {
+  id         Int                    @id @default(autoincrement())
+  nombre     String
+  imagen     String?
+  fecha      DateTime?
+  escuela    Escuelas               @relation("escuela", fields: [escuela_id], references: [id])
+  escuela_id Int
+  perfiles   CertificadosPerfil[]
+  aptitudes  AptitudesCertificado[]
+
+  @@map("certificados")
+}
+
+model Escuelas {
+  id           Int              @id @default(autoincrement())
+  nombre       String
+  imagen       String?
+  certificados Certificados[]   @relation("escuela")
+  perfiles     EscuelasPerfil[]
+
+  @@map("escuelas")
+}
+
+model Eventos {
+  id          Int       @id @default(autoincrement())
+  titulo      String
+  descripcion String
+  fecha       DateTime?
+  imagen      String?
+
+  @@map("eventos")
+}
+
+model Experiencias {
+  id          Int                 @id @default(autoincrement())
+  nombre      String
+  descripcion String?
+  empresa     String?
+  imagen      String?
+  fecha       DateTime?
+  fecha_fin   DateTime?
+  perfiles    ExperienciaPerfil[]
+
+  @@map("experiencias")
+}
+
+model Perfiles {
+  id           Int                  @id @default(autoincrement())
+  nombre       String
+  aptitudes    AptitudesPerfil[]
+  certificados CertificadosPerfil[]
+  escuelas     EscuelasPerfil[]
+  proyectos    ProyectosPerfil[]
+  experiencias ExperienciaPerfil[]
+
+  @@map("perfiles")
+}
+
+model Proyectos {
+  id          Int                 @id @default(autoincrement())
+  nombre      String
+  descripcion String
+  fecha       DateTime?
+  imagen      String?
+  repositorio String?
+  deploy      String?
+  aptitudes   AptitudesProyecto[]
+  perfiles    ProyectosPerfil[]
+
+  @@map("proyectos")
+}
+
+model CertificadosPerfil {
+  perfil_id      Int
+  certificado_id Int
+
+  perfil      Perfiles     @relation(fields: [perfil_id], references: [id])
+  certificado Certificados @relation(fields: [certificado_id], references: [id])
+
+  @@id([certificado_id, perfil_id])
+  @@map("certificados_perfil")
+}
+
+model AptitudesPerfil {
+  aptitud_id Int
+  perfil_id  Int
+
+  aptitud Aptitudes @relation(fields: [aptitud_id], references: [id])
+  perfil  Perfiles  @relation(fields: [perfil_id], references: [id])
+
+  @@id([aptitud_id, perfil_id])
+  @@map("aptitudes_perfil")
+}
+
+model ProyectosPerfil {
+  proyecto_id Int
+  perfil_id   Int
+
+  proyecto Proyectos? @relation(fields: [proyecto_id], references: [id])
+  perfil   Perfiles?  @relation(fields: [perfil_id], references: [id])
+
+  @@id([proyecto_id, perfil_id]) // Composite key for many-to-many relationships
+  @@map("proyectos_perfil")
+}
+
+model EscuelasPerfil {
+  escuela_id Int
+  perfil_id  Int
+
+  escuela Escuelas @relation(fields: [escuela_id], references: [id])
+  perfil  Perfiles @relation(fields: [perfil_id], references: [id])
+
+  @@id([escuela_id, perfil_id])
+  @@map("perfiles_escuelas")
+}
+
+model AptitudesProyecto {
+  aptitud_id  Int
+  proyecto_id Int
+
+  aptitud  Aptitudes @relation(fields: [aptitud_id], references: [id])
+  proyecto Proyectos @relation(fields: [proyecto_id], references: [id])
+
+  @@id([aptitud_id, proyecto_id])
+  @@map("proyectos_aptitudes")
+}
+
+model AptitudesCertificado {
+  aptitud_id     Int
+  certificado_id Int
+  aptitud        Aptitudes    @relation(fields: [aptitud_id], references: [id])
+  certificado    Certificados @relation(fields: [certificado_id], references: [id])
+
+  @@id([aptitud_id, certificado_id])
+  @@map("certificados_aptitudes")
+}
+
+model ExperienciaPerfil {
+  experiencia_id Int @map("experiencia_id")
+  perfil_id      Int @map("perfil_id")
+
+  experiencia Experiencias @relation(fields: [experiencia_id], references: [id])
+  perfil      Perfiles     @relation(fields: [perfil_id], references: [id])
+
+  @@id([experiencia_id, perfil_id])
+  @@map("experiencias_perfil")
+}
+
+view certificados_view {
+  id              Int
+  nombre          String
+  imagen          String?
+  fecha           DateTime?
+  escuela_id      Int
+  escuela_nombre  String
+  escuela_imagen  String
+}
+
+view aptitudes_view {
+  id                Int
+  nombre            String
+  imagen            String?
+  categoria_id      Int
+  categoria_nombre  String
+}

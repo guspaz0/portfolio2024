@@ -4,12 +4,12 @@
     <form>
       <fieldset>
         <legend>Filtros</legend>
-        <label for="filterTec">Aptitud:</label>
-        <select id="filterTec" v-model="filterTecnologia">
-          <option v-for="tec in aptitudes" :key="tec.id" :value="tec.id">
-            {{ tec.nombre }} ({{ tec.countProyects }})
-          </option>
-        </select>
+          <MaterialSelect
+            v-model.value="filterTecnologia"
+            :options="aptitudes.map(apt => ({ value: apt.id, name: apt.nombre }))"
+            :label="'Aptitud'"
+            :placeholder="'Seleccionar'"
+          />
       </fieldset>
       <small>Mostrando {{ proyectos.length }} de {{ perfil?.proyectos.length }} Proyectos</small>
       <span class="card" @click.prevent="reset">Ver Todos</span>
@@ -26,6 +26,7 @@
 import { ref, watch, onMounted } from 'vue'
 import type { Aptitud } from '~/server/entities/aptitudes/Aptitudes.entity'
 import type { Proyecto } from '~/server/entities/proyectos/Proyectos.entity'
+import MaterialSelect from '../composables/MaterialSelect.vue'
 const ProyectoComp = resolveComponent('proyectos/ProyectoComp')
 
 

@@ -3,7 +3,7 @@
         <span
             class="img"
             :style="{
-            backgroundImage: `linear-gradient(to bottom, rgba(109, 105, 105, 0.655), rgba(109, 105, 105, 0.1)), url(${proyecto.imagen})`
+                backgroundImage: `linear-gradient(to bottom, rgba(109, 105, 105, 0.655), rgba(109, 105, 105, 0.1)), url(${proyecto.imagen})`
             }"
         />
         <h2>{{ proyecto.nombre }}</h2>

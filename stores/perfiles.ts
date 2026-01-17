@@ -5,6 +5,8 @@ import type { Certificado } from "~/server/entities/certificados/Certificados.en
 import { Aptitud } from "~/server/entities/aptitudes/Aptitudes.entity";
 import type { Escuela } from "~/server/entities/escuelas/Escuelas.entity";
 import { Proyecto } from "~/server/entities/proyectos/Proyectos.entity";
+import type { Categoria } from "~/server/entities/categorias/Categorias.entity";
+import type { aptitudes_view } from "@prisma/client";
 
 export const useWebsiteStore = defineStore('portfolioStore', {
     state: () => ({
@@ -13,9 +15,10 @@ export const useWebsiteStore = defineStore('portfolioStore', {
         authenticated: ref<boolean>(false),
         darkMode: ref<boolean>(false),
         certificados: ref<Certificado[]>([]),
-        aptitudes: ref<Aptitud[]>([]),
+        aptitudes: ref<aptitudes_view[]>([]),
         escuelas: ref<Escuela[]>([]),
         proyectos: ref<Proyecto[]>([]),
+        categorias: ref<Categoria[]>([]),
         entitiesCount: ref<Record<string, number>>({}),
     }),
     actions: {
@@ -36,7 +39,9 @@ export const useWebsiteStore = defineStore('portfolioStore', {
         },
         async fetchCountEntities() {
             this.entitiesCount = await $fetch('/api/dashboard')
+        },
+        async fetchCategorias() {
+            this.categorias = await $fetch('/api/categorias')
         }
     }
 })
-

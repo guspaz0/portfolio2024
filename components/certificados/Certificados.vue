@@ -4,18 +4,18 @@
     <form>
       <fieldset>
         <legend>Filtros</legend>
-        <label for="filterEsc">Escuela:</label>
-        <select id="filterEsc" v-model="filterEscuela">
-          <option v-for="esc in escuelas" :key="esc.id" :value="esc.id">
-            {{ esc.nombre }}
-          </option>
-        </select>
-        <label for="filterTec">Aptitud:</label>
-        <select id="filterTec" v-model="filterTecnologia">
-          <option v-for="tec in aptitudes" :key="tec.id" :value="tec.id">
-            {{ tec.nombre }} ({{ tec.countCertificados }})
-          </option>
-        </select>
+        <MaterialSelect
+          v-model:value="filterEscuela"
+          :options="escuelas.map(esc => ({ name: esc.nombre, value: esc.id }))"
+          :label="'Escuela'"
+          :placeholder="'Seleccionar'"
+        />
+        <MaterialSelect
+          v-model:value="filterTecnologia"
+          :options="aptitudes.map(apt => ({ name: apt.nombre, value: apt.id }))"
+          :label="'Aptitud'"
+          :placeholder="'Seleccionar'"
+        />
       </fieldset>
       <small>Mostrando {{ certificados.length }} de {{ perfil?.certificados?.length }} Certificados</small>
       <span class="card" @click.prevent="reset">Ver Todos</span>
@@ -29,6 +29,7 @@
 </template>
 
 <script setup lang="ts">
+import MaterialSelect from '../composables/MaterialSelect.vue'
 import type { Aptitud } from '~/server/entities/aptitudes/Aptitudes.entity'
 import type { Certificado } from '~/server/entities/certificados/Certificados.entity'
 import type { Escuela } from '~/server/entities/escuelas/Escuelas.entity'
@@ -115,4 +116,8 @@ watch(() => props.perfil, (currentPerfil) => {
     filter: drop-shadow(0 0 1px white);
 }
 
+.certificados fieldset {
+  display: flex;
+  flex-direction: row;
+}
 </style>

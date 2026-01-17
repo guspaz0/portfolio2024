@@ -1,14 +1,34 @@
 :root,
     :root.ligth {
+        color-scheme: light;
         font-size: 14px;
         --bg-color: #fff;
         --text-color: #123;
         --theme-section-bg-lightgrad: linear-gradient(103deg,#f5f6ff 10%,#dff4fb);
+        
+        --material-ui-color: rgba(0, 0, 0, 0.87);
+        --material-ui-bg-disabled: rgba(0, 0, 0, 0.04);
+        --material-ui-color-disabled: rgba(0, 0, 0, 0.38);
+        --material-ui-border-disabled: rgba(0, 0, 0, 0.26);
+        --material-ui-border-filled: rgba(0, 0, 0, 0.42);
+        --material-ui-bg-filled: rgba(0, 0, 0, 0.06);
+        --material-ui-bg-pseudo-filled: rgba(0, 0, 0, 0.09);
+        --material-ui-label-color: rgba(0, 0, 0, 0.6);
     }
     :root.dark{
+        color-scheme: dark;
         --bg-color: #123;
         --text-color: #fff;
         --theme-section-bg-lightgrad: linear-gradient(103deg,#212128 10%,#1a262c);
+        
+        --material-ui-color: rgba(255, 255, 255, 0.87);
+        --material-ui-bg-disabled: rgba(255, 255, 255, 0.04);
+        --material-ui-color-disabled: rgba(255, 255, 255, 0.38);
+        --material-ui-border-disabled: rgba(255, 255, 255, 0.26);
+        --material-ui-border-filled: rgba(255, 255, 255, 0.42);
+        --material-ui-bg-filled: rgba(255, 255, 255, 0.06);
+        --material-ui-bg-pseudo-filled: rgba(255, 255, 255, 0.09);
+        --material-ui-label-color: rgba(255, 255, 255, 0.6);
     }
 
 html {
@@ -311,8 +331,7 @@ input[type="radio"] {
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        gap: 10px;
-        flex-wrap: wrap;
+        gap: 5px;
     }
 }
 

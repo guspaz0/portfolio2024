@@ -1,18 +1,22 @@
 <template>
-    <CommandTable :entity="'proyecto'" :createComponent="AddProyecto" :data="proyectos"/>
+    <CommandTable 
+        :entity="'proyecto'" 
+        :create-component="AddProyecto" 
+        :data="proyectos"
+    />
 </template>
-<script setup land="ts">
+<script setup lang="ts">
+import CommandTable from '~/components/composables/CommandTable.vue';
+import AddProyecto from '~/components/proyectos/AddProyecto.vue';
+import { useWebsiteStore } from '~/stores/perfiles'
 definePageMeta({
     layout: 'dashboard'
 })
-import CommandTable from '~/components/customComponents/CommandTable.vue';
-import AddProyecto from '~/components/proyectos/AddProyecto.vue';
-import { useWebsiteStore } from '~/stores/perfiles'
 const store = useWebsiteStore()
 await callOnce(store.fetchProyectos)
 const { proyectos } = storeToRefs(store)
 </script>
 
-<styles>
+<style scoped>
     
-</styles>
+</style>

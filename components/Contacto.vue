@@ -28,26 +28,23 @@
       <fieldset>
         <legend>Correo</legend>
 
-        <label for="subject">Asunto:</label>
-        <input
-          v-model="subject"
-          id="subject"
-          type="text"
-          name="subject"
-          placeholder="Escribe el asunto del mensaje"
-          required
+        <MaterialInput
+          :id="'subject'"
+          v-model="mailData.subject"
+          :type="'text'"
+          :label="'Asunto'"
+          :error="!!errors.subject"
+          :helper-text="errors.subject || ''"
+          :variant="'standard'"
         />
-
-        <label for="body">Mensaje:</label>
-        <textarea
-          v-model="body"
-          id="body"
-          name="body"
-          rows="10"
-          cols="40"
-          placeholder="Escribe tu mensaje aquí..."
-          required
-        ></textarea>
+        <MaterialTextArea
+          v-model="mailData.message"
+          :label="'Mensaje'"
+          :rows="10"
+          :cols="40"
+          :error="!!errors.message"
+          :helper-text="errors.message"
+        />
 
         <span
           class="card"
@@ -65,9 +62,10 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { Assets } from '~/server/types/contacto'
-
+import MaterialInput from './composables/MaterialInput.vue'
+import MaterialTextArea from './composables/MaterialTextArea.vue'
 // Reactive data
 const titulo = "Contacto"
 
@@ -85,8 +83,12 @@ const redes = [
 ]
 
 // Form data
-const body = ref('')
-const subject = ref('')
+const mailData = reactive({
+  subject: '',
+  message: ''
+})
+
+const errors = ref<Record<string, string | undefined>>({})
 
 // Methods
 const handleSubmit = () => {

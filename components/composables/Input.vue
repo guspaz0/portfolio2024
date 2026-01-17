@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{ 
-    type: 'text' | 'search',
+    type: 'text' | 'search' | 'date',
     name: string,
     error: string | undefined,
 }>()
@@ -12,11 +12,11 @@ const prop = defineModel<string>({
 
 <template>
     <div class="input-container">
-        <label :for="Date.now()*Math.random()+name">{{ name }}:</label>
+        <label :for="name">{{ name }}:</label>
         <input class="custom-input"
             :type="type" 
             :id="name" 
-            :name="name" 
+            :name="name"
             v-model="prop"
         />
         <small v-if="error" class="errors">{{ error }}</small>
@@ -27,7 +27,7 @@ const prop = defineModel<string>({
 <style scoped>
 .input-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 5px;
@@ -36,6 +36,7 @@ const prop = defineModel<string>({
 .custom-input {
     border-radius: 5px;
     padding: 5px;
+    width: 250px;
 }
 
 small.errors {

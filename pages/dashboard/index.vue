@@ -13,13 +13,18 @@
 </template>
 
 <script setup lang="ts">
+import { useWebsiteStore } from '~/stores/perfiles'
 definePageMeta({
     layout: 'dashboard'
 })
-import { useWebsiteStore } from '~/stores/perfiles'
 const store = useWebsiteStore()
-await callOnce(store.fetchCountEntities)
 const { entitiesCount } = storeToRefs(store)
+
+onMounted(async () => {
+    if (!entitiesCount.value) {
+        await callOnce(store.fetchCountEntities)
+    }
+})
 
 </script>
 

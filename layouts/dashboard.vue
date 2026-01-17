@@ -8,6 +8,9 @@
                         {{ link.name }}
                     </NuxtLink>
                 </li>
+                <li>
+                    <DarkThemeButton/>
+                </li>
             </ul>
         </header>
         <main class="dashboard-content">
@@ -16,6 +19,8 @@
     </div>
 </template>
 <script setup lang="ts">
+import DarkThemeButton from '~/components/composables/DarkThemeButton.vue';
+
 const menu = ref<Record<string, string>[]>([
     { name: 'Portfolio', link: '/'},
     { name: 'Aptitudes', link: '/dashboard/aptitudes' },

@@ -3,7 +3,7 @@
         <div>
             <details>
                 <summary>Crear {{ entity }}</summary>
-                <component :is="createComponent"/>
+                <component class="content" :is="createComponent"/>
             </details>
         </div>
         <div class="dashboard-content">
@@ -59,22 +59,24 @@ defineProps({
     align-items: 'center';
     gap: 5px;
 }
-
-.content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 details {
     width: fit-content;
     border-radius: 5px;
+    transition: all 0.3s ease;
+}
+.content {
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 details > summary {
+    font-weight: bold;
     padding: 5px;
     border-radius: 5px;
 }
 details > summary:hover {
     background-color: var(--bg-color);
+}
+details[open] .content {
+    opacity: 1;
 }
 </style>

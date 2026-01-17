@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import path from 'path'
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
@@ -14,8 +15,7 @@ export default defineNuxtConfig({
         ".prisma/client/index-browser":
           "./node_modules/.prisma/client/index-browser.js"
       },
-    },
-    //plugins: [ '@vitejs/plugin-vue' ],
+    }
   },
   modules: [
     '@nuxt/image',
@@ -29,25 +29,49 @@ export default defineNuxtConfig({
   },
   prisma: {
     autoSetupPrisma: true,
-    runMigration: false,
+    runMigration: true,
+    writeToSchema: false,
+    formatSchema: true,
+    prismaSchemaPath: process.env.NODE_ENV == 'development'
+      ? path.join(process.cwd(),'prisma', 'schema.prisma.dev')
+      : path.join(process.cwd(),'prisma', 'schema.prisma')
   },
-
   // Nitro configuration
   nitro: {
     prerender: {
       routes: ['/sitemap.xml']
     },
+    hooks: {
+      'rollup:before': (nitro) =>{
+        nitro.options.moduleSideEffects.push('reflect-metadata')
+      }
+    },
+    rollupConfig:{
+      output: {
+        banner: 'import "reflect-metadata";',
+      }
+    },
     esbuild: {
       options: {
+        target: 'esnext',
+        tsconfigRaw: JSON.stringify({
+          compilerOptions: {
+            experimentalDecorators: true, 
+            target: 'esnext',
+            emitDecoratorMetadata: true
+          }
+        })
       },
     },
-    // typescript: {
-    //   tsConfig: {
-    //     compilerOptions: {
-    //       strictPropertyInitialization: false,
-    //     },
-    //   },
-    // },
+    typescript: {
+      tsConfig: {
+        compilerOptions: {
+          strictPropertyInitialization: false,
+          experimentalDecorators: true,
+          emitDecoratorMetadata: true
+        },
+      },
+    },
   },
   // GitHub Pages configuration
   app: {

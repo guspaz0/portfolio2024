@@ -1,6 +1,6 @@
 <template>
   <section v-bind:id="el">
-    <h2>Tecnologías</h2>
+    <h2>Aptitudes</h2>
     <div class="carousel-container">
       <div class="carousel">
         <span v-for="skill in aptitudes" :key="skill.id+skill.nombre">
