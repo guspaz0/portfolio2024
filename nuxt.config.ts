@@ -24,8 +24,15 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'nuxt-auth-utils',
     '@nuxt/icon',
-    'nuxt-toast'
+    'nuxt-toast',
+    '@nuxtjs/color-mode'
   ],
+  colorMode: {
+    preference: 'system', // default theme: 'light', 'dark' or 'system'
+    fallback: 'light',    // fallback if system preference is not available
+    classSuffix: '',      // no suffix, so classes are 'dark' or 'light'
+    storageKey: 'nuxt-color-mode' // localStorage key
+  },
   icon: {
     serverBundle: {
       collections: ['line-md', 'logos']

@@ -2,18 +2,9 @@
 const website = useWebsiteStore()
 const { darkMode } = storeToRefs(website)
 
-const toggleDarkMode = () => {
-    darkMode.value = !darkMode.value
-    const appTheme = document.documentElement
-    if (darkMode.value) {
-        console.log('Dark mode enabled')
-        appTheme.classList.remove('light')
-        appTheme.classList.add('dark')
-    } else {
-        console.log('Dark mode disabled')
-        appTheme.classList.remove('light')
-        appTheme.classList.add('dark')
-    }
+const colorMode = useColorMode()
+const toggleTheme = () => {
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
 }
 
 onMounted(() => {
@@ -29,7 +20,7 @@ onMounted(() => {
             type="checkbox"
             class="checkbox"
             :checked="darkMode"
-            @click="toggleDarkMode"
+            @click="toggleTheme"
         />
         <label for="switch" class="toggle"></label>
     </div>
