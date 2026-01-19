@@ -1,10 +1,9 @@
 <template>
-    <AptitudComp v-for="tec in aptitudes?.slice(0, max)" 
+    <AptitudesItem v-for="tec in aptitudes?.slice(0, max)" 
         :key="tec.id" 
         :aptitud="tec"
     />
     <span v-if="aptitudes.length > max" 
-        class="expand" 
         @mouseenter.prevent="showAptitudes" 
         @contextmenu.prevent=""
     >
@@ -15,18 +14,16 @@
         @contextmenu.prevent=""
     >
         <span v-for="tec in aptitudes" :key="tec.id" class="skills">
-            <small>{{ tec.nombre }}</small>
-            <NuxtImg 
-                :src="(tec.imagen as string)" 
-                :alt="tec.nombre" 
-                loading="lazy" />
+            <Icon 
+                :name="'logos:'+tec.icon" 
+                size="2rem"
+            />
         </span>
     </dialog>
 </template>
 
 <script setup lang="ts">
 import type { Aptitud } from '~/server/entities/aptitudes/Aptitudes.entity';
-const AptitudComp = resolveComponent('aptitudes/AptitudComp')
 
 defineProps({
     aptitudes: {
@@ -40,6 +37,7 @@ defineProps({
 })
 
 const showAptitudes = (e: MouseEvent) => {
+    e.stopPropagation()
     const skills = Array.from(e.target?.parentNode?.childNodes)
         .filter(s => s.tagName === "DIALOG") as HTMLDialogElement[]
     if (e.type === "mouseenter") {
@@ -66,7 +64,6 @@ const showAptitudes = (e: MouseEvent) => {
 .skills {
     filter: none;
     mask-image: none;
-    background-color: rgba(5,5,5, 0.1);
     padding: 5px;
     min-width: 60px;
     border-radius: 5px;
@@ -82,20 +79,15 @@ article .skills {
 }
 
 span.skills:hover {
-    background-color: rgba(5,5,5, 0.2);
     color: black;
 }
-span.skills small:hover{
-    position: absolute;
-    z-index: 50;
-}
-span.skills img {
-    display: none;
+
+span.skills span.iconify {
     max-width: 50px;
     max-height: 50px;
     transition: 500ms;
 }
-span.skills:hover img {
+span.skills:hover span.iconify {
     display: block;
     position: absolute;
     z-index: 50;
@@ -106,7 +98,6 @@ dialog {
 
 dialog:hover {
     position: absolute;
-
 }
 
 dialog[open] {

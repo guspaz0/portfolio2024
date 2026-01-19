@@ -176,7 +176,7 @@ onMounted(() => {
     position: relative;
     width: 100%;
     max-width: 300px;
-    margin-bottom: 10px;
+    margin-bottom: 0;
 }
 .chips-container {
     display: flex;
@@ -217,7 +217,7 @@ onMounted(() => {
     background-color: var(--bg-color);
     text-align: left;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1rem;
     
     color: var(--material-ui-color);
     display: 'none';

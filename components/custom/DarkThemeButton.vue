@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
-import { useWebsiteStore } from '~/stores/perfiles'
 const website = useWebsiteStore()
 const { darkMode } = storeToRefs(website)
 

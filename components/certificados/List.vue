@@ -23,13 +23,12 @@
 
     <div class="certificados">
       <p v-if="certificados.length === 0">No hay certificados con la Escuela/Aptitud seleccionada</p>
-      <CertificadoComp v-for="cert in certificados" :key="cert.id" :cert="cert" />
+      <CertificadosItem v-for="cert in certificados" :key="cert.id" :cert="cert" />
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import MaterialSelect from '../composables/MaterialSelect.vue'
 import type { Aptitud } from '~/server/entities/aptitudes/Aptitudes.entity'
 import type { Certificado } from '~/server/entities/certificados/Certificados.entity'
 import type { Escuela } from '~/server/entities/escuelas/Escuelas.entity'

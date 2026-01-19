@@ -10,24 +10,22 @@
 					:helper-text="errors.nombre || ''"
 					:variant="'standard'"
 				/>
-                <InputFile 
+                <CustomInputFile 
                     :name="'imagen'" 
                     v-model="formFields.imagen" 
                     v-model:errors="errors"
                 />
             </div>
-            <SubmitButton :content="'Enviar'" :errors="Object.keys(errors).length == 0"/>
+            <CustomSubmitButton :content="'Enviar'" :errors="Object.keys(errors).length == 0"/>
         </form>
     </div>
 </template>
 
 <script setup lang="ts">
-import SubmitButton from '../composables/SubmitButton.vue';
-import MaterialInput from '../composables/MaterialInput.vue';
-import InputFile from '../composables/InputFile.vue';
 import type { Escuelas } from '@prisma/client';
 import { EscuelaRequestDto, type EscuelaForm } from '~/server/entities/escuelas/EscuelaRequest.dto';
-import { useFormValidator } from '../composables/useFormValidator';
+const toast = useToast()
+
 const store = useWebsiteStore()
 const { escuelas } = storeToRefs(store)
 
@@ -57,16 +55,15 @@ const submitForm = async () => {
 		});
 
 		if (response.success) {
-			alert('Certificate uploaded successfully!');
+			toast.success({ title: 'Guardado', message: 'Escuela creada exitosamente!'});
 			escuelas.value = [ ...escuelas.value, response.data as Escuelas ]
 			const defaults = new EscuelaRequestDto()
 			Object.entries(defaults).forEach(([key, value]) => formFields[key] = value)
 		} else {
-			alert('Failed to upload certificate. Please try again.');
+			throw new Error(response.message || 'Error al crear escuela')
 		}
 	} catch (error) {
-		console.error('Error uploading certificate:', error);
-		alert('An error occurred. Please try again.');
+		toast.error({ title: 'Error', message: error.message });
 	}
 };
 </script>

@@ -22,14 +22,29 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@prisma/nuxt',
     '@pinia/nuxt',
-    'nuxt-file-storage'
+    'nuxt-auth-utils',
+    '@nuxt/icon',
+    'nuxt-toast'
   ],
+  icon: {
+    serverBundle: {
+      collections: ['line-md', 'logos']
+    }
+  },
+  runtimeConfig:{
+    session: {
+      password: '',
+      name: 'portfolio-session',
+      cookie: {
+        maxAge: 60 * 24 * 7, // 7 days
+      }
+    }
+  },
   experimental: {
     componentIslands: true,
   },
   prisma: {
     autoSetupPrisma: true,
-    runMigration: true,
     writeToSchema: false,
     formatSchema: true,
     prismaSchemaPath: process.env.NODE_ENV == 'development'

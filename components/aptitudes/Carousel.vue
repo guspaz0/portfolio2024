@@ -4,13 +4,7 @@
     <div class="carousel-container">
       <div class="carousel">
         <span v-for="skill in aptitudes" :key="skill.id+skill.nombre">
-          <NuxtImg @contextmenu.prevent=""
-                v-if="(skill.alt as string)"
-                :width="50"
-                :src="skill.alt"
-                :alt="skill.nombre"
-                loading="lazy"
-            />
+          <Icon v-if="skill.icon" :name="'logos:'+skill.icon" size="2em"/>
           <NuxtImg @contextmenu.prevent=""
                 v-else
                 :width="50"
@@ -21,13 +15,7 @@
           <small>{{skill.nombre}}</small>
         </span>
         <span v-for="skill in aptitudes" :key="skill.id + skill.nombre + '-clone'" aria-hidden="true">
-          <NuxtImg @contextmenu.prevent=""
-                v-if="(skill.alt as string)"
-                :src="skill.alt"
-                :alt="skill.nombre"
-                :width="50"
-                loading="lazy"
-            />
+          <Icon v-if="skill.icon" :name="'logos:'+skill.icon" size="2em"/>
           <NuxtImg @contextmenu.prevent=""
                 v-else
                 :width="50"

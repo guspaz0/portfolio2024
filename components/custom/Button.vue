@@ -22,7 +22,7 @@ function handleClick(event: Event) {
 
 </script>
 <template>
-    <button :class="variant" @click.prevent="handleClick">{{ title }}</button>
+    <button :class="variant" @click="handleClick">{{ title }}</button>
 </template>
 
 

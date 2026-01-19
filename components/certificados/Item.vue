@@ -10,7 +10,7 @@
     </span>
     <b>Tecnologias:</b>
     <div class="proyectos">
-      <Aptitudes 
+      <AptitudesList 
         :key="(cert.nombre as string)" 
         :aptitudes="cert.aptitudes"
         :max="2"
@@ -30,7 +30,6 @@
 <script setup lang="ts">
 import { Certificado } from '~/server/entities/certificados/Certificados.entity'
 import type { PropType } from 'vue'
-const Aptitudes = resolveComponent('Aptitudes')
 
 defineProps({
   cert: {

@@ -40,7 +40,6 @@
 
 <script setup lang="ts">
 import type { Experiencia } from '~/server/entities/experiencias/Experiencias.entity'
-import { ref, watch } from 'vue'
 import type { Perfil } from '~/server/types/Perfil'
 
 // Props definition

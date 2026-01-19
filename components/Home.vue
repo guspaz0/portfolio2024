@@ -16,12 +16,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
-import type { Perfil } from '~/server/types/Perfil'
-import { useWebsiteStore } from '~/stores/perfiles'
 const website = useWebsiteStore()
-
-const { perfiles, currentProfile, darkMode } = website
+const { perfiles, currentProfile, darkMode } = storeToRefs(website)
 
 // Props definition
 const props = defineProps({
@@ -33,25 +29,12 @@ const props = defineProps({
 })
 
 // Reactive state
-const profile = ref(props.perfil || 1)
-const resumeDrive = ref('https://drive.google.com/file/d/1otmq9F_jcLdmL0niyZgp1wg_EQj3YyIJ/view?usp=sharing')
 const titulo = ref('Hola! Soy Gustavo Paz ')
 const tituloGradient = ref('Desarrollador de Software')
 const mensaje = ref('Selecciona un perfil para mostrar informacion pertinente')
 const style = ref('overview')
 const loginSecuence = ref<string[]>('login'.split(""))
 const loginBuffer = ref<string[]>([])
-
-// Methods
-const setProfile = (id: number) => {
-  //sessionStorage?.setItem('profile', id.toString())
-  profile.value = +id
-}
-
-// Watchers
-watch(profile, (newValue) => {
-  // Profile change handler if needed
-})
 
 const handleKeyUp = (event: KeyboardEvent) => {
   // Add your secret phrase logic here
@@ -71,7 +54,5 @@ onUnmounted(() => {
 // Lifecycle hooks
 onMounted(async () => {
   document.addEventListener('keyup', handleKeyUp);
-
-  profile.value = +sessionStorage.getItem('profile') as number || props.perfil
 })
 </script>

@@ -9,6 +9,7 @@ export class Aptitud {
     id: number;
     nombre: string;
     imagen: string | null;
+    icon: string | null;
     categoria?: Categoria;
     perfiles?: Perfil[];
     proyectos?: Proyecto[];
@@ -21,7 +22,8 @@ export class Aptitud {
     const flatProyectos = a.proyectos?.flatMap(p => new Proyecto(p?.proyecto)) || undefined
     this.id = a.id;
     this.nombre = a?.nombre;
-    this.imagen = a.imagen? `${Assets.CLOUD_URL}${a.imagen}` : "";    
+    this.imagen = a.imagen? `${Assets.CLOUD_URL}${a.imagen}` : "";
+    this.icon = a.icon || '' ;
     this.categoria = a.categoria || undefined;
     this.perfiles = a.perfiles?.flatMap(p => p?.perfil) || undefined;
     this.proyectos =  flatProyectos;

@@ -1,18 +1,22 @@
 <template>
     <div class="dashboard-container">
-        <div>
-            <details>
-                <summary>Crear {{ entity }}</summary>
-                <component class="content" :is="createComponent"/>
-            </details>
-        </div>
+        <AuthState>
+            <template #default="{ loggedIn, clear, user }">
+                <div v-if="loggedIn">
+                    <details>
+                        <summary>Crear {{ entity }}</summary>
+                        <component class="content" :is="createComponent"/>
+                    </details>
+                </div>
+            </template>
+        </AuthState>
+
         <div class="dashboard-content">
-            <FlexList :data="data"/>
+            <CustomFlexList :data="data"/>
         </div>
     </div>
 </template>
 <script setup lang="ts">
-import FlexList from './FlexList.vue';
 defineProps({
     entity: {
         type: String,

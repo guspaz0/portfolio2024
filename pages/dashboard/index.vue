@@ -13,9 +13,9 @@
 </template>
 
 <script setup lang="ts">
-import { useWebsiteStore } from '~/stores/perfiles'
 definePageMeta({
-    layout: 'dashboard'
+    layout: 'dashboard',
+    middleware: ['auth']
 })
 const store = useWebsiteStore()
 const { entitiesCount } = storeToRefs(store)

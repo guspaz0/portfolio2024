@@ -1,17 +1,16 @@
 <template>
-    <CommandTable 
+    <CustomCommandTable 
         :entity="'aptitud'" 
-        :createComponent="AddAptitud" 
+        :createComponent="Add" 
         :data="aptitudes.map(apt => ({ ...apt, categoria: apt.categoria?.nombre }))"
     />
 </template>
 <script setup lang="ts">
+import Add from '~/components/aptitudes/Add.vue';
 definePageMeta({
     layout: 'dashboard'
 })
-import AddAptitud from '~/components/aptitudes/AddAptitud.vue';
-import CommandTable from '~/components/composables/CommandTable.vue';
-import { useWebsiteStore } from '~/stores/perfiles'
+
 const store = useWebsiteStore()
 await callOnce(store.fetchAptitudes)
 const { aptitudes } = storeToRefs(store)

@@ -1,14 +1,12 @@
 <template>
     <CommandTable 
         :entity="'certificado'" 
-        :create-component="AddCertificado" 
+        :create-component="Add" 
         :data="certificados.map((cert) => ({ ...cert, escuela: cert.escuela?.nombre}))"
     />
 </template>
 <script setup lang="ts">
-import AddCertificado from '~/components/certificados/addCertificado.vue';
-import CommandTable from '~/components/composables/CommandTable.vue';
-import { useWebsiteStore } from '~/stores/perfiles'
+import Add from '~/components/certificados/Add.vue';
 definePageMeta({
     layout: 'dashboard'
 })

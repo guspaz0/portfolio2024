@@ -15,31 +15,32 @@
         </fieldset>
 
         <Timeline v-if="currentPerfil?.id" :perfil="currentPerfil" />
-        <Certificados v-if="currentPerfil?.id" :key="currentPerfil.id" :perfil="currentPerfil" />
-        <Proyectos v-if="currentPerfil?.id" :perfil="currentPerfil" />
+        <CertificadosList v-if="currentPerfil?.id" :key="currentPerfil.id" :perfil="currentPerfil" />
+        <ProyectosList v-if="currentPerfil?.id" :perfil="currentPerfil" />
         <AptitudesCarousel v-if="currentPerfil?.id" :perfil="currentPerfil" />
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, type PropType } from 'vue'
 import type { Perfil } from '~/server/types/Perfil'
-import { useWebsiteStore } from '~/stores/perfiles'
 const website = useWebsiteStore()
 
 const { perfiles, currentProfile } = storeToRefs(website)
 
 // Reactive data
 //const selected = ref(+currentProfile.value)
-const currentPerfil = ref<Perfil | null>(null)
+const currentPerfil = ref<Perfil | null>()
 
 watch(() => currentProfile.value, (perfilId) => {
     currentPerfil.value = perfiles.value.find((perfil) => perfil.id === perfilId) as Perfil
 })
 
 //Lifecycle hooks
-onMounted(() => {
-    currentPerfil.value = perfiles.value.find((perfil) => perfil.id === currentProfile.value) as Perfil
+onMounted(async () => {
+    if (perfiles.value.length === 0) {
+        await callOnce(website.fetchPerfiles)
+        currentPerfil.value = perfiles.value.find((perfil) => perfil.id === (currentProfile.value || 1)) as Perfil
+    }
 })
 </script>
 <style scoped>

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import CustomButton from './CustomButton.vue';
 defineProps<{
     content?: string,
     name: string,

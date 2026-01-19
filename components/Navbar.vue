@@ -3,17 +3,12 @@
         <ul>
             <h2>{{ titulo }}</h2>
             <li>
-                <select name="perfil"
-                    v-model="currentProfile"
-                    @change="handleSelectChange"
-                >
-                    <option v-for="perfil in perfiles"
-                        :key="perfil.id"
-                        :value="perfil.id"
-                    >
-                        {{ perfil.nombre }}
-                    </option>
-                </select>
+                <MaterialSelect
+                    v-model:value="currentProfile"
+                    :options="perfiles.map(perf => ({ name: perf.nombre, value: perf.id }))"
+                    :placeholder="'Perfil'"
+                    :multiple="false"
+                />
             </li>
             <li v-for="item in listasNav" :key="item.href">
                 <a
@@ -25,23 +20,18 @@
                 </a>
             </li>
             <li>
-                <DarkThemeButton/>
+                <CustomDarkThemeButton/>
             </li>
         </ul>
     </nav>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch, onUnmounted } from 'vue'
-import type { Perfil } from '~/server/types/Perfil'
-import { useWebsiteStore } from '~/stores/perfiles'
-import DarkThemeButton from './composables/DarkThemeButton.vue'
 const website = useWebsiteStore()
-await callOnce(website.fetchPerfiles)
 const { perfiles, currentProfile, darkMode } = storeToRefs(website)
 
 // Template ref
-const navRef = ref(null)
+const navRef = useTemplateRef('navRef')
 
 // Reactive data
 const titulo = "Portfolio"
@@ -91,8 +81,11 @@ const handleNavClick = (href: string) => {
 }
 
 // Lifecycle hooks
-onMounted(() => {
+onMounted(async () => {
     window.addEventListener('scroll', handleScroll)
+    if (perfiles.value.length == 0 ) {
+        await callOnce(website.fetchPerfiles)
+    }
 })
 
 onUnmounted(() => {
@@ -101,14 +94,6 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.navbar select {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    opacity: inherit;
-}
-.navbar option {
-    opacity: 0.5;
-}
 .navbar {
     position: relative;
     place-items: center;

@@ -41,7 +41,7 @@
 					:error="!!errors.descripcion" 
 					:helper-text="errors.descripcion || ''"
 				/>
-                <InputFile class="item"
+                <CustomInputFile class="item"
 					v-model="formFields.imagen" 
 					v-model:errors="errors"
 					:name="'imagen'" 
@@ -64,22 +64,16 @@
                 />
             </div>
             <div class="submit-btn-container">
-                <SubmitButton :content="'Enviar'" :errors="Object.keys(errors).length == 0"/>
+                <CustomSubmitButton :content="'Enviar'" :errors="Object.keys(errors).length == 0"/>
             </div>
         </form>
     </div>
 </template>
 
 <script setup lang="ts">
-import SubmitButton from '../composables/SubmitButton.vue';
-import InputFile from '../composables/InputFile.vue';
-import MaterialTextArea from '../composables/MaterialTextArea.vue';
-import MaterialSelect from '../composables/MaterialSelect.vue';
-import MaterialInput from '../composables/MaterialInput.vue';
-import { useWebsiteStore } from '~/stores/perfiles';
 import { ProyectoRequestDto, type ProyectoForm } from '~/server/entities/proyectos/ProyectoForm.dto';
-import { storeToRefs } from 'pinia';
-import { useFormValidator } from '../composables/useFormValidator';
+const toast = useToast()
+
 const store = useWebsiteStore()
 const { aptitudes, perfiles, proyectos } = storeToRefs(store)
 
@@ -115,16 +109,15 @@ const submitForm = async () => {
 		});
 
 		if (response.success) {
-			alert('Certificate uploaded successfully!');
+			toast.success({ title: 'Guardado', message: 'Proyecto creado exitosamente!'});
 			proyectos.value = [ ...proyectos.value, response.data ]
 			const defaults = new ProyectoRequestDto()
 			Object.entries(defaults).forEach(([key, value]) => formFields[key] = value)
 		} else {
-			alert('Failed to upload certificate. Please try again.');
+			throw new Error(response.message || 'Error al crear escuela')
 		}
 	} catch (error) {
-		console.error('Error uploading certificate:', error);
-		alert('An error occurred. Please try again.');
+		toast.error({ title: 'Error', message: error.message });
 	}
 };
 

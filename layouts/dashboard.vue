@@ -3,13 +3,22 @@
         <header class="dashboard-header">
             <h2>Dashboard</h2>
             <ul class="menu-links">
-                <li v-for="link in menu" :id="link.name">
+                <li v-for="link in menu" :id="link.name" class="link">
                     <NuxtLink :to="link.link">
                         {{ link.name }}
                     </NuxtLink>
                 </li>
                 <li>
-                    <DarkThemeButton/>
+                    <CustomDarkThemeButton/>
+                </li>
+                <li>
+                    <AuthState>
+                        <template #default="{ loggedIn, clear, user }">
+                            <b v-if="user">{{ user.email.split('@')[0] }}</b>
+                            <CustomButton v-if="loggedIn" :title="'Logout'" @click="clear"/>
+                            <NuxtLink v-else to="/login">Login</NuxtLink>
+                        </template>
+                    </AuthState>
                 </li>
             </ul>
         </header>
@@ -19,7 +28,6 @@
     </div>
 </template>
 <script setup lang="ts">
-import DarkThemeButton from '~/components/composables/DarkThemeButton.vue';
 
 const menu = ref<Record<string, string>[]>([
     { name: 'Portfolio', link: '/'},
@@ -27,7 +35,7 @@ const menu = ref<Record<string, string>[]>([
     { name: 'Certificados', link: '/dashboard/certificados'},
     { name: 'Escuelas', link: '/dashboard/escuelas' },
     { name: 'proyectos', link: '/dashboard/proyectos' },
-    { name: 'Logout', link: '/logout' }
+    // { name: 'Logout', link: '/logout' }
 ])
 
 const activePage = ref('')
@@ -65,12 +73,12 @@ li .active {
     margin: 0;
     gap: 5px;
 }
-.menu-links > li {
+.menu-links > li.link {
     border: 1px solid rgba(0, 0,0, 0.3);
     border-radius: 5px;
     padding: 5px;
 }
-.menu-links > li:hover {
+.menu-links > li.link:hover {
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 5px;
 }

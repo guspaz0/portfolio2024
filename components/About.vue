@@ -11,18 +11,16 @@
                 />
 
                 <NuxtImg
-                    src="https://github-readme-stats.vercel.app/api/top-langs/?username=guspaz0&size_weight=0.5&count_weight=0.5&hide=dockerfile,ejs,css,scss,html,handlebars,procfile&layout=compact&langs_count=6&theme=default"
+                    src="https://github-readme-stats.vercel.app/api/top-langs/?username=guspaz0&size_weight=0.5&count_weight=0.5&hide=go,rust,solidity,dockerfile,ejs,css,scss,html,handlebars,procfile&layout=compact&langs_count=6&theme=default"
                     alt="Top Languages"
                     height=""
                     format="webp"
                 />
                 <p>{{ mensaje }}</p>
                 <p>{{ parrafo2 }}</p>
-                <a :href="resumeDrive" rel="noreferrer noopener" target="_blank">
-                    <span class="card resume">
-                        CV / Resume
-                    </span>
-                </a>
+                <NuxtLink :href="resumeDrive" rel="noreferrer noopener" target="_blank">
+                    <CustomButton :title="'CV / Resume'" @on-click=""/>
+                </NuxtLink>
             </span>
             <div class="perfil">
                 <span class="">
@@ -47,14 +45,6 @@ const resumeDrive = 'https://drive.google.com/file/d/1otmq9F_jcLdmL0niyZgp1wg_EQ
 const mensaje = "Un apasionado por la tecnologia y el analisis de datos"
 const parrafo2 = 'Soy una persona proactiva, curiosa, flexible y perseverante. Nunca paro de aprender.'
 
-
-// SEO Meta tags (for Nuxt.js)
-useHead({
-    title: 'Sobre Mi - Portfolio',
-    meta: [
-        { name: 'description', content: 'Información sobre mi experiencia y habilidades en desarrollo web' }
-    ]
-})
 </script>
 
 

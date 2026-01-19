@@ -18,31 +18,29 @@
 					:label="'categoria'"
 					:multiple="false"
 				/>
-                <InputFile :name="'imagen'" v-model="formFields.imagen" v-model:errors="errors"/>
+				<AptitudesIconSearch 
+					v-model="formFields.icon"
+					:error="!!errors.icon"
+					:helper-text="errors.icon"
+				/>
+                <CustomInputFile :name="'imagen'" v-model="formFields.imagen" v-model:errors="errors"/>
             </div>
             <div class="submit-btn-container">
-                <SubmitButton :content="'Enviar'" :errors="Object.keys(errors).length !== 0"/>
+                <CustomSubmitButton :content="'Enviar'" :errors="Object.keys(errors).length !== 0"/>
             </div>
         </form>
     </div>
 </template>
 
 <script setup lang="ts">
-import MaterialInput from '../composables/MaterialInput.vue';
-import SubmitButton from '../composables/SubmitButton.vue';
-import InputFile from '../composables/InputFile.vue';
-import MaterialSelect from '../composables/MaterialSelect.vue';
-import { useWebsiteStore } from '~/stores/perfiles';
 import { AptitudRequestDto, type AptitudForm } from '~/server/entities/aptitudes/aptitudesRequest.dto';
-import { useFormValidator } from '../composables/useFormValidator';
-import { storeToRefs } from 'pinia';
-import type { aptitudes_view } from '@prisma/client';
-import { instanceToPlain } from 'class-transformer';
+const toast = useToast()
 const store = useWebsiteStore()
 const { categorias, aptitudes } = storeToRefs(store)
 
 const formFields = reactive<AptitudForm>({
 	nombre: '',
+	icon: '',
 	imagen: null,
 	categoria: 1
 })
@@ -68,16 +66,15 @@ const submitForm = async () => {
 		});
 
 		if (response.success) {
-			alert('Certificate uploaded successfully!');
+			toast.success({ title: 'Guardado', message: 'Escuela creada exitosamente!'});
 			aptitudes.value = [ ...aptitudes.value, response.data as aptitudes_view ]
 			const defaults = new AptitudRequestDto()
 			Object.entries(defaults).forEach(([key, value]) => formFields[key] = value)
 		} else {
-			alert('Failed to upload certificate. Please try again.');
+			throw new Error(response.message || 'Error al crear escuela')
 		}
 	} catch (error) {
-		console.error('Error uploading certificate:', error);
-		alert('An error occurred. Please try again.');
+		toast.error({ title: 'Error', message: error.message });
 	}
 };
 

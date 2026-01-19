@@ -1,10 +1,9 @@
 <template>
     <span class="skills" @contextmenu.prevent>
-        <small>{{ aptitud.nombre }}</small>
-        <NuxtImg 
-            :src="(aptitud.imagen as string)" 
-            :alt="aptitud.nombre"
-            loading="lazy" 
+        <!-- <small>{{ aptitud.nombre }}</small> -->
+        <Icon 
+            :name="'logos:'+aptitud.icon" 
+            size="2rem"
         />
     </span>
 </template>
@@ -25,25 +24,18 @@ defineProps({
 .skills {
     filter: none;
     mask-image: none;
-    background-color: rgba(5,5,5, 0.1);
     padding: 5px;
     min-width: 60px;
     border-radius: 5px;
 }
-span.skills:hover {
-    background-color: rgba(5,5,5, 0.2);
-    color: black;
-}
-span.skills small:hover{
-    position: absolute;
-    z-index: 50;
-}
+
 span.skills img {
     display: none;
     max-width: 50px;
     max-height: 50px;
     transition: 500ms;
 }
+
 span.skills:hover img {
     display: block;
     position: absolute;

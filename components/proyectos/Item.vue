@@ -10,7 +10,7 @@
         <p>{{ proyecto.descripcion }}</p>
         <b>Tecnologias:</b>
         <div class="proyectos">
-            <Aptitudes 
+            <AptitudesList
                 :key="(proyecto.nombre as string)" 
                 :aptitudes="proyecto.aptitudes"
                 :max="2"
@@ -40,9 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, type PropType } from 'vue';
 import type { Proyecto } from '~/server/entities/proyectos/Proyectos.entity'
-const Aptitudes = resolveComponent('Aptitudes')
 
 defineProps({
   proyecto: {

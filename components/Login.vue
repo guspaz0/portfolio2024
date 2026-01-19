@@ -4,59 +4,66 @@
   <div class="login-container">
     <h2>Login</h2>
     <form @submit.prevent="handleLogin">
-      <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" v-model="email" required />
-      </div>
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" v-model="password" required />
-      </div>
-      <button type="submit">Login</button>
+      <MaterialInput
+        v-model="formFields.email"
+        :type="'text'"
+        :label="'email'"
+        :errors="!!errors.email"
+        :helper-text="errors.email || ''"
+        :variant="'standard'"
+      />
+      <MaterialInput
+        v-model="formFields.password"
+        :type="'password'"
+        :label="'password'"
+        :errors="!!errors.password"
+        :helper-text="errors.password || ''"
+        :variant="'standard'"
+      />
+      <CustomSubmitButton :content="'Login'"/>
     </form>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { useWebsiteStore } from '~/stores/perfiles'
-definePageMeta({
-  middlewares: ['components/login']
-})
+import { LoginRequestDto } from '~/server/utils/loginRequestDto';
 
 const website = useWebsiteStore()
-const { authenticated } = storeToRefs(website)
+const { user } = storeToRefs(website)
 
-const email = ref('');
-const password = ref('');
+const formFields = reactive<LoginRequestDto>({
+  email: '',
+  password: ''
+});
+
+const { errors, validateForm } = useFormValidator(formFields, LoginRequestDto)
+
+watch(formFields, () => validateForm())
+
 const router = useRouter();
 
 const handleLogin = async () => {
+  const isFine = await validateForm()
+  if (!isFine) throw new Error('Validation failed')
   try {
     // Simulate a login request
     const response = await $fetch('/api/login', {
       method: 'POST',
-      body: { email: email.value, password: password.value }
+      body: formFields
     });
-
     if (response.success) {
-      authenticated.value = response.success
-      // Set a token in a cookie or localStorage
-      useCookie('auth_token', { value: response.token, maxAge: 3600 });
       router.push('/dashboard')
     } else {
       alert('Login failed. Please check your credentials.');
     }
   } catch (error) {
-    console.error('Login error:', error);
     alert('An error occurred during login.');
   }
 };
 onMounted(() => {
-  // if (authenticated.value) {
-  //   navigateTo('/dashboard')
-  // }
+  if (user.value) {
+    navigateTo('/dashboard')
+  }
 })
 </script>
 
@@ -76,32 +83,5 @@ onMounted(() => {
 .login-container form {
   display: flex;
   flex-direction: column;
-}
-
-.login-container div {
-  margin-bottom: 15px;
-}
-
-.login-container label {
-  margin-bottom: 5px;
-}
-
-.login-container input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.login-container button {
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.login-container button:hover {
-  background-color: #0056b3;
 }
 </style>

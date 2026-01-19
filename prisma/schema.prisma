@@ -3,7 +3,6 @@
 generator client {
   provider        = "prisma-client-js"
   output          = "../node_modules/.prisma/client"
-  previewFeatures = ["views"]
 }
 
 datasource db {
@@ -16,6 +15,8 @@ model Aptitudes {
   id           Int                    @id @default(autoincrement())
   nombre       String
   imagen       String?
+  icon         String?
+  nivel        Int?
   categoria    Categorias             @relation(fields: [categoria_id], references: [id])
   categoria_id Int
   perfiles     AptitudesPerfil[]

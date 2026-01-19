@@ -1,14 +1,13 @@
 <template>
-    <CommandTable 
+    <CustomCommandTable 
         :entity="'proyecto'" 
-        :create-component="AddProyecto" 
+        :create-component="Add" 
         :data="proyectos"
     />
 </template>
 <script setup lang="ts">
-import CommandTable from '~/components/composables/CommandTable.vue';
-import AddProyecto from '~/components/proyectos/AddProyecto.vue';
-import { useWebsiteStore } from '~/stores/perfiles'
+import Add from '~/components/proyectos/Add.vue'
+
 definePageMeta({
     layout: 'dashboard'
 })

@@ -17,18 +17,14 @@
 
     <div :class="el">
       <p v-if="proyectos.length === 0">No hay proyectos con la Aptitud seleccionada</p>
-      <ProyectoComp v-for="proyecto in proyectos" :key="proyecto.id" :proyecto="proyecto" />
+      <ProyectosItem v-for="proyecto in proyectos" :key="proyecto.id" :proyecto="proyecto" />
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted } from 'vue'
 import type { Aptitud } from '~/server/entities/aptitudes/Aptitudes.entity'
 import type { Proyecto } from '~/server/entities/proyectos/Proyectos.entity'
-import MaterialSelect from '../composables/MaterialSelect.vue'
-const ProyectoComp = resolveComponent('proyectos/ProyectoComp')
-
 
 // Props
 const props = defineProps({

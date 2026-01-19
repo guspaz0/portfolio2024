@@ -44,30 +44,22 @@
           :helper-text="errors?.escuela || ''"
           :multiple="false"
         />
-        <InputFile 
+        <CustomInputFile 
           :name="'imagen'" 
           v-model="formFields.imagen" 
           v-model:errors="errors"
         />
       </div>
       <div class="submit-btn-container">
-          <SubmitButton />
+          <CustomSubmitButton />
       </div>
     </form>
   </div>
 </template>
 
 <script setup lang="ts">
-import SubmitButton from '../composables/SubmitButton.vue';
-import InputFile from '../composables/InputFile.vue';
-import MaterialInput from '../composables/MaterialInput.vue';
-import MaterialSelect from '../composables/MaterialSelect.vue';
-import { useWebsiteStore } from '~/stores/perfiles';
 import { CertificadoRequestDto, type CertificadoForm } from '~/server/entities/certificados/certificadosRequestDto';
-import { storeToRefs } from 'pinia';
-import { useFormValidator } from '../composables/useFormValidator';
-import type { certificados_view } from '@prisma/client';
-import { instanceToPlain, plainToInstance } from 'class-transformer';
+const toast = useToast()
 const store = useWebsiteStore()
 const { aptitudes, perfiles, escuelas, certificados } = storeToRefs(store)
 
@@ -102,16 +94,15 @@ const submitForm = async () => {
     });
 
     if (response.success) {
-      alert('Certificate uploaded successfully!');
+      toast.success({ title: 'Guardado', message: 'Certificado creado exitosamente!'});
       certificados.value = [ ...certificados.value, response.data]
       const defaults = new CertificadoRequestDto()
       Object.entries(defaults).forEach(([key, value]) => formFields[key] = value)
     } else {
-      alert('Failed to upload certificate. Please try again.');
-    }
-  } catch (error) {
-    console.error('Error uploading certificate:', error);
-    alert('An error occurred. Please try again.');
+			throw new Error(response.message || 'Error al crear escuela')
+		}
+	} catch (error) {
+		toast.error({ title: 'Error', message: error.message });
   }
 };
 

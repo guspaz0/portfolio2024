@@ -7,12 +7,12 @@ import type { Escuela } from "~/server/entities/escuelas/Escuelas.entity";
 import { Proyecto } from "~/server/entities/proyectos/Proyectos.entity";
 import type { Categoria } from "~/server/entities/categorias/Categorias.entity";
 import type { aptitudes_view } from "@prisma/client";
+import type { User } from "#auth-utils";
 
 export const useWebsiteStore = defineStore('portfolioStore', {
     state: () => ({
         perfiles: ref<Perfil[]>([]),
         currentProfile: ref<number>(1),
-        authenticated: ref<boolean>(false),
         darkMode: ref<boolean>(false),
         certificados: ref<Certificado[]>([]),
         aptitudes: ref<aptitudes_view[]>([]),
@@ -20,6 +20,7 @@ export const useWebsiteStore = defineStore('portfolioStore', {
         proyectos: ref<Proyecto[]>([]),
         categorias: ref<Categoria[]>([]),
         entitiesCount: ref<Record<string, number>>({}),
+        user: ref<User | undefined>()
     }),
     actions: {
         async fetchPerfiles() {
