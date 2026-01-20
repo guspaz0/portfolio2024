@@ -38,7 +38,7 @@ const loginBuffer = ref<string[]>([])
 
 const handleKeyUp = (event: KeyboardEvent) => {
   // Add your secret phrase logic here
-  const key = event.key.toLowerCase()
+  const key = event.key?.toLowerCase()
   const updated = [ ...loginBuffer.value, key].slice(-loginSecuence.value.length)
   if (updated.join('') === loginSecuence.value.join('')) {
     navigateTo('/login')

@@ -10,6 +10,15 @@ const {
     NUXT_GOOGLE_REFRESH_TOKEN 
 } = process.env
 
+// Validar que existan las variables de entorno requeridas
+function validateEnvVars() {
+    const required = ['NUXT_GOOGLE_EMAIL', 'NUXT_GOOGLE_CLIENT_ID', 'NUXT_GOOGLE_CLIENT_SECRET', 'NUXT_GOOGLE_REFRESH_TOKEN'];
+    const missing = required.filter(v => !process.env[v]);
+    if (missing.length > 0) {
+        console.error(`Missing required environment variables: ${missing.join(', ')}`);
+        throw new Error(`Email service initialization failed: missing ${missing.join(', ')}`);
+    }
+}
 
 async function getGoogleAccessToken() {
     const oauth2Client = new google.auth.OAuth2(
@@ -25,7 +34,7 @@ async function getGoogleAccessToken() {
     return await new Promise((resolve, reject) => {
         oauth2Client.getAccessToken((err, token) => {
             if (err) {
-                console.log("*ERR: ", err)
+                console.error("*ERR: ", err)
                 reject(err);
             }
             resolve(token); 
@@ -34,27 +43,55 @@ async function getGoogleAccessToken() {
 }
 
 class EmailService {
-    transporter: Transporter;
+    transporter: Transporter | null = null;
+    private initPromise: Promise<void> | null = null;
 
-    constructor() {
-        this.#init()
+    async init() {
+        // Si ya se está inicializando, esperar a que termine
+        if (this.initPromise) {
+            return this.initPromise;
+        }
+
+        // Si ya está inicializado, no hacer nada
+        if (this.transporter) {
+            return;
+        }
+
+        this.initPromise = this.#performInit();
+        await this.initPromise;
     }
 
-    async #init() {
-        this.transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-                type: "OAuth2",
-                user: NUXT_GOOGLE_EMAIL,
-                accessToken: await getGoogleAccessToken(),
-                clientId: NUXT_GOOGLE_CLIENT_ID,
-                clientSecret: NUXT_GOOGLE_CLIENT_SECRET,
-                refreshToken: NUXT_GOOGLE_REFRESH_TOKEN
-            },
-        } as SMTPConnection.Options);
+    private async #performInit() {
+        try {
+            validateEnvVars();
+            this.transporter = nodemailer.createTransport({
+                service: "gmail",
+                auth: {
+                    type: "OAuth2",
+                    user: NUXT_GOOGLE_EMAIL,
+                    accessToken: await getGoogleAccessToken(),
+                    clientId: NUXT_GOOGLE_CLIENT_ID,
+                    clientSecret: NUXT_GOOGLE_CLIENT_SECRET,
+                    refreshToken: NUXT_GOOGLE_REFRESH_TOKEN
+                },
+            } as SMTPConnection.Options);
+            console.log("Email service initialized successfully");
+        } catch (error) {
+            console.error("Failed to initialize email service:", error);
+            throw error;
+        }
     }
 
     async sendEmail(mail: MailRequestDto) {
+        // Asegurar que está inicializado antes de enviar
+        if (!this.transporter) {
+            await this.init();
+        }
+
+        if (!this.transporter) {
+            throw new Error("Email service failed to initialize");
+        }
+
         return await this.transporter.sendMail({
             ...mail,
             from: `App Portfolio <${NUXT_GOOGLE_EMAIL}>`,

@@ -28,7 +28,6 @@ export default defineEventHandler(async (event: any) => {
             return { success: false, message: 'Invalid credentials' };
         }
     } catch (error: any) {
-        console.log("Error /api/login server event : \n",error)
         throw createError({ statusCode: 401, message: error.message })
     }
 })

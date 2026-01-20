@@ -5,6 +5,9 @@ import emailService from "~/server/entities/email/email.service"
 
 export default defineEventHandler(async (event) => {
     try {
+        // Inicializar el servicio de email antes de usarlo
+        await emailService.init()
+
         const body = await readBody(event)
         
         const dto = plainToInstance(MailRequestDto, body)
@@ -16,6 +19,7 @@ export default defineEventHandler(async (event) => {
             return message.response
         }
     } catch (e) {
+        console.error(e.message)
         return createError({ 
             statusCode: 500, 
             message: import.meta.dev ? JSON.stringify(e.message) : 'Internal server'

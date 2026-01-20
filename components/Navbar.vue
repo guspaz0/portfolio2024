@@ -31,7 +31,6 @@
 const website = useWebsiteStore()
 const { perfiles, currentProfile } = storeToRefs(website)
 
-watch(() => currentProfile.value, (val) => console.log(val))
 // Template ref
 const navRef = useTemplateRef('navRef')
 
