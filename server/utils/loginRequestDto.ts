@@ -1,5 +1,5 @@
 import { Expose } from "class-transformer";
-import { IsEmail, IsNotEmpty } from "class-validator";
+import { IsEmail, IsEmpty, isEmpty, IsNotEmpty, Length } from "class-validator";
 
 @Expose()
 export class LoginRequestDto {

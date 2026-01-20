@@ -8,7 +8,7 @@
         v-model="formFields.email"
         :type="'text'"
         :label="'email'"
-        :errors="!!errors.email"
+        :error="!!errors.email"
         :helper-text="errors.email || ''"
         :variant="'standard'"
       />
@@ -16,7 +16,7 @@
         v-model="formFields.password"
         :type="'password'"
         :label="'password'"
-        :errors="!!errors.password"
+        :error="!!errors.password"
         :helper-text="errors.password || ''"
         :variant="'standard'"
       />

@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { IsNotEmpty, IsNumber, IsInstance, IsObject, IsOptional, ValidateIf } from "class-validator";
 import { Aptitud } from "./Aptitudes.entity";
-import { Expose, Transform, Type } from "class-transformer";
+import { Exclude, Expose, Transform, Type } from "class-transformer";
 
 export type AptitudForm = Pick<Aptitud, 'nombre'> & { imagen: File | null, categoria: number, id?: number, icon: string }
 
@@ -22,6 +22,13 @@ export class AptitudRequestDto implements AptitudForm {
     @IsNotEmpty()
     @Transform(({ value }) => +value)
     categoria: number = 1;
+
+    @Exclude()
+    @IsOptional()
+    @IsNumber()
+    @Type(() => Number)
+    @Transform(({ value }) => +value)
+    nivel?: number;
 
     id?: number | undefined;
 }

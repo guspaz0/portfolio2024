@@ -1,5 +1,5 @@
 import prisma from '~/lib/prisma'
-import { Aptitud } from './Aptitudes.entity';
+import type { Aptitud } from './Aptitudes.entity';
 import { AptitudRequestDto } from './aptitudesRequest.dto';
 import { v2 as cloudinary } from 'cloudinary'
 import { useParseFormData } from '~/server/utils/parseFormData';
@@ -10,10 +10,9 @@ import { CloudinaryUploadedFile } from '~/server/types/CloudinaryUploadedFile';
 class AptitudesService {
 	constructor(
 		private repo = prisma.aptitudes,
-		private repoView = prisma.aptitudes_view
 	){}
 
-	async findAll(): Promise<Aptitud[]> {
+	async findAll() {
 		return await this.repo.findMany({ include: { categoria: true } });
 	}
 
@@ -25,7 +24,7 @@ class AptitudesService {
 	}
 
 	async getViewById(id: number) {
-		return await this.repoView.findFirst({ where: { id } })
+		return await this.repo.findFirst({ where: { id } })
 	}
 
 	async save(data: FormData) {
@@ -53,6 +52,8 @@ class AptitudesService {
 				data: {
 					nombre: dto.nombre,
 					imagen: uploadResult.url.split('/').pop(),
+					icon: dto.icon,
+					nivel: dto.nivel || null,
 					categoria_id: dto.categoria
 				}
 			})

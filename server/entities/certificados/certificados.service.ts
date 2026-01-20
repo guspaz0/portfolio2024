@@ -10,7 +10,6 @@ import { CertificadoRequestDto } from "./certificadosRequestDto";
 class CertificadosService {
   constructor(
     private repo = prisma.certificados,
-    private repow = prisma.certificados_view
   ){}
 
   async findAll() {

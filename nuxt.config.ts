@@ -97,12 +97,12 @@ export default defineNuxtConfig({
   },
   // GitHub Pages configuration
   app: {
-    baseURL: '/portfolio2024/',
+    baseURL: '/portfolio',
     buildAssetsDir: 'assets',
     head: {
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
-      title: 'Portfolio 2025',
+      title: 'Portfolio',
       meta: [
         { name: 'description', content: 'Portfolio Web Full stack Developer' }
       ]

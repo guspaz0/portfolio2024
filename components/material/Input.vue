@@ -54,7 +54,8 @@ const props = defineProps({
     },
     type: {
         type: String as PropType<'text' | 'password' | 'search' | 'date'>,
-        required: true
+        required: true,
+        validator: (value: string) => ['text', 'password', 'search', 'date'].includes(value)
     },
     min: {
         type: [String, Number],
