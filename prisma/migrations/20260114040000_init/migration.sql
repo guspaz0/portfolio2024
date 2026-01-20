@@ -4,6 +4,7 @@ CREATE TABLE "aptitudes" (
     "nombre" TEXT NOT NULL,
     "imagen" TEXT,
     "icon" TEXT,
+    "nivel" TEXT,
     "categoria_id" INTEGER NOT NULL,
     CONSTRAINT "aptitudes_categoria_id_fkey" FOREIGN KEY ("categoria_id") REFERENCES "categorias" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );

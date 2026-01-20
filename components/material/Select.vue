@@ -5,7 +5,7 @@
         <div v-if="multiple && value.length > 0" class="chips-container">
             <span v-for="val in value" :key="val" class="chip">
                 {{ getOptionName(val) }}
-                <button class="chip-remove" @click="handleChipRemove(val, $event)">×</button>
+                <button class="chip-remove" @click.prevent="handleChipRemove(val, $event)">×</button>
             </span>
         </div>
 
@@ -114,7 +114,7 @@ const handleOptionClick = (optionValue: number) => {
             : [...value.value as number[], optionValue]
         value.value = newValue
     } else {
-        value.value = [optionValue]
+        value.value = optionValue
         isOpen.value = false
     }
 }

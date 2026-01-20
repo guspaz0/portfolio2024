@@ -5,10 +5,11 @@
       <fieldset>
         <legend>Filtros</legend>
           <MaterialSelect
-            v-model.value="filterTecnologia"
+            v-model:value="filterTecnologia"
             :options="aptitudes.map(apt => ({ value: apt.id, name: apt.nombre }))"
             :label="'Aptitud'"
             :placeholder="'Seleccionar'"
+            :multiple="false"
           />
       </fieldset>
       <small>Mostrando {{ proyectos.length }} de {{ perfil?.proyectos.length }} Proyectos</small>
@@ -25,11 +26,12 @@
 <script setup lang="ts">
 import type { Aptitud } from '~/server/entities/aptitudes/Aptitudes.entity'
 import type { Proyecto } from '~/server/entities/proyectos/Proyectos.entity'
+import type { Perfil } from '~/server/types/Perfil'
 
 // Props
 const props = defineProps({
   perfil: {
-    type: Object,
+    type: Object as PropType<Perfil>,
     required: true,
     default: {}
   }
@@ -49,19 +51,19 @@ const reset = () => {
 }
 
 // Watchers
-watch(filterTecnologia, (val) => {
+watch(() => filterTecnologia.value, (val) => {
   if (val !== '') {
     filterTecnologia.value = ''
-    proyectos.value = props.perfil?.proyectos?.filter(proyecto => proyecto.aptitudes?.some(tec => +tec.id === +val)) || [];
+    proyectos.value = props.perfil?.proyectos?.filter((proyecto: Proyecto) => proyecto.aptitudes?.some(tec => +tec.id === +val)) || [];
   }
 })
 
 watch(() => props.perfil, (currentPerfil) => {
   const test = new Map<number,Aptitud>()
   const counter = new Map<number,number>();
-  const testFlat = currentPerfil?.proyectos.flatMap(p => p.aptitudes)
+  const testFlat = currentPerfil?.proyectos?.flatMap((p: Proyecto) => p.aptitudes) as Aptitud[]
 
-  testFlat.forEach(apt => {
+  testFlat?.forEach((apt: Aptitud) => {
     counter.has(apt.id)
       ? counter.set(apt.id, (counter.get(apt.id) as number)+1)
       : counter.set(apt.id, 1)

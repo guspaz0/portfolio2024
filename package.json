@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "migration:generate": "prisma migrate dev --create-only --schema=./prisma/schema.prisma.dev",
+    "migration:generate": "prisma migrate dev --create-only --schema=./prisma/schema.prisma",
     "migration:run": "prisma migrate dev --schema=./prisma/schema.prisma.dev",
     "migration:compare:schema": "prisma migrate diff --from-schema-datamodel ./prisma/schema.prisma.dev --to-schema-datamodel ./prisma/schema.prisma --output ./database-diff.sql",
     "migration:compare": "prisma migrate diff --from-url file:./prisma/portfolio_db.sql --to-url file:./portfolio_db.sql --script --output ./database-diff.sql"

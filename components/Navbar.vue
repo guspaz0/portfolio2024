@@ -6,6 +6,7 @@
                 <MaterialSelect
                     v-model:value="currentProfile"
                     :options="perfiles.map(perf => ({ name: perf.nombre, value: perf.id }))"
+                    :error="false"
                     :placeholder="'Perfil'"
                     :multiple="false"
                 />
@@ -28,8 +29,9 @@
 
 <script setup lang="ts">
 const website = useWebsiteStore()
-const { perfiles, currentProfile, darkMode } = storeToRefs(website)
+const { perfiles, currentProfile } = storeToRefs(website)
 
+watch(() => currentProfile.value, (val) => console.log(val))
 // Template ref
 const navRef = useTemplateRef('navRef')
 

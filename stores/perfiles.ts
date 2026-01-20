@@ -1,12 +1,9 @@
-import { defineStore } from "pinia";
 import type { Perfil } from "~/server/types/Perfil";
-import { ref } from 'vue'
 import type { Certificado } from "~/server/entities/certificados/Certificados.entity";
-import { Aptitud } from "~/server/entities/aptitudes/Aptitudes.entity";
+import type { Aptitud } from "~/server/entities/aptitudes/Aptitudes.entity";
 import type { Escuela } from "~/server/entities/escuelas/Escuelas.entity";
-import { Proyecto } from "~/server/entities/proyectos/Proyectos.entity";
+import type { Proyecto } from "~/server/entities/proyectos/Proyectos.entity";
 import type { Categoria } from "~/server/entities/categorias/Categorias.entity";
-import type { aptitudes_view } from "@prisma/client";
 import type { User } from "#auth-utils";
 
 export const useWebsiteStore = defineStore('portfolioStore', {
@@ -15,7 +12,7 @@ export const useWebsiteStore = defineStore('portfolioStore', {
         currentProfile: ref<number>(1),
         darkMode: ref<boolean>(false),
         certificados: ref<Certificado[]>([]),
-        aptitudes: ref<aptitudes_view[]>([]),
+        aptitudes: ref<Aptitud[]>([]),
         escuelas: ref<Escuela[]>([]),
         proyectos: ref<Proyecto[]>([]),
         categorias: ref<Categoria[]>([]),
