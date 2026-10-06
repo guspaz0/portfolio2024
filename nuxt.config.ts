@@ -103,6 +103,13 @@ export default defineNuxtConfig({
       title: 'Portfolio',
       meta: [
         { name: 'description', content: 'Portfolio Web Full stack Developer' }
+      ],
+      script: [
+        {
+          src: 'https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js',
+          type: 'module',
+          defer: true,
+        }
       ]
     }
   },

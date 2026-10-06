@@ -6,36 +6,42 @@
       <div class="orb orb-b"></div>
       <div class="orb orb-c"></div>
 
-      <span class="hero-badge">
-        <span class="dot"></span>
-        Disponible para nuevos proyectos
-      </span>
+      <div class="hero-content">
+        <span class="hero-badge">
+          <span class="dot"></span>
+          Disponible para nuevos proyectos
+        </span>
 
-      <h1 class="hero-title">
-        Gustavo Paz<br/>
-        <span class="gradient">Full Stack Developer</span>
-      </h1>
+        <h1 class="hero-title">
+          Gustavo Paz<br/>
+          <span class="gradient">Full Stack Developer</span>
+        </h1>
 
-      <p class="hero-tagline">
-        Construyo productos digitales de punta a punta: interfaces que se sienten
-        vivas y backends que aguantan la carga. Del diseño a la infraestructura,
-        sin puntos ciegos.
-      </p>
+        <p class="hero-tagline">
+          Construyo productos digitales de punta a punta: interfaces que se sienten
+          vivas y backends que aguantan la carga. Del diseño a la infraestructura,
+          sin puntos ciegos.
+        </p>
 
-      <div class="hero-buttons">
-        <a class="btn btn-primary" href="#proyectos" @click.prevent="scrollTo('#proyectos')">
-          Ver proyectos
-          <Icon name="line-md:arrow-right" size="16" color="white"/>
-        </a>
-        <NuxtLink
-          class="btn btn-ghost"
-          :href="resumeDrive"
-          rel="noreferrer noopener"
-          target="_blank"
-        >
-          Descargar CV
-          <Icon name="line-md:download" size="16" color="var(--muted)"/>
-        </NuxtLink>
+        <div class="hero-buttons">
+          <a class="btn btn-primary" href="#proyectos" @click.prevent="scrollTo('#proyectos')">
+            Ver proyectos
+            <Icon name="line-md:arrow-right" size="16" color="white"/>
+          </a>
+          <NuxtLink
+            class="btn btn-ghost"
+            :href="resumeDrive"
+            rel="noreferrer noopener"
+            target="_blank"
+          >
+            Descargar CV
+            <Icon name="line-md:download" size="16" color="var(--muted)"/>
+          </NuxtLink>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <JsLogo3D />
       </div>
     </section>
 
@@ -120,6 +126,38 @@ onMounted(async () => {
 <style scoped>
 .hero {
   position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 48px;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
+  min-width: 0;
+}
+
+.hero-visual {
+  width: clamp(280px, 30vw, 420px);
+  aspect-ratio: 1 / 1;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+  .hero-content {
+    align-items: center;
+  }
+  .hero-visual {
+    width: clamp(220px, 60vw, 320px);
+  }
 }
 
 .orb-a {
