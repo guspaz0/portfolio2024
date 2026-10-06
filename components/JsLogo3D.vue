@@ -12,8 +12,6 @@
         exposure="1.1"
         shadow-intensity="1"
         environment-image="neutral"
-        ar
-        ar-modes="webxr scene-viewer quick-look"
       >
         <!-- Studio lighting for chrome reflections -->
         <slot name="lights">
