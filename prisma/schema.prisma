@@ -16,7 +16,6 @@ model Aptitudes {
   nombre       String
   imagen       String?
   icon         String?
-  nivel        Int?
   categoria    Categorias             @relation(fields: [categoria_id], references: [id])
   categoria_id Int
   perfiles     AptitudesPerfil[]

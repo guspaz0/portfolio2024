@@ -2,7 +2,9 @@
 
 <template>
   <div class="login-container">
-    <h2>Login</h2>
+    <p class="kicker">// acceso</p>
+    <h2>Dashboard</h2>
+    <p class="login-desc">Inicia sesión para gestionar tu portfolio.</p>
     <form @submit.prevent="handleLogin">
       <MaterialInput
         v-model="formFields.email"
@@ -46,7 +48,6 @@ const handleLogin = async () => {
   const isFine = await validateForm()
   if (!isFine) throw new Error('Validation failed')
   try {
-    // Simulate a login request
     const response = await $fetch('/api/login', {
       method: 'POST',
       body: formFields
@@ -69,19 +70,27 @@ onMounted(() => {
 
 <style scoped>
 .login-container {
-  max-width: 300px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  max-width: 420px;
+  margin: 80px auto;
+  padding: 40px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .login-container h2 {
-  text-align: center;
+    text-align: left;
+    background: none;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+    color: var(--text);
 }
 
-.login-container form {
-  display: flex;
-  flex-direction: column;
+.login-desc {
+    color: var(--muted);
+    font-size: 14px;
 }
 </style>

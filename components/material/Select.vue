@@ -99,7 +99,7 @@ const props = defineProps({
 })
 const value = defineModel('value', {
     required: true,
-    type: Array as PropType<Array<number>>
+    type: [Array, Number, String] as PropType<Array<number> | number | string>
 })
 const isOpen = ref<boolean>(props.ulWidth === 'max-content')
 
@@ -178,6 +178,15 @@ onMounted(() => {
     max-width: 300px;
     margin-bottom: 0;
 }
+
+.label {
+    display: block;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 6px;
+    padding-left: 2px;
+}
 .chips-container {
     display: flex;
     flex-wrap: wrap;
@@ -211,66 +220,70 @@ onMounted(() => {
 }
 .select-button {
     width: 100%;
-    padding: 6px 8px;
-    border: 1.5px solid var(--material-ui-color);
-    border-radius: 8px;
-    background-color: var(--bg-color);
+    padding: 10px 14px;
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
     text-align: left;
     cursor: pointer;
-    font-size: 1rem;
-    
-    color: var(--material-ui-color);
-    display: 'none';
+    font-size: 0.9rem;
+    font-family: inherit;
+    color: var(--text);
+    display: flex;
     justify-content: space-between;
     align-items: center;
     transition: all 0.2s ease;
 }
 
 .select-button:hover {
-    border-color: #3b82f6;
+    border-color: var(--accent);
 }
 .select-button:focus {
     outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px var(--material-ui-bg-pseudo-filled);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(139, 124, 255, 0.15);
 }
 .select-button.is-open {
-    display: 'flex';
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px var(--material-ui-bg-disabled);
+    display: flex;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(139, 124, 255, 0.15);
 }
 .select-button.is-error {
     border-color: #ef4444;
-    color: var(--material-ui-color);
+    color: var(--text);
 }
 .select-button.is-error:hover,.is-error:focus {
     border-color: #ef4444;
 }
-.arrow {
+.select-button .arrow {
     margin-left: 8px;
     transform: rotate(0deg);
     transition: transform 0.2s ease;
-    color: var(--material-ui-label-color);
+    color: var(--muted);
+    font-size: 10px;
 }
-.arrow.is-open {
+.select-button .arrow.is-open {
     transform: rotate(180deg);
 }
 .dropdown-list {
     position: absolute;
-    /* top: 100%; */
     left: 0;
     right: 0;
-    background: var(--bg-color);
-    border: 2px solid var(--material-ui-border-disabled);
-    border-top: none;
-    border-radius: 0 0 8px 8px;
-    max-height: 200px;
+    top: calc(100% + 4px);
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    max-height: 220px;
     overflow-y: auto;
     z-index: 10000;
     margin: 0;
-    padding: 0;
+    padding: 6px;
     list-style: none;
-    box-shadow: 0 4px 6px -1px var(--material-ui-bg-pseudo-filled);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
 }
 .dropdown-list.is-selected {
     width: v-bind('ulWidth')
@@ -281,24 +294,22 @@ onMounted(() => {
     padding: 0;
 }
 .dropdown-item {
-    padding: 12px 16px;
+    padding: 10px 14px;
     cursor: pointer;
-    border-bottom: 1px solid var(--material-ui-bg-disabled);
+    border-radius: 8px;
     transition: background-color 0.2s ease;
-    color: var(--material-ui-color);
+    color: var(--text);
+    font-size: 14px;
 }
 .dropdown-item:hover {
-    background-color: var(--material-ui-bg-filled);
+    background-color: var(--surface-2);
 }
-.dropdown-item:last-child {
-    border-bottom: none;
-}
-.dropdown-item .is-selected {
-    background-color: #3b82f6;
-    color: var(--bg-color);
+.dropdown-item.is-selected {
+    background-color: var(--accent);
+    color: var(--btn-primary-text);
 }
 .dropdown-item.is-selected:hover {
-    background-color: #2563eb;
+    background-color: var(--accent);
 }
 .error-text {
     color: #ef4444;
@@ -307,7 +318,7 @@ onMounted(() => {
     display: block;
 }
 .helper-text {
-    color: var(--material-ui-border-filled);
+    color: var(--muted);
     font-size: 12px;
     margin-top: 4px;
     display: block;

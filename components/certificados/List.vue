@@ -1,25 +1,30 @@
 <template>
-  <section id="certificados">
-    <h2>{{ titulo }}</h2>
-    <form>
-      <fieldset>
-        <legend>Filtros</legend>
+  <section id="certificados" class="section">
+    <div class="section-head">
+        <div>
+            <p class="kicker">// certificados</p>
+            <h2>Certificados</h2>
+        </div>
+    </div>
+
+    <div class="filtros">
         <MaterialSelect
           v-model:value="filterEscuela"
           :options="escuelas.map(esc => ({ name: esc.nombre, value: esc.id }))"
           :label="'Escuela'"
           :placeholder="'Seleccionar'"
+          class="filtro"
         />
         <MaterialSelect
           v-model:value="filterTecnologia"
           :options="aptitudes.map(apt => ({ name: apt.nombre, value: apt.id }))"
           :label="'Aptitud'"
           :placeholder="'Seleccionar'"
+          class="filtro"
         />
-      </fieldset>
-      <small>Mostrando {{ certificados.length }} de {{ perfil?.certificados?.length }} Certificados</small>
-      <span class="card" @click.prevent="reset">Ver Todos</span>
-    </form>
+        <small>Mostrando {{ certificados.length }} de {{ perfil?.certificados?.length }} Certificados</small>
+        <span class="card" @click.prevent="reset">Ver Todos</span>
+    </div>
 
     <div class="certificados">
       <p v-if="certificados.length === 0">No hay certificados con la Escuela/Aptitud seleccionada</p>
@@ -33,9 +38,7 @@ import type { Aptitud } from '~/server/entities/aptitudes/Aptitudes.entity'
 import type { Certificado } from '~/server/entities/certificados/Certificados.entity'
 import type { Escuela } from '~/server/entities/escuelas/Escuelas.entity'
 import type { Perfil } from '~/server/types/Perfil'
-const CertificadoComp = resolveComponent('certificados/CertificadoComp')
 
-// Props
 const props = defineProps({
   perfil: {
     type: Object as PropType<Perfil>,
@@ -43,23 +46,18 @@ const props = defineProps({
   }
 })
 
-// Reactive state
-const titulo = ref('Certificados')
 const certificados = ref<Certificado[]>([])
 const escuelas = ref<Escuela[]>([])
 const aptitudes = ref<Aptitud[]>([])
 const filterEscuela = ref<string>('')
 const filterTecnologia = ref<string>('')
 
-// Methods
 const reset = () => {
   filterTecnologia.value = ''
   filterEscuela.value = ''
   certificados.value = props.perfil?.certificados || [];
 }
 
-
-// Watchers
 watch(filterEscuela, (val) => {
   if (val !== '') {
     filterTecnologia.value = ''
@@ -76,10 +74,8 @@ watch(filterTecnologia, (val) => {
 
 watch(() => props.perfil, (currentPerfil) => {
   reset()
-  // Initialize certificados with first 3 items
   certificados.value = currentPerfil?.certificados?.slice(0, 3) || [];
 
-  // Filter aptitudes based on certificates
   const uniqueAptitudes = new Map<number,Aptitud>()
   const counter = new Map<number,number>();
   const flatAptitudes = (currentPerfil?.certificados?.flatMap(cert => cert.aptitudes) || []) as Aptitud[]
@@ -91,7 +87,6 @@ watch(() => props.perfil, (currentPerfil) => {
   })
   aptitudes.value = uniqueAptitudes.values().toArray()
 
-  // Get unique schools
   const uniqueEscuelas = new Map<number,Escuela>()
   const flatEscuelas = (currentPerfil?.certificados?.flatMap((cert) => cert.escuela) || []) as Escuela[];
   flatEscuelas.forEach(esc => uniqueEscuelas.set(esc.id, esc))
@@ -100,23 +95,58 @@ watch(() => props.perfil, (currentPerfil) => {
 </script>
 
 <style scoped>
+.section-head {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filtros {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.filtros .filtro {
+    flex: 0 1 220px;
+    min-width: 180px;
+}
+
+.filtros small {
+    color: var(--muted);
+    font-size: 13px;
+    padding-bottom: 10px;
+}
+
+.card {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    font-size: 13px;
+    cursor: pointer;
+    transition: 200ms;
+}
+
+.card:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
 
 .certificados {
     display: flex;
     flex-direction: row;
-    align-items: start;
-    justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 20px;
+    padding: 4px;
 }
 
-.certificados img, #certificados img {
-    width: 150px;
-    filter: drop-shadow(0 0 1px white);
+.certificados > article {
+    flex: 1 1 320px;
+    max-width: 100%;
 }
 
-.certificados fieldset {
-  display: flex;
-  flex-direction: row;
+.certificados > p {
+    color: var(--muted);
 }
 </style>

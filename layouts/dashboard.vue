@@ -1,10 +1,13 @@
 <template>
     <div class="dashboard-layout">
         <header class="dashboard-header">
-            <h2>Dashboard</h2>
+            <a class="nav-brand" href="/">
+                <span class="nav-logo"></span>
+                <span class="name">gustavo.paz</span>
+            </a>
             <ul class="menu-links">
                 <li v-for="link in menu" :id="link.name" class="link">
-                    <NuxtLink :to="link.link">
+                    <NuxtLink :to="link.link" class="nav-link">
                         {{ link.name }}
                     </NuxtLink>
                 </li>
@@ -14,9 +17,9 @@
                 <li>
                     <AuthState>
                         <template #default="{ loggedIn, clear, user }">
-                            <b v-if="user">{{ user.email.split('@')[0] }}</b>
+                            <b v-if="user" class="user">{{ user.email.split('@')[0] }}</b>
                             <CustomButton v-if="loggedIn" :title="'Logout'" @click="clear"/>
-                            <NuxtLink v-else to="/login">Login</NuxtLink>
+                            <NuxtLink v-else to="/login" class="nav-cta">Login</NuxtLink>
                         </template>
                     </AuthState>
                 </li>
@@ -35,7 +38,6 @@ const menu = ref<Record<string, string>[]>([
     { name: 'Certificados', link: '/dashboard/certificados'},
     { name: 'Escuelas', link: '/dashboard/escuelas' },
     { name: 'proyectos', link: '/dashboard/proyectos' },
-    // { name: 'Logout', link: '/logout' }
 ])
 
 const activePage = ref('')
@@ -47,23 +49,31 @@ function handleActivePage(e: Event) {
 </script>
 
 <style>
-li .active {
-    background-color: rgba(0,0,0,0.3);
-}
 .dashboard-layout {
-    height: -webkit-fill-available;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 .dashboard-header {
-    width: -webkit-fill-available;
-    padding-inline: 5px;
+    width: 100%;
+    padding: 18px 56px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    gap: 16px;
     z-index: 10000;
+    background: var(--surface);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
 }
 .dashboard-content {
     margin: 0;
+    padding: 32px 56px;
+    flex: 1;
 }
 .menu-links {
     display: flex;
@@ -71,15 +81,20 @@ li .active {
     align-items: center;
     list-style: none;
     margin: 0;
-    gap: 5px;
+    gap: 8px;
+    flex-wrap: wrap;
 }
-.menu-links > li.link {
-    border: 1px solid rgba(0, 0,0, 0.3);
-    border-radius: 5px;
-    padding: 5px;
+.menu-links > li {
+    display: flex;
+    align-items: center;
 }
-.menu-links > li.link:hover {
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 5px;
+.menu-links > li.link:hover .nav-link {
+    color: var(--text);
+    background-color: var(--surface-2);
+}
+.menu-links .user {
+    font-size: 13px;
+    color: var(--muted);
+    padding: 8px 12px;
 }
 </style>

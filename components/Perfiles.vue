@@ -1,23 +1,29 @@
 <template>
-    <div>
+    <div class="perfiles-section">
         <fieldset class="perfiles">
-            <legend>Perfiles</legend>
-            <span v-for="perfil in perfiles" :key="perfil.id">
-                <input
-                    type="radio"
-                    name="selected"
-                    :id="'perfil' + perfil.id"
-                    v-model="currentProfile"
-                    :value="perfil.id"
-                />
-                <label :for="'perfil' + perfil.id">{{ perfil.nombre }}</label>
-            </span>
+            <legend>// perfiles</legend>
+            <div class="perfil-options">
+                <span v-for="perfil in perfiles" :key="perfil.id" class="perfil-option">
+                    <input
+                        type="radio"
+                        name="selected"
+                        :id="'perfil' + perfil.id"
+                        v-model="currentProfile"
+                        :value="perfil.id"
+                    />
+                    <label :for="'perfil' + perfil.id">{{ perfil.nombre }}</label>
+                </span>
+            </div>
         </fieldset>
 
         <Timeline v-if="currentPerfil?.id" :perfil="currentPerfil" />
         <CertificadosList v-if="currentPerfil?.id" :key="currentPerfil.id" :perfil="currentPerfil" />
         <ProyectosList v-if="currentPerfil?.id" :perfil="currentPerfil" />
         <AptitudesCarousel v-if="currentPerfil?.id" :perfil="currentPerfil" />
+        <GithubInsights
+            :username="'guspaz0'"
+            :count="5"
+        />
     </div>
 </template>
 
@@ -27,57 +33,34 @@ const website = useWebsiteStore()
 
 const { perfiles, currentProfile } = storeToRefs(website)
 
-// Reactive data
-//const selected = ref(+currentProfile.value)
-const currentPerfil = ref<Perfil | null>()
-
-watch(() => currentProfile.value, (perfilId) => {
-    currentPerfil.value = perfiles.value.find((perfil) => perfil.id === perfilId) as Perfil
+const currentPerfil = computed<Perfil | null>(() => {
+    return perfiles.value.find((perfil) => perfil.id === currentProfile.value) || null
 })
 
-//Lifecycle hooks
 onMounted(async () => {
     if (perfiles.value.length === 0) {
         await callOnce(website.fetchPerfiles)
-        currentPerfil.value = perfiles.value.find((perfil) => perfil.id === (currentProfile.value || 1)) as Perfil
     }
 })
 </script>
+
 <style scoped>
-
-fieldset.perfiles {
-    position: relative;
-    transform: translate(-50%,0%);
-    top: 50%;
-    left: 50%;
+.perfiles-section {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    border-color: var(--text-color);
-    max-width: 750px;
+    flex-direction: column;
+    gap: 32px;
+    padding: 40px 56px;
+    max-width: 1440px;
+    margin: 0 auto;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-left: none;
+    border-right: none;
 }
 
-fieldset.perfiles label {
-    position: relative;
-    color: var(--text-color);
-    font-size: 20px;
-    border: 2px solid var(--text-color);
-    border-radius: 5px;
-    padding: 10px 50px;
-    display: flex;
-    align-items: center;
-    transition: 400ms;
-}
-
-fieldset.perfiles input[type="radio"]:checked + label {
-    background-color: var(--text-color);
-    color: var(--bg-color);
-}
-
-fieldset.perfiles input[type="radio"]:checked + label:before {
-    height: 10px;
-    width: 10px;
-    border: 6px solid var(--bg-color);
-    background-color: var(--text-color);
+@media (max-width: 700px) {
+    .perfiles-section {
+        padding: 0 24px;
+    }
 }
 </style>

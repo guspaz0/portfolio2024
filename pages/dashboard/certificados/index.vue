@@ -1,5 +1,5 @@
 <template>
-    <CommandTable 
+    <CustomCommandTable 
         :entity="'certificado'" 
         :create-component="Add" 
         :data="certificados.map((cert) => ({ ...cert, escuela: cert.escuela?.nombre}))"

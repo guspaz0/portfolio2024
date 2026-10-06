@@ -1,110 +1,115 @@
 <template>
-    <div>
-        <h2>Sobre mi</h2>
-        <section id="about" class="about">
-            <span>
-                <NuxtImg
-                    src="https://github-readme-stats.vercel.app/api?username=guspaz0&show_icons=true"
-                    height=""
-                    alt="GitHub Stats"
-                    format="webp"
-                />
-
-                <NuxtImg
-                    src="https://github-readme-stats.vercel.app/api/top-langs/?username=guspaz0&size_weight=0.5&count_weight=0.5&hide=go,rust,solidity,dockerfile,ejs,css,scss,html,handlebars,procfile&layout=compact&langs_count=6&theme=default"
-                    alt="Top Languages"
-                    height=""
-                    format="webp"
-                />
-                <p>{{ mensaje }}</p>
-                <p>{{ parrafo2 }}</p>
-                <NuxtLink :href="resumeDrive" rel="noreferrer noopener" target="_blank">
-                    <CustomButton :title="'CV / Resume'" @on-click=""/>
-                </NuxtLink>
-            </span>
-            <div class="perfil">
-                <span class="">
-                <NuxtImg
-                    @contextmenu.prevent=""
-                    src="https://avatars.githubusercontent.com/u/103156469?v=4"
-                    height=""
-                    width=""
-                    alt="perfil"
-                    loading="lazy"
-                />
-                <!-- <div class="shadow"></div> -->
-                </span>
+    <section id="about" class="section">
+        <div class="orb orb-about"></div>
+        <div class="section-head">
+            <div>
+                <p class="kicker">// sobre mí</p>
+                <h2>Más allá del código</h2>
             </div>
-        </section>
-    </div>
+        </div>
+
+        <div class="about">
+            <div class="about-text">
+                <p>
+                    Soy un desarrollador full stack con 6 años construyendo productos.
+                    Me obsesiona la intersección entre el diseño y la ingeniería:
+                    interfaces que se sienten vivas, backends que aguantan la carga,
+                    y sistemas que se pueden mantener.
+                </p>
+                <p>
+                    Cuando no estoy programando, escribo sobre arquitectura de software
+                    o contribuyo a open source.
+                </p>
+                <NuxtLink :href="resumeDrive" rel="noreferrer noopener" target="_blank" class="btn btn-ghost">
+                    CV / Resume
+                    <Icon name="line-md:download" size="16" color="var(--muted)"/>
+                </NuxtLink>
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <b>6+</b>
+                    <small>Años de experiencia</small>
+                </div>
+                <div class="stat">
+                    <b>40+</b>
+                    <small>Proyectos entregados</small>
+                </div>
+                <div class="stat">
+                    <b>2.1k</b>
+                    <small>Estrellas en GitHub</small>
+                </div>
+            </div>
+        </div>
+    </section>
 </template>
 
 <script setup lang="ts">
-// Reactive data
 const resumeDrive = 'https://drive.google.com/file/d/1otmq9F_jcLdmL0niyZgp1wg_EQj3YyIJ/view?usp=sharing'
-const mensaje = "Un apasionado por la tecnologia y el analisis de datos"
-const parrafo2 = 'Soy una persona proactiva, curiosa, flexible y perseverante. Nunca paro de aprender.'
-
 </script>
 
-
 <style scoped>
-div.perfil {
-    max-width: 350px;
-    max-height: 350px;
-    filter: grayscale(100%);
-}
-
-span.links {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-}
 .about {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 5px;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 20px;
+    align-items: start;
 }
 
-.about > span > p {
-    max-width: 400px;
-}
-
-.about > span {
+.about-text {
     display: flex;
-    gap: 10px;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    gap: 16px;
+    align-items: flex-start;
 }
 
-.about > span > img {
-    mask-image: none;
-    min-width: 300px;
+.about-text p {
+    max-width: 620px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--muted);
 }
 
-.about img {
-    max-width: 250px;
-    mask-image: linear-gradient(black 70%, transparent);
-    filter: drop-shadow(0 0 2px white);
+.stats {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
-div.shadow {
-    position: absolute;
-    z-index: -11;
-    width: 20px;
-    height: 20px;
-    left: 130px;
-    bottom: 110px;
-    border-radius: 50%;
-    background-color: var(--text-color);
-    border: none;
+.stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 18px 20px;
+    border-radius: 12px;
+    background: var(--surface);
+    border: 1px solid var(--line);
 }
-.shadow {
-    animation: pulse 2.0s infinite;
+
+.stat b {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent-2);
+}
+
+.stat small {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.orb-about {
+    top: -40px;
+    right: -120px;
+    width: 420px;
+    height: 420px;
+    background: var(--accent);
+    opacity: 0.08;
+}
+
+@media (max-width: 900px) {
+    .about {
+        grid-template-columns: 1fr;
+    }
 }
 </style>

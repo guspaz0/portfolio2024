@@ -1,22 +1,23 @@
 <template>
-    <AptitudesItem v-for="tec in aptitudes?.slice(0, max)" 
-        :key="tec.id" 
+    <AptitudesItem v-for="tec in aptitudes?.slice(0, max)"
+        :key="tec.id"
         :aptitud="tec"
     />
-    <span v-if="aptitudes.length > max" 
-        @mouseenter.prevent="showAptitudes" 
+    <span v-if="aptitudes.length > max"
+        @mouseenter.prevent="showAptitudes"
         @contextmenu.prevent=""
+        class="more"
     >
-        <b>+{{ aptitudes.length - max }}</b>
+        +{{ aptitudes.length - max }}
     </span>
-    <dialog v-if="(aptitudes?.length as number) > max+1" 
-        @mouseleave.prevent="showAptitudes" 
+    <dialog v-if="(aptitudes?.length as number) > max+1"
+        @mouseleave.prevent="showAptitudes"
         @contextmenu.prevent=""
     >
         <span v-for="tec in aptitudes" :key="tec.id" class="skills">
-            <Icon 
-                :name="'logos:'+tec.icon" 
-                size="2rem"
+            <Icon
+                :name="'logos:'+tec.icon"
+                size="1.5rem"
             />
         </span>
     </dialog>
@@ -50,54 +51,17 @@ const showAptitudes = (e: MouseEvent) => {
 </script>
 
 <style scoped>
-.aptitudes {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items:center;
-    justify-content: space-between;
-    border-radius: 5px;
-    gap: 7px;
-    transition: 250ms;
-}
-
-.skills {
-    filter: none;
-    mask-image: none;
-    padding: 5px;
-    min-width: 60px;
-    border-radius: 5px;
-}
-
-article .skills {
-    display: flex;
-    flex-direction: column;
+.more {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 5px;
-    flex-wrap: wrap;
-}
-
-span.skills:hover {
-    color: black;
-}
-
-span.skills span.iconify {
-    max-width: 50px;
-    max-height: 50px;
-    transition: 500ms;
-}
-span.skills:hover span.iconify {
-    display: block;
-    position: absolute;
-    z-index: 50;
-}
-dialog {
-    transition: 500ms;
-}
-
-dialog:hover {
-    position: absolute;
+    padding: 5px 10px;
+    border-radius: 6px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    color: var(--muted);
+    cursor: pointer;
 }
 
 dialog[open] {
@@ -106,12 +70,11 @@ dialog[open] {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    bottom: -5px;
-    z-index: 15;
-    filter: drop-shadow(3px 3px 4px black);
-    border: none;
-    gap: 3px;
-    padding: 2px;
-    border-radius: 5px;
+    gap: 8px;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--ink);
+    color: var(--text);
 }
 </style>

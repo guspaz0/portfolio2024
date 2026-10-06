@@ -34,3 +34,7 @@ github_pages
 .continue
 
 portfolio_db.sql
+.pi
+client_secret_734544827060-tcjfaj1e060laf4ggmcjk5k63k00n0gh.apps.googleusercontent.com.json
+.pnpm-store
+prisma/schema.prisma.prod

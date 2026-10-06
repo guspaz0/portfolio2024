@@ -5,15 +5,16 @@
             :style="{
                 backgroundImage: `linear-gradient(to bottom, rgba(109, 105, 105, 0.655), rgba(109, 105, 105, 0.1)), url(${proyecto.imagen})`
             }"
-        />
+        >
+            <Icon name="line-md:document-code" size="36" color="var(--accent-2)"/>
+        </span>
         <h2>{{ proyecto.nombre }}</h2>
         <p>{{ proyecto.descripcion }}</p>
-        <b>Tecnologias:</b>
-        <div class="proyectos">
+        <div class="tags">
             <AptitudesList
-                :key="(proyecto.nombre as string)" 
+                :key="(proyecto.nombre as string)"
                 :aptitudes="proyecto.aptitudes"
-                :max="2"
+                :max="3"
             />
         </div>
         <span class="links" @contextmenu.prevent>
@@ -24,7 +25,7 @@
                 id="repo"
                 target="_blank"
             >
-                Repositorio
+                Repositorio →
             </a>
             <a
                 v-if="proyecto.deploy"
@@ -33,7 +34,7 @@
                 id="deploy"
                 target="_blank"
             >
-            Link Deploy
+            Ver deploy →
             </a>
         </span>
     </article>
@@ -49,17 +50,29 @@ defineProps({
   }
 });
 
-
-
 </script>
 
 <style scoped>
-.proyectos .skills {
-    filter: none;
-    mask-image: none;
-    background-color: rgba(5,5,5, 0.1);
-    padding: 5px;
-    min-width: 60px;
-    border-radius: 5px;
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.links {
+    display: flex;
+    gap: 16px;
+    margin-top: auto;
+}
+
+.links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent-2);
+    transition: 200ms;
+}
+
+.links a:hover {
+    text-decoration: underline;
 }
 </style>

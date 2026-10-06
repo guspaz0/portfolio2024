@@ -14,59 +14,31 @@ onMounted(() => {
 </script>
 
 <template>
-    <div>
-        <input
-            id="switch"
-            type="checkbox"
-            class="checkbox"
-            :checked="darkMode"
-            @click="toggleTheme"
-        />
-        <label for="switch" class="toggle"></label>
-    </div>
+    <button
+        class="theme-toggle"
+        type="button"
+        :title="colorMode.value === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
+        @click="toggleTheme"
+    >
+        <Icon :name="colorMode.value === 'dark' ? 'line-md:sunny' : 'line-md:moon'" size="18" color="var(--muted)"/>
+    </button>
 </template>
 
 <style scoped>
-.toggle {
-    position : relative ;
-    display : inline-block;
-    width: 54px;
-    height: 30px;
-    background-color: rgba(255,255,255,0.5);
-    border-radius: 30px;
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    cursor: pointer;
+    transition: 250ms;
 }
 
-.toggle:after {
-    content: '';
-    position: absolute;
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background-color: rgba(0,0,255,0.3);
-    top: 2px;
-    left: 2px;
-    background-image: url('https://res.cloudinary.com/dbowsjk6p/image/upload/v1726354393/sun_qemswh.svg');
-    background-position: center;
-    background-size: cover;
-    transition:  all 0.5s;
-}
-
-.toggle > p {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 10px;
-}
-
-.checkbox:checked + .toggle::after {
-    left : 26px;
-    background-image: url('https://res.cloudinary.com/dbowsjk6p/image/upload/v1726354393/crescent-moon-moon_x8fbf8.svg');
-    background-position: center;
-    background-size: cover;
-}
-.checkbox:checked + .toggle {
-    background-color: rgba(9,162,182,0.5);
-}
-
-.checkbox {
-    display : none;
+.theme-toggle:hover {
+    border-color: var(--accent);
 }
 </style>

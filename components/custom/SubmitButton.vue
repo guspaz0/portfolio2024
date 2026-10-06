@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{ 
+defineProps<{
     errors?: boolean,
     content?: string
 }>()
@@ -23,19 +23,23 @@ defineProps<{
 }
 
 button {
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
+    padding: 10px 20px;
+    background-color: var(--accent);
+    color: var(--btn-primary-text);
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
+    transition: 200ms;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #7a6af0;
 }
 
 small.errors {
-    color: red;
+    color: #ff5c8a;
 }
 </style>

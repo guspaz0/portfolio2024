@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     global: true,
     dirs: ['~/components'],
   },
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   ssr: true,
   vite: {
     resolve: {
@@ -29,7 +29,7 @@ export default defineNuxtConfig({
   ],
   colorMode: {
     preference: 'system', // default theme: 'light', 'dark' or 'system'
-    fallback: 'light',    // fallback if system preference is not available
+    fallback: 'dark',     // dark-first design
     classSuffix: '',      // no suffix, so classes are 'dark' or 'light'
     storageKey: 'nuxt-color-mode' // localStorage key
   },
@@ -54,9 +54,7 @@ export default defineNuxtConfig({
     autoSetupPrisma: true,
     writeToSchema: false,
     formatSchema: true,
-    prismaSchemaPath: process.env.NODE_ENV == 'development'
-      ? path.join(process.cwd(),'prisma', 'schema.prisma.dev')
-      : path.join(process.cwd(),'prisma', 'schema.prisma')
+    prismaSchemaPath: path.join(process.cwd(),'prisma', 'schema.prisma')
   },
   // Nitro configuration
   nitro: {
@@ -95,10 +93,10 @@ export default defineNuxtConfig({
       },
     },
   },
-  // GitHub Pages configuration
+  // GitHub Pages configuration — the site lives under /portfolio
   app: {
     baseURL: '/portfolio',
-    buildAssetsDir: 'assets',
+    buildAssetsDir: '_nuxt',
     head: {
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
@@ -115,7 +113,9 @@ export default defineNuxtConfig({
   // Google Fonts configuration
   googleFonts: {
     families: {
-      Inter: [400, 500, 600, 700]
+      Inter: [400, 500, 600, 700],
+      'Space Grotesk': [400, 500, 600, 700],
+      'JetBrains Mono': [400, 500]
     }
   }
 })
